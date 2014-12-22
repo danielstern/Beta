@@ -18,25 +18,30 @@ package beta.core {
 		override protected function kill() {
 			
 			if (doesExplode && !killed) {			
-	
-				for (var i = 0; i < explosionParticleCount; i++) {
-					var debris = new Debris();
-					stage.addChild(debris);
-					
-					var pos = entity.localToGlobal(new Point());
-					debris.x = pos.x;
-					debris.y = pos.y;
-					
-					var xForce = Math.random() * 100 - 50;
-					var yForce = Math.random() * 100 - 50;
-					
-					debris.applyForceX(xForce);
-					debris.applyForceY(yForce);
-				}
+				
+				explode();
 				
 			}
 			
 			super.kill();				
+		}
+		
+		protected function explode() {
+			for (var i = 0; i < explosionParticleCount; i++) {
+				var debris = new Debris();
+				stage.addChild(debris);
+				
+				var pos = entity.localToGlobal(new Point());
+				debris.x = pos.x;
+				debris.y = pos.y;
+				
+				var xForce = Math.random() * 100 - 50;
+				var yForce = Math.random() * 100 - 50;
+				
+				debris.applyForceX(xForce);
+				debris.applyForceY(yForce);
+			}
+			
 		}
 	}
 }

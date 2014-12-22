@@ -15,7 +15,6 @@ package beta.core {
 		
 		override protected function kill() {
 			removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-			//trace("displayable object kill.",entity);
 			if (parent && stage) {
 				parent.removeChild(entity);
 			}		

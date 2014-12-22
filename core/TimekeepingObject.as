@@ -33,7 +33,6 @@ package beta.core {
 			timers.forEach(function(timer) {
 				timer.framesUntilResolve--;
 				if (timer.framesUntilResolve === 0) {
-					//timer.callback(timer.arg);
 					timer.callback();
 				}
 			})

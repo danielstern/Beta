@@ -18,7 +18,6 @@ package beta.core {
 			if (collisions[0] && thorned) {
 				
 				var other:DestructibleObject = collisions[0];
-				//trace(entity + " collided with... " + other);
 				other.takeDamage(damage);
 				
 				if (applyForceOnImpact) {

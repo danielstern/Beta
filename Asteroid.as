@@ -16,7 +16,7 @@ package beta
 			mass = 40;
 			
 			applyForceX(-1000);
-			killOffScreen = false;
+			killOffScreen = true;
 			
 			enableCollisions();
 			

@@ -9,12 +9,9 @@ package beta
 		public function Debris() {
 			
 			mass = 5;		
-//			collidable = false;
 			killOffScreen = true;
-			
 			thorned = false;
 			doesExplode = false;
-			//super();
 			
 			doAfter(100, kill);
 			

@@ -5,7 +5,6 @@ package beta.core {
 	import flash.geom.Point;
 	public class CollidableObject extends ConstrainableObject
 	{	
-		//protected var collidableObjects = [];
 		protected var collisionList:CollisionList;
 		
 		protected var collisionType = 0;
@@ -14,29 +13,24 @@ package beta.core {
 		private var collidable = false;
 
 		public function CollidableObject() {
-					
-			//if (collidable) {
-			//	trace("New collidable object...", this);
-			//	allCollidableObjects.push(this);
-			//} else {
-			//	trace("Collidable?", collidable);
-			//}
+
 			super();	
 		}
 		
 		public function enableCollisions() {
-			//CollidableObject.allCollidableObjects.push(this);
 			collisionList = new CollisionList(this);
 			collidable = true;
 		}
 		
 		override protected function onAddedToStage(e) {
-			if (collidable) {				
-				
+			if (collidable) {					
 				super.onAddedToStage(e);
 				dispatchEvent(new Event("collidableObject", true));
 				stage.addEventListener("collidableObject", function(e) {
-					collisionList.addItem(e.target);
+					var other = e.target;
+					if (other.collisionType === collidesWith && other.collidable) {
+						collisionList.addItem(other);
+					}
 				})
 			}
 		}
@@ -44,15 +38,7 @@ package beta.core {
 		override protected function kill() {
 			if (collidable) {
 				collisionList.dispose();
-			//	var all = CollidableObject.allCollidableObjects;
-			
-			//	trace("Killing collision object...",all.indexOf(entity),all,entity)
-			//	all.splice(all.indexOf(entity), 1);
-				//trace(all.length);
-			//}
-				collidable = false;
-			
-				
+				collidable = false;			
 			}
 			
 			super.kill();
@@ -63,20 +49,6 @@ package beta.core {
 			super.tick();
 			if (collidable) {			
 				collisions = [];
-				
-				
-				//var collisionList = new CollisionList(this);
-				//var objectsOfConcern = CollidableObject.allCollidableObjects.filter(function(other) {
-				//	var distance = Point.distance(new Point(other.x, other.y), new Point(x, y));
-	//
-				//	if (other.collisionType === collidesWith && distance < 100 && other.collidable) {
-				//		return true;
-			//		}
-			//	});
-							
-				//objectsOfConcern.forEach(function(object) {
-//					collisionList.addItem(object);
-	//			})
 				
 				var collisionsThisFrame = collisionList.checkCollisions();
 				
