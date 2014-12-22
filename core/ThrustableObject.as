@@ -1,5 +1,4 @@
-package beta
-{
+package beta.core {
 	import flash.display.*;
 	import flash.events.Event;
 	
@@ -38,8 +37,8 @@ package beta
 			}
 			
 			if (thrustingDown) {
-				stabilizersEnabledDown = false;
 				applyForceY(yThrusterPower);
+				stabilizersEnabledDown = false;
 			} else {
 				stabilizersEnabledDown = true;				
 			}

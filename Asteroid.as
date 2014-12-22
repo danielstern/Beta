@@ -1,7 +1,7 @@
 package beta
 {
 	import flash.display.*;
-	import flash.events.Event;
+	import beta.core.*;
 	
 	public class Asteroid extends ThornedObject
 	{
@@ -16,7 +16,6 @@ package beta
 			mass = 40;
 			
 			applyForceX(-1000);
-			stabilizersOff();
 			killOffScreen = false;
 			
 		}

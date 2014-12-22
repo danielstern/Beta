@@ -1,9 +1,9 @@
-package beta
-{
+package beta.core {
 	import flash.display.*;
 	import flash.events.Event;
 	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Point;
+	import beta.*;
 	
 	public class ExplodableObject extends FilterableObject
 	{

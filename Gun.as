@@ -3,6 +3,7 @@ package beta
 	import flash.display.*;
 	import flash.events.Event;
 	import flash.geom.Point;
+	import beta.core.*;
 	
 	public class Gun extends DisplayableObject
 	{
@@ -10,7 +11,7 @@ package beta
 		protected var cooldownTime = 20;
 		protected var timeUntilCanShoot:Number = 0;
 		protected var canShoot:Boolean = true;
-		protected var firing:Boolean = true;
+		protected var firing:Boolean = false;
 		
 		public function Gun() {
 			super();
@@ -25,7 +26,7 @@ package beta
 		} 
 		
 		public function fire() {
-
+			
 			var bullet = new ShipBullet();
 			stage.addChild(bullet);
 			

@@ -2,6 +2,7 @@ package beta
 {
 	import flash.display.*;
 	import flash.events.Event;
+	import beta.core.*;
 	
 	public class Ship extends ControllableObject
 	{

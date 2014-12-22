@@ -1,5 +1,4 @@
-package beta
-{
+package beta.core {
 	import flash.display.*;
 	import flash.events.Event;
 	
@@ -35,7 +34,8 @@ package beta
 				}
 			} else {
 				if (stage) {
-					var stageWidth = stage.stageWidth;
+					//var stageWidth = stage.stageWidth;
+					var stageWidth = 600;
 					var stageHeight = stage.height;
 					if (x < 0 || x > stageWidth || y < 0 || y > stageHeight) {
 						isOffScreen = true;

@@ -2,6 +2,7 @@ package beta
 {
 	import flash.display.*;
 	import flash.events.Event;
+	import beta.core.*;
 	
 	public class Gunship extends Ship
 	{
@@ -9,10 +10,16 @@ package beta
 		public function Gunship() {
 			super();
 			mass += 0.2;
+			stabilizersEnabled = true;
 			
+		
+		}
+		
+		public function addGun() {
 			var gun = new Gun();
 			addChild(gun);
 			guns.push(gun);
+			return gun;
 		}
 		
 		override protected function tick() {
