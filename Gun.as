@@ -2,6 +2,7 @@ package beta
 {
 	import flash.display.*;
 	import flash.events.Event;
+	import flash.geom.Point;
 	
 	public class Gun extends DisplayableObject
 	{
@@ -24,7 +25,14 @@ package beta
 		} 
 		
 		public function fire() {
-			trace("Blam!");
+
+			var bullet = new ShipBullet();
+			stage.addChild(bullet);
+			
+			bullet.applyForceX(250);
+			var bulletPos = localToGlobal(new Point(x, y));
+			bullet.x = bulletPos.x;
+			bullet.y = bulletPos.y;
 			timeUntilCanShoot = cooldownTime;
 		}
 		

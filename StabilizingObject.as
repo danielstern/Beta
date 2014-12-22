@@ -16,6 +16,11 @@ package beta
 			super();			
 		}
 		
+		protected function stabilizersOff() {
+			stablizerPowerX = 0;
+			stablizerPowerY = 0;
+		}
+		
 		override protected function tick() {
 			super.tick();
 						

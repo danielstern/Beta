@@ -5,23 +5,27 @@ package beta
 	
 	public class DisplayableObject extends MovieClip
 	{
-		//protected var x:Number;
 		protected var cycle = 0;
-		//protected var y:Number;
-		protected var displayState = {
-			
-		}
+		protected var entity = this;
+
 		public function DisplayableObject() {
 			super();
 			
-			addEventListener(Event.ENTER_FRAME, function() {
-			  cycle++;
-			  tick();
-			})
+			addEventListener(Event.ENTER_FRAME, onEnterFrame);
+			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+		}
+		
+		protected function onEnterFrame(e) {
+			cycle++;
+			tick();
+		}
+		
+		protected function onAddedToStage(e) {
+			
 		}
 		
 		protected function tick() {
-			
+
 		}
 	}
 }

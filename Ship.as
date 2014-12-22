@@ -5,14 +5,18 @@ package beta
 	
 	public class Ship extends ControllableObject
 	{
-		protected var guns = [new Gun(),new Gun()];
 		public function Ship() {
 			super();
 			mass = 1.2;
 			xThrusterPower = 0.7;
 			yThrusterPower = 0.7;
-			stablizerPowerX = 5;
-			stablizerPowerY = 5;
+			stablizerPowerX = 10;
+			stablizerPowerY = 10;
+			
+			minY = 10;
+			minX = 10;
+			maxX = 590;
+			maxY = 490;
 		}
 		
 		override protected function tick() {
@@ -40,18 +44,7 @@ package beta
 				thrustingDown = true;
 			} else {
 				thrustingDown = false;			
-			}
-			
-			if (controlsAction1) {
-				guns.forEach(function(gun) {
-					gun.startFiring();
-				});
-			} else {
-				guns.forEach(function(gun) {
-					gun.stopFiring();
-				});
-			}
-			
+			}			
 		}
 	}
 }
