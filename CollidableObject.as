@@ -5,48 +5,46 @@ package beta
 	import com.coreyoneil.collision.CollisionList;
 	public class CollidableObject extends ConstrainableObject
 	{	
+		protected static var allCollidableObjects = [];
+		
 		protected var collisionType = 0;
 		protected var collidesWith = 0;
-		protected static var allObjects = [];
-		protected var collisionList:CollisionList;
 		public var collisions:Array;
 
 		public function CollidableObject() {
 			super();			
-			collisionList = new CollisionList(this);
-			allObjects.push(this);
+			allCollidableObjects.push(this);
 		}
 		
 		override protected function onAddedToStage(e) {
 			super.onAddedToStage(e);
 			dispatchEvent(new Event("collidableObject", true));
-			var entity = this;
+		}
+		
+		override protected function kill() {
+			super.kill();
 			
-		//	stage.addEventListener("collidableObject", function(e) {
-		//		trace("Collidable object added,", entity, e.target);
-		//		collisionList.addItem(e.target);				
-		//	})
+			var all = CollidableObject.allCollidableObjects;
+			all.splice(all.indexOf(entity), 1);
 		}
 		
 		override protected function tick() {
 			super.tick();
 			collisions = [];
-			collisionList = new CollisionList(this);
-			CollidableObject.allObjects.forEach(function(object) {
+			
+			var collisionList = new CollisionList(this);
+			CollidableObject.allCollidableObjects.forEach(function(object) {
 				collisionList.addItem(object);
 			})
 			
 			var collisionsThisFrame = collisionList.checkCollisions();
 			
 			collisionsThisFrame.forEach(function(collision) {
-			//	trace("Collisions this frame?", entity);
 				var other = collision.object1 === entity ? collision.object2 : collision.object1;
 				if (other.collisionType === collidesWith) {
 					collisions.push(other);
 				}
-				
 			});
-			//collisions.push("?");
 		}
 	}
 }

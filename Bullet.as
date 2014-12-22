@@ -3,10 +3,8 @@ package beta
 	import flash.display.*;
 	import flash.events.Event;
 	
-	public class Bullet extends DestructibleObject
-	{
-		protected var damage = 10;
-		
+	public class Bullet extends ThornedObject
+	{		
 		public function Bullet() {
 			super();
 			stabilizersOff();
@@ -14,26 +12,13 @@ package beta
 			maxVelocityY = 7;
 			mass = 0.2;		
 			
-			collisionType = 'friend';
-			collidesWith = 'enemy';			
+			expireOnDamageDeal = true;
+			damage = 10;
 		}
 		
 		override protected function tick() {
 		
-			super.tick();
-			if (isOffScreen) {
-				kill();
-			}
-			
-			//trace("Bullet tick.",collisions);
-			if (collisions[0]) {
-				trace("bullet collided with something", collisions);
-				//collisions[0].takeDamage(damage);
-				kill();
-			}
-			
-
-			
+			super.tick();			
 			
 		}
 	}

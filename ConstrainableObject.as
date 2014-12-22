@@ -9,9 +9,9 @@ package beta
 		protected var maxX;
 		protected var minX;
 		protected var maxY;
-		protected var minY;
-		
-		protected var isOffScreen = false;
+		protected var minY:Number;
+		protected var killOffScreen:Boolean = false;
+		protected var isOffScreen:Boolean = false;
 
 		public function ConstrainableObject() {
 			super();
@@ -39,6 +39,11 @@ package beta
 					isOffScreen = true;
 				};
 			}
+			
+			if (isOffScreen && killOffScreen) {
+				kill();
+			}
+
 			
 		}
 	}

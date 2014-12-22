@@ -3,7 +3,7 @@ package beta
 	import flash.display.*;
 	import flash.events.Event;
 	
-	public class ControllableObject extends DestructibleObject
+	public class ControllableObject extends ThornedObject
 	{
 		protected var controlsGoingRight = false;
 		protected var controlsGoingLeft = false;

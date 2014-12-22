@@ -17,6 +17,9 @@ package beta
 			minX = 10;
 			maxX = 590;
 			maxY = 490;
+			
+			collisionType = "friend";
+			collidesWith = "enemy";
 		}
 		
 		override protected function tick() {

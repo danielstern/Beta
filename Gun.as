@@ -29,10 +29,12 @@ package beta
 			var bullet = new ShipBullet();
 			stage.addChild(bullet);
 			
-			bullet.applyForceX(250);
 			var bulletPos = localToGlobal(new Point(x, y));
 			bullet.x = bulletPos.x;
 			bullet.y = bulletPos.y;
+			
+			bullet.applyForceX(250);
+			
 			timeUntilCanShoot = cooldownTime;
 		}
 		

@@ -3,31 +3,20 @@ package beta
 	import flash.display.*;
 	import flash.events.Event;
 	
-	public class Asteroid extends DestructibleObject
+	public class Asteroid extends ThornedObject
 	{
-		protected var damage = 4;
 		public function Asteroid() {
 			super();
+			
 			collisionType = 'enemy';
 			collidesWith = 'friend';
+			
+			health = 10;
+			damage = 4;
+			
 			applyForceX(-100);
 			stabilizersOff();
-		}
-		
-		override protected function tick() {
-		
-			super.tick();
-			if (isOffScreen) {
-				kill();
-			}
-			
-			//trace("asteroid tick", collisions);
-			
-			if (collisions[0]) {
-				trace("astreroid collided with something", collisions);
-				//collisions[0].takeDamage(damage);
-				//kill();
-			}
+			killOffScreen = true;
 			
 		}
 	}
