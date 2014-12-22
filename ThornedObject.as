@@ -8,6 +8,7 @@ package beta
 		protected var damage:Number = 5;
 		protected var expireOnDamageDeal = false;
 		protected var thorned = true;
+		protected var applyForceOnImpact = true;
 		
 		public function ThornedObject() {
 			super();
@@ -18,8 +19,18 @@ package beta
 			super.tick();
 		
 			if (collisions[0] && thorned) {
-				trace("Taking damage from...", collisions[0]);
-				collisions[0].takeDamage(damage);
+				
+				var other:DestructibleObject = collisions[0];
+				//trace(entity + " collided with... " + other);
+				other.takeDamage(damage);
+				
+				if (applyForceOnImpact) {
+					other.applyForceX(this.xInertia);			
+					other.applyForceY(this.yInertia);	
+					
+					this.applyForceX( -this.xInertia);
+					this.applyForceY( -this.yInertia);
+				}
 				
 				if (expireOnDamageDeal) {
 					kill();

@@ -14,10 +14,14 @@ package beta
 		
 		public function takeDamage(damage:Number) {
 			health -= damage;
+			turnWhite();
+			clearFiltersAfter(5);
+			
 			if (health < 0) {
 				health = 0;
 				kill();
 			}
+			
 		}
 		
 		public function restoreHealth(restorationAmount:Number) {

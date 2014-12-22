@@ -2,8 +2,9 @@ package beta
 {
 	import flash.display.*;
 	import flash.events.Event;
+	import flash.filters.ColorMatrixFilter;
 	
-	public class KillableObject extends DisplayableObject
+	public class KillableObject extends MovieClip
 	{
 		protected var killed = false;
 
@@ -12,15 +13,7 @@ package beta
 		}
 		
 		protected function kill() {
-			trace("Killed.");
-			
-			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
-			killed = true;
-			if (parent && stage) {
-				parent.removeChild(this);
-			}
-			
-
+			killed = true;	
 		}
 	}
 }

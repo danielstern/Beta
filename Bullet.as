@@ -13,14 +13,10 @@ package beta
 			mass = 0.2;		
 			
 			expireOnDamageDeal = true;
+			killOffScreen = true;
 			damage = 10;
 		}
 		
-		override protected function tick() {
-		
-			super.tick();			
-			
-		}
 	}
 }
 

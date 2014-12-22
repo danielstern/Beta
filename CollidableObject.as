@@ -22,10 +22,10 @@ package beta
 		}
 		
 		override protected function kill() {
-			super.kill();
-			
 			var all = CollidableObject.allCollidableObjects;
 			all.splice(all.indexOf(entity), 1);
+			
+			super.kill();
 		}
 		
 		override protected function tick() {

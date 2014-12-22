@@ -13,10 +13,11 @@ package beta
 			
 			health = 10;
 			damage = 4;
+			mass = 40;
 			
-			applyForceX(-100);
+			applyForceX(-1000);
 			stabilizersOff();
-			killOffScreen = true;
+			killOffScreen = false;
 			
 		}
 	}

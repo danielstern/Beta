@@ -14,6 +14,8 @@ package beta
 		protected var maxVelocityY:Number = 5;
 		protected var maxVelocityX:Number = 5;
 		
+		protected var doesMove:Boolean = true;
+		
 		public function PropellableObject() {
 			super();			
 		}
@@ -43,9 +45,16 @@ package beta
 			} else if (yVelocity < -maxVelocityY) {
 				yVelocity = -maxVelocityY;
 			}
-			  
-			x += xVelocity;
-			y += yVelocity;
+			
+			if (doesMove) {
+				x += xVelocity;
+				y += yVelocity;
+			}
+		}
+		
+		override protected function kill() {
+			doesMove = false;
+			super.kill();
 		}
 	}
 }
