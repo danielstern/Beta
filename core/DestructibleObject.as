@@ -13,7 +13,7 @@ package beta.core {
 		
 		public function takeDamage(damage:Number) {
 			health -= damage;
-			turnWhite();
+			turnRed();
 			clearFiltersAfter(5);
 			
 			if (health < 0) {

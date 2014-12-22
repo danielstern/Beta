@@ -7,16 +7,18 @@ package beta
 	public class Debris extends ThornedObject
 	{		
 		public function Debris() {
-			super();
+			
 			mass = 5;		
-			collidable = false;
+//			collidable = false;
 			killOffScreen = true;
-			collidesWith = 'none';
-			collisionType = 0;
+			
 			thorned = false;
 			doesExplode = false;
+			//super();
 			
 			doAfter(100, kill);
+			
+		
 		}
 		
 	}

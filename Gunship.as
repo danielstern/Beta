@@ -25,11 +25,15 @@ package beta
 		override protected function tick() {
 			super.tick();
 			
+			
+			
 			if (controlsAction1) {
+				turnWhite();
 				guns.forEach(function(gun) {
 					gun.startFiring();
 				});
 			} else {
+				clearFilters();
 				guns.forEach(function(gun) {
 					gun.stopFiring();
 				});

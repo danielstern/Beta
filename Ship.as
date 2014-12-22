@@ -7,20 +7,29 @@ package beta
 	public class Ship extends ControllableObject
 	{
 		public function Ship() {
+		
+			
 			super();
+			
+			collisionType = "friend";
+			collidesWith = "enemy";
+			enableCollisions();
+			
+			doesExplode = true;
+			explosionParticleCount = 4;
+			
 			mass = 1.2;
 			xThrusterPower = 0.7;
 			yThrusterPower = 0.7;
 			stablizerPowerX = 10;
 			stablizerPowerY = 10;
 			
+			
 			minY = 10;
 			minX = 10;
 			maxX = 590;
 			maxY = 490;
 			
-			collisionType = "friend";
-			collidesWith = "enemy";
 		}
 		
 		override protected function tick() {

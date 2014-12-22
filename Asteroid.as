@@ -18,6 +18,11 @@ package beta
 			applyForceX(-1000);
 			killOffScreen = false;
 			
+			enableCollisions();
+			
+			doesExplode = true;
+			explosionParticleCount = 6;
+			
 		}
 	}
 }

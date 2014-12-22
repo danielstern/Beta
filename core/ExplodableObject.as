@@ -9,7 +9,7 @@ package beta.core {
 	{
 		protected var explosionType = "debris";
 		protected var explosionParticleCount = 5;
-		protected var doesExplode = true;
+		protected var doesExplode = false;
 
 		public function ExplodableObject() {
 			super();

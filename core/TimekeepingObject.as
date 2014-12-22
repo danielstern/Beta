@@ -15,8 +15,10 @@ package beta.core {
 		}
 		
 		protected function onEnterFrame(e) {
-			cycle++;
-			tick();
+			if (!killed) {			
+				cycle++;
+				tick();
+			}
 		}
 		
 		public function doAfter(frames, callback, arg = undefined) {

@@ -15,8 +15,6 @@ package beta.core {
 		
 		override protected function tick() {
 		
-			super.tick();
-		
 			if (collisions[0] && thorned) {
 				
 				var other:DestructibleObject = collisions[0];
@@ -27,14 +25,16 @@ package beta.core {
 					other.applyForceX(this.xInertia);			
 					other.applyForceY(this.yInertia);	
 					
-					this.applyForceX( -this.xInertia);
-					this.applyForceY( -this.yInertia);
+					applyForceX( -this.xInertia);
+					applyForceY( -this.yInertia);
 				}
 				
 				if (expireOnDamageDeal) {
 					kill();
 				}
 			}
+			
+			super.tick();
 			
 		}
 	}
