@@ -4,46 +4,25 @@ package beta.units {
 	import beta.core.*;
 	import beta.components.Gunship;
 	
-	public class BasicHeroShip extends Gunship
+	public class BasicHeroShip extends Hero
 	{
-		public static var NAME = "hero";
 		public function BasicHeroShip() {
 			super();
-			/*
-			 */
+			
+			health = 25;
+
 			var gun1 = addGun();
 			var gun2 = addGun();
 			
 			gun1.y = -3;
 			gun2.y = 3;
-			
-			collisionType = "friend";
-			collidesWith = "enemy";
-			
-			health = 25;
-			
+
 			gun1.orientation = 0;
 			gun2.orientation = 0;
 			
-			//orientation = 90;
-			
-			constrainToScreen = true;
 			doesExplode = true;
-			explosionParticleCount = 25;
+			explosionParticleCount = 45;
 			
-			minY = 10;
-			minX = 10;
-			maxX = 590;
-			maxY = 490;
-			
-			name = NAME;
-			
-		
-		}
-		
-		override protected function kill() {
-			super.kill();
-			trace("Killed main hsip.");
 		}
 	}
 }
