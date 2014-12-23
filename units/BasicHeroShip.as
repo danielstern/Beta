@@ -23,6 +23,8 @@ package beta.units {
 			doesExplode = true;
 			explosionParticleCount = 45;
 			
+			upgradable = true;
+			
 		}
 	}
 }

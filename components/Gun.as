@@ -38,7 +38,7 @@ package beta.components {
 				var container = parent.parent;
 				container.addChild(bullet);
 				
-				var bulletPos = this.localToGlobal(new Point());
+				var bulletPos = entity.localToGlobal(new Point());
 				bullet.x = bulletPos.x - container.x;
 				bullet.y = bulletPos.y - container.y;
 				

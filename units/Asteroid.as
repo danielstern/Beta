@@ -15,7 +15,7 @@ package beta.units {
 			doesExplode = true;
 			explosionParticleCount = 6;
 			
-			//name = NAME;
+			name = NAME;
 		}
 	}
 }

@@ -2,7 +2,7 @@ package beta.core {
 	import flash.display.*;
 	import flash.events.Event;
 	
-	public class ControllableObject extends ThornedObject
+	public class ControllableObject extends UpgradableObject
 	{
 		protected var controlsGoingRight = false;
 		protected var controlsGoingLeft = false;

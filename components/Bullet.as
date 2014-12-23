@@ -3,7 +3,7 @@ package beta.components {
 	import flash.events.Event;
 	import beta.core.*;
 	
-	public class Bullet extends ThornedObject
+	public class Bullet extends UpgradableObject
 	{		
 		public static var NAME = "bullet";
 		public function Bullet() {
