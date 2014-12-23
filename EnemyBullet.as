@@ -9,6 +9,7 @@ package beta
 		public function EnemyBullet() {
 			collisionType = 'enemy';
 			collidesWith = 'friend';	
+			mass = 0.3;
 		}
 	}
 }

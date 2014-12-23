@@ -12,7 +12,7 @@ package beta
 			
 			xThrusterPower = 0.05;
 			yThrusterPower = 0.03;
-			maxVelocityX = 0.3;
+			maxVelocityX = 1.2;
 			maxVelocityY = 1;
 			mass = 0.7;
 			stabilizersEnabled = true;

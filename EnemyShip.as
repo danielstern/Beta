@@ -4,7 +4,7 @@ package beta
 	import flash.events.Event;
 	import beta.core.*;
 	
-	public class EnemyShip extends Ship
+	public class EnemyShip extends Gunship
 	{
 		public function EnemyShip() {
 			super();

@@ -16,6 +16,8 @@ package beta
 			damage = 5;
 			mass = 40;
 			
+			expireOnDamageDeal = true;
+			
 			explosionType = 'mine';
 			
 			applyForceX(-1000);

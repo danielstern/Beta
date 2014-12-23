@@ -21,6 +21,7 @@ package beta
 			damage = 10;
 			doesExplode = true;
 			explosionParticleCount = 2;
+			activate();
 		}
 		
 		override protected function kill() {

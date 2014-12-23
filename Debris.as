@@ -14,6 +14,7 @@ package beta
 			doesExplode = false;
 			
 			doAfter(100, kill);
+			activate();
 			
 		
 		}

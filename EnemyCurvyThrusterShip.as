@@ -6,9 +6,9 @@ package beta
 	
 	public class EnemyCurvyThrusterShip extends EnemyBasicThrusterShip
 	{
+		protected var curves:Boolean = true;
 		public function EnemyCurvyThrusterShip() {
 			super();
-
 			thrustLeft = true;
 			
 		}
@@ -18,12 +18,15 @@ package beta
 			
 			var direction = Math.sin(cycle / 20);
 			
-			if (direction <= 0) {
-			    thrustingUp = true;	
-				thrustingDown = false;
-			} else {
-				thrustingDown = true;	
-				thrustingUp = false;	
+			if (curves) {
+							
+				if (direction <= 0) {
+					thrustingUp = true;	
+					thrustingDown = false;
+				} else {
+					thrustingDown = true;	
+					thrustingUp = false;	
+				}
 			}
 		}
 	}

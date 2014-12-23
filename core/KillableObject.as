@@ -3,9 +3,9 @@ package beta.core {
 	import flash.events.Event;
 	import flash.filters.ColorMatrixFilter;
 	
-	public class KillableObject extends MovieClip
+	public class KillableObject extends ActivatableObject
 	{
-		protected var killed = false;
+		public var killed = false;
 
 		public function KillableObject() {
 			super();
@@ -14,6 +14,8 @@ package beta.core {
 		protected function kill() {
 			killed = true;	
 		}
+		
+		
 	}
 }
 

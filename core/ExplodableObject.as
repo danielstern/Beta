@@ -15,25 +15,21 @@ package beta.core {
 			super();
 		}
 		
-		override protected function kill() {
-			
+		override protected function kill() {			
 			if (doesExplode && !killed) {			
-				
-				explode();
-				
+				explode();	
 			}
-			
-			super.kill();				
+			super.kill();
 		}
 		
 		protected function explode() {
 			for (var i = 0; i < explosionParticleCount; i++) {
 				var debris = new Debris();
-				stage.addChild(debris);
+				parent.addChild(debris);
 				
 				var pos = entity.localToGlobal(new Point());
-				debris.x = pos.x;
-				debris.y = pos.y;
+				debris.x = pos.x - parent.x;
+				debris.y = pos.y - parent.y;
 				
 				var xForce = Math.random() * 100 - 50;
 				var yForce = Math.random() * 100 - 50;

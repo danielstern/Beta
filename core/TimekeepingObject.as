@@ -15,7 +15,7 @@ package beta.core {
 		}
 		
 		protected function onEnterFrame(e) {
-			if (!killed) {			
+			if (activated && !killed) {			
 				cycle++;
 				tick();
 			}

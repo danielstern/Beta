@@ -16,22 +16,28 @@ package beta
 		}
 		
 		public function addGun() {
-			var gun = new Gun();
+			var gun = getGun();
 			addChild(gun);
 			guns.push(gun);
 			return gun;
 		}
 		
+		protected function getGun() {
+			return new Gun();
+		}
+		
+		protected function gunsStartFiring() {
+			guns.forEach(function(gun) {
+				gun.startFiring();
+			});
+		}
+		
 		override protected function tick() {
-			super.tick();
-			
-			
+			super.tick();			
 			
 			if (controlsAction1) {
 				turnWhite();
-				guns.forEach(function(gun) {
-					gun.startFiring();
-				});
+				gunsStartFiring();
 			} else {
 				clearFilters();
 				guns.forEach(function(gun) {

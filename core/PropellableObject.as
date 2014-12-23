@@ -48,6 +48,8 @@ package beta.core {
 			if (doesMove) {
 				x += xVelocity;
 				y += yVelocity;
+			} else {
+				trace("does not move");
 			}
 		}
 		

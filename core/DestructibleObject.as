@@ -15,11 +15,7 @@ package beta.core {
 			health -= damage;
 			turnRed();
 			clearFiltersAfter(5);
-			
-			if (health < 0) {
-				health = 0;
-				kill();
-			}
+			trace(entity, "Health:", health);
 			
 		}
 		
@@ -28,6 +24,15 @@ package beta.core {
 			if (health > maxHealth) {
 				health = maxHealth;
 			}
+		}
+		
+		override protected function tick() {
+			if (health < 0 && !killed) {
+				health = 0;
+				trace("Kill", entity);
+				kill();
+			}
+			super.tick();
 		}
 	}
 }
