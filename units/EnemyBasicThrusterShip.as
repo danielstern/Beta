@@ -1,12 +1,8 @@
-package beta
-{
-	import flash.display.*;
-	import flash.events.Event;
-	import beta.core.*;
-	
+package beta.units {
+
 	public class EnemyBasicThrusterShip extends EnemyShip
 	{
-		protected var thrustLeft = true;
+		protected var enemyAIThrustLeft = true;
 		public function EnemyBasicThrusterShip() {
 			super();
 			
@@ -15,13 +11,13 @@ package beta
 			maxVelocityX = 1.2;
 			maxVelocityY = 1;
 			mass = 0.7;
-			stabilizersEnabled = true;
+			stabilizersEnabled = false;
 			stablizerPowerY = 0.2;
 		}
 		
 		override protected function tick() {
 			super.tick();
-			if (thrustLeft) {
+			if (enemyAIThrustLeft) {
 				thrustingLeft = true;
 			}
 		}

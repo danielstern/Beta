@@ -1,17 +1,12 @@
-package beta
-{
-	import flash.display.*;
-	import flash.events.Event;
-	import flash.geom.Point;
-	import beta.core.*;
+package beta.units {
+	import beta.components.Gun;
 	
 	public class EnemyGun extends Gun
 	{
 		public static var NAME = "enemyGun";
 		public function EnemyGun() {
 			super();
-			cooldownTime = 100;
-			
+			cooldownTime = 100;			
 			name = NAME;
 		}
 		

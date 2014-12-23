@@ -1,9 +1,5 @@
-package beta
-{
-	import flash.display.*;
-	import flash.events.Event;
-	import beta.core.*;
-	
+package beta.units {
+	import beta.components.Gun;
 	public class EnemyBasicAttackingShip extends EnemyCurvyThrusterShip
 	{
 		protected var attackFrequency = 100;
@@ -14,7 +10,7 @@ package beta
 			
 			//addGun();
 			attacks = true;
-			curves = false;
+			enemyAICurves = false;
 			addGuns();
 		
 		}

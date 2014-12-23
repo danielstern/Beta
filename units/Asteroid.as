@@ -1,11 +1,8 @@
-package beta
-{
-	import flash.display.*;
-	import beta.core.*;
+package beta.units {
 	
-	public class Asteroid extends EnemyStaticObject
+	public class Asteroid extends Enemy
 	{
-		public static var NAME = "astroid";
+		public static var NAME = "asteroid";
 		public function Asteroid() {
 			super();
 			
@@ -18,7 +15,7 @@ package beta
 			doesExplode = true;
 			explosionParticleCount = 6;
 			
-			name = NAME;
+			//name = NAME;
 		}
 	}
 }

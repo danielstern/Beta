@@ -1,16 +1,10 @@
-package beta
-{
-	import flash.display.*;
-	import flash.events.Event;
-	import beta.core.*;
+package beta.units {
 	
 	public class EnemyCurvyThrusterShip extends EnemyBasicThrusterShip
 	{
-		protected var curves:Boolean = true;
+		protected var enemyAICurves:Boolean = true;
 		public function EnemyCurvyThrusterShip() {
 			super();
-			thrustLeft = true;
-			
 		}
 		
 		override protected function tick() {
@@ -18,7 +12,7 @@ package beta
 			
 			var direction = Math.sin(cycle / 20);
 			
-			if (curves) {
+			if (enemyAICurves) {
 							
 				if (direction <= 0) {
 					thrustingUp = true;	

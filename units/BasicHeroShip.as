@@ -1,8 +1,8 @@
-package beta
-{
+package beta.units {
 	import flash.display.*;
 	import flash.events.Event;
 	import beta.core.*;
+	import beta.components.Gunship;
 	
 	public class BasicHeroShip extends Gunship
 	{
@@ -17,6 +17,9 @@ package beta
 			gun1.y = -3;
 			gun2.y = 3;
 			
+			collisionType = "friend";
+			collidesWith = "enemy";
+			
 			health = 25;
 			
 			gun1.orientation = 0;
@@ -27,6 +30,11 @@ package beta
 			constrainToScreen = true;
 			doesExplode = true;
 			explosionParticleCount = 25;
+			
+			minY = 10;
+			minX = 10;
+			maxX = 590;
+			maxY = 490;
 			
 			name = NAME;
 			

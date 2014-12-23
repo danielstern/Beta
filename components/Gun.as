@@ -1,9 +1,9 @@
-package beta
-{
+package beta.components {
 	import flash.display.*;
 	import flash.events.Event;
 	import flash.geom.Point;
 	import beta.core.*;
+	import beta.units.ShipBullet;
 	
 	public class Gun extends DisplayableObject
 	{

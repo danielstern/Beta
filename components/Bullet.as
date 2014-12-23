@@ -1,5 +1,4 @@
-package beta
-{
+package beta.components {
 	import flash.display.*;
 	import flash.events.Event;
 	import beta.core.*;

@@ -1,8 +1,4 @@
-package beta
-{
-	import flash.display.*;
-	import flash.events.Event;
-	import beta.core.*;
+package beta.units {
 	
 	public class EnemyForkedAttackingShip extends EnemyBasicAttackingShip
 	{

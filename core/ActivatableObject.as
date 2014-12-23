@@ -4,6 +4,7 @@ package beta.core {
 	import flash.filters.ColorMatrixFilter;
 	import flash.utils.getAliasName;
 	import flash.utils.getQualifiedClassName;
+	import beta.events.MetaEvent;
 	
 	public class ActivatableObject extends MovieClip
 	{

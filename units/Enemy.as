@@ -1,12 +1,12 @@
-package beta
-{
-	import flash.display.*;
-	import beta.core.*;
+package beta.units {
 	
-	public class EnemyStaticObject extends Gunship
+	import beta.components.Gunship;
+	
+	public class Enemy extends Gunship
 	{
 		public static var NAME = "enemy";
-		public function EnemyStaticObject() {
+		public function Enemy() {
+			
 			super();
 			
 			collisionType = 'enemy';
@@ -24,7 +24,7 @@ package beta
 			enableCollisions();
 			
 			doesExplode = true;
-			explosionParticleCount = 6;
+			explosionParticleCount = 4;
 			
 			name = NAME;
 			

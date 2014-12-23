@@ -1,9 +1,7 @@
-package beta
-{
-	import flash.display.*;
-	import flash.events.Event;
-	import beta.core.*;
+package beta.units {
 	
+	import beta.components.Bullet;
+
 	public class EnemyBullet extends Bullet
 	{
 		public function EnemyBullet() {

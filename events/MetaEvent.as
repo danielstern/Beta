@@ -1,4 +1,4 @@
-package beta.core {
+package beta.events {
 	import flash.display.*;
 	import flash.events.Event;
 	import flash.filters.ColorMatrixFilter;

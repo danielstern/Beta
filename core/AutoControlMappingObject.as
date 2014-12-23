@@ -1,39 +1,17 @@
-package beta
-{
+package beta.core {
 	import flash.display.*;
 	import flash.events.Event;
 	import beta.core.*;
 	
-	public class Ship extends ControllableObject
+	public class AutoControlMappingObject extends ControllableObject
 	{
-		public function Ship() {
-		
+		public function AutoControlMappingObject() {
 			
 			super();
-			
-			collisionType = "friend";
-			collidesWith = "enemy";
-			enableCollisions();
-			
-			doesExplode = true;
-			explosionParticleCount = 4;
-			
-			mass = 1.2;
-			xThrusterPower = 0.7;
-			yThrusterPower = 0.7;
-			stablizerPowerX = 10;
-			stablizerPowerY = 10;
-			
-			
-			minY = 10;
-			minX = 10;
-			maxX = 590;
-			maxY = 490;
 			
 		}
 		
 		override protected function tick() {
-			super.tick();
 			if (controlsGoingRight) {
 				thrustingRight = true;
 			} else {
@@ -57,7 +35,9 @@ package beta
 				thrustingDown = true;
 			} else {
 				thrustingDown = false;			
-			}			
+			}
+			
+			super.tick();
 		}
 	}
 }
