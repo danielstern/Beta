@@ -4,8 +4,10 @@ package beta
 	import flash.events.Event;
 	import beta.core.*;
 	
-	public class EnemyShip extends Gunship
+	public class EnemyShip extends EnemyStaticObject
 	{
+		
+		
 		public function EnemyShip() {
 			super();
 			mass = 3;
@@ -17,6 +19,10 @@ package beta
 			constrainToScreen = false;			
 			collisionType = "enemy";
 			collidesWith = "friend";
+			
+			stabilizersEnabled = true;
+			
+			//name = NAME;
 		}
 	}
 }

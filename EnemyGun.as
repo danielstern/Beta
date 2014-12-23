@@ -7,9 +7,12 @@ package beta
 	
 	public class EnemyGun extends Gun
 	{
+		public static var NAME = "enemyGun";
 		public function EnemyGun() {
 			super();
 			cooldownTime = 100;
+			
+			name = NAME;
 		}
 		
 		

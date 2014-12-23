@@ -11,10 +11,13 @@ package beta
 		protected var timeUntilCanShoot:Number = 0;
 		protected var canShoot:Boolean = true;
 		protected var firing:Boolean = false;
+		public static var SHOOT:String = "shoot";
+		public static var NAME:String = "gun";
 		
 		public function Gun() {
 			super();
 			activate();
+			name = NAME;
 		}
 		
 		public function startFiring() {
@@ -26,6 +29,8 @@ package beta
 		} 
 		
 		public function fire() {
+			
+			//dispatchEvent(new Event(Gun.SHOOT,true));
 			
 			if (parent && parent.parent) {	
 				
@@ -47,6 +52,8 @@ package beta
 				bullet.applyForceY(yForce);
 				
 				timeUntilCanShoot = cooldownTime;
+				
+				meta(Gun.SHOOT);
 			}
 		}
 		

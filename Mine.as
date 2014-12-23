@@ -4,33 +4,32 @@ package beta
 	import beta.core.*;
 	import flash.geom.*;
 	
-	public class Mine extends ThornedObject
+	public class Mine extends EnemyStaticObject
 	{
+		public static var NAME = "mine";
 		public function Mine() {
 			super();
-			
-			collisionType = 'enemy';
-			collidesWith = 'friend';
-			
+						
 			health = 5;
 			damage = 5;
 			mass = 40;
 			
 			expireOnDamageDeal = true;
 			
+			doesExplode = true;
 			explosionType = 'mine';
 			
 			applyForceX(-1000);
 			killOffScreen = true;
 			
-			enableCollisions();
 			
-			doesExplode = true;
 			explosionParticleCount = 6;
+			name = NAME;
 			
 		}
 		
 		override protected function explode() {
+			
 			var bullets = 4;
 			for (var i = 0; i < bullets; i++) {
 				var bullet = new EnemyBullet();
@@ -48,6 +47,8 @@ package beta
 				bullet.applyForceY(yForce);
 			}
 			
+			super.explode();
+
 		}
 	}
 }

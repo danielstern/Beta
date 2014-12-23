@@ -6,6 +6,7 @@ package beta
 	
 	public class Bullet extends ThornedObject
 	{		
+		public static var NAME = "bullet";
 		public function Bullet() {
 			
 			super();
@@ -22,6 +23,8 @@ package beta
 			doesExplode = true;
 			explosionParticleCount = 2;
 			activate();
+			
+			name = NAME;
 		}
 		
 		override protected function kill() {

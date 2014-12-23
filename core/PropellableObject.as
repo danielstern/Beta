@@ -49,7 +49,7 @@ package beta.core {
 				x += xVelocity;
 				y += yVelocity;
 			} else {
-				trace("does not move");
+				//trace("does not move");
 			}
 		}
 		

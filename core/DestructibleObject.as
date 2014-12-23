@@ -4,8 +4,10 @@ package beta.core {
 	
 	public class DestructibleObject extends ThrustableObject
 	{
-		protected var health = 100;
-		protected var maxHealth = 100;
+		protected var health = 25;
+		protected var maxHealth = 25;
+		public static var TAKE_DAMAGE = "takeDamage";
+		public static var DESTROYED = "destroyed";
 		
 		public function DestructibleObject() {
 			super();
@@ -15,8 +17,9 @@ package beta.core {
 			health -= damage;
 			turnRed();
 			clearFiltersAfter(5);
-			trace(entity, "Health:", health);
-			
+			//trace(entity, "Health:", health);
+			//trace("Dispatch damage event.", parent);
+			meta(DestructibleObject.TAKE_DAMAGE);
 		}
 		
 		public function restoreHealth(restorationAmount:Number) {
@@ -27,10 +30,10 @@ package beta.core {
 		}
 		
 		override protected function tick() {
-			if (health < 0 && !killed) {
+			if (health <= 0) {
 				health = 0;
-				trace("Kill", entity);
-				kill();
+				meta(DestructibleObject.DESTROYED);
+				kill();				
 			}
 			super.tick();
 		}

@@ -21,16 +21,17 @@ package beta.core {
 				if (!other.killed) {					
 					other.takeDamage(damage);
 					
-					if (applyForceOnImpact) {
-						other.applyForceX(this.xInertia);			
-						other.applyForceY(this.yInertia);	
+					//buggy
+					//if (applyForceOnImpact) {
+					//	other.applyForceX(this.xInertia);			
+					//	other.applyForceY(this.yInertia);	
 						
-						applyForceX( -this.xInertia);
-						applyForceY( -this.yInertia);
-					}
+					//	applyForceX( -this.xInertia);
+					//	applyForceY( -this.yInertia);
+					//}
 					
 					if (expireOnDamageDeal) {
-						kill();
+						health = 0;
 					}
 				}
 			}
