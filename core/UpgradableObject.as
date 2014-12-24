@@ -14,7 +14,7 @@ package beta.core {
 		
 		public function upgrade(scheme:Upgrade) {
 			if (upgradable) {			
-				trace("Power up!", scheme);
+				//trace("Power up!", scheme);
 				upgrades.push(scheme);
 				if (scheme.health) {
 					restoreHealth(health);

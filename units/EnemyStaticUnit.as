@@ -13,7 +13,6 @@ package beta.units {
 			damage = 4;
 			mass = 5;			
 			
-			killOffScreen = true;
 			stabilizersEnabled = false;
 			
 			doesExplode = true;
@@ -26,3 +25,4 @@ package beta.units {
 }
 
 
+	

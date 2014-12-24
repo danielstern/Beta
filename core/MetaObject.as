@@ -1,4 +1,5 @@
 package beta.core {
+	import beta.events.HealingEvent;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import beta.events.MetaEvent;
@@ -29,6 +30,15 @@ package beta.core {
 				damageEvent.damageY = y;
 				damageEvent.origin = this;
 				dispatchEvent(damageEvent);
+			}
+		}
+		
+		public function metaRecoveredHealth(recoveryAmount) {
+			if (metaShowsDamage) {
+				var healEvent:HealingEvent = new HealingEvent('heal');
+				healEvent.recoveryAmount = recoveryAmount;
+				healEvent.origin = this;
+				dispatchEvent(healEvent);
 			}
 		}
 	}

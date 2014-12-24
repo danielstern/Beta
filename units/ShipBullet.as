@@ -10,6 +10,11 @@ package beta.units {
 			collisionType = 'friend';
 			collidesWith = 'enemy';	
 		}
+		
+		override protected function tick() {
+			super.tick();
+			//trace(parent.width, this.x);
+		}
 	}
 }
 

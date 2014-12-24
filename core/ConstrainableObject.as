@@ -22,7 +22,7 @@ package beta.core {
 			minX = 0;
 			minY = 10;
 			maxX = parent.width;
-			maxY = parent.height;
+			maxY = parent.height - height;
 			
 			super.onAddedToStage(e);
 		}
@@ -44,7 +44,8 @@ package beta.core {
 				}
 			} else {
 				if (parent) {
-					if (x < 0 || x > parent.width || y < 0 || y > parent.height) {
+					
+					if (x < 0 || x >= parent.width - 10 || y < 0 || y >= parent.height - 10) {
 						isOffScreen = true;
 					};
 				}
