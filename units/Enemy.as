@@ -14,15 +14,9 @@ package beta.units {
 			
 			health = 10;
 			damage = 4;
-			mass = 40;
-			
-			
-			
+
 			killOffScreen = true;
-			
-			//enableCollisions();
-			stabilizersEnabled = false;
-			
+						
 			doesExplode = true;
 			explosionParticleCount = 4;
 			

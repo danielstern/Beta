@@ -50,7 +50,7 @@ package beta.games {
 				world.DrawDebugData();
 				//trace("World update.");			
 			
-			}, 100,world);
+			}, 25,world);
 			
 			function spawnHero() { 
 				setTimeout(function() {
@@ -82,17 +82,18 @@ package beta.games {
 			spawnHero();
 			
 			
-			//setInterval(function() {
-				//var enemy:ActivatableObject = getRandomEnemy();
+			setInterval(function() {
+				var enemy:Enemy = getRandomEnemy();
 				//enemy.x = gameWidth - 5;
+				enemy.setBoxModelPosition(new b2Vec2(20, Math.random() * 10));
 				//enemy.y = Math.random() * gameHeight -25;
 				//gameContainer.addChild(enemy);
-				//enemy.activate();
-			//},1000)
+				enemy.activate();
+			},1000)
 
-			//function getRandomEnemy() {
-				//var enemies = [
-					//new Asteroid(),
+			function getRandomEnemy() {
+				var enemies = [
+					new Asteroid(world)
 					//new EnemyBasicThrusterShip(),
 					//new EnemyCurvyThrusterShip, 
 					//new Mine(), 
@@ -100,9 +101,9 @@ package beta.games {
 					//new EnemyForkedAttackingShip(), 
 					//new BasicGunCountPowerup(),
 					//new BasicHealthPowerup()
-				//];
-				//return enemies[Math.floor(Math.random() * enemies.length)];
-			//}
+				];
+				return enemies[Math.floor(Math.random() * enemies.length)];
+			}
 			
 			gameContainer.addEventListener(Hero.NAME + ":" + DestructibleObject.DESTROYED, handleHeroDie);
 			

@@ -11,8 +11,7 @@ package beta.components {
 			super(world);
 			addBoxModelCircleFixture(0.3);
 	
-			addGun(new b2Vec2(0.5, 0.5));
-			addGun(new b2Vec2(0.5, -0.5));		
+		
 		}
 		
 		public function addGun(position) {
