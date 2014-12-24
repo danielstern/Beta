@@ -31,15 +31,19 @@ package beta.units {
 			var bullets = 4;
 			for (var i = 0; i < bullets; i++) {
 				var bullet = new EnemyBullet();
-				stage.addChild(bullet);
-				var angleRadians = 2 * Math.PI * (i + 1) / bullets + 1/4*Math.PI;
-								
-				var pos = entity.localToGlobal(new Point());
-				bullet.x = pos.x;
-				bullet.y = pos.y;
+				parent.addChild(bullet);
+				var angleRadians = 2 * Math.PI * (i + 1) / bullets + 1 / 4 * Math.PI;
 				
-				var xForce = Math.cos(angleRadians) / 10;
-				var yForce = Math.sin(angleRadians) / 10;
+				bullet.x = x;
+				bullet.y = y;
+								
+				//var pos = entity.localToGlobal(new Point());
+				//bullet.x = pos.x;
+				//bullet.y = pos.y;
+			//	trace("Mine bullet...", pos);
+				
+				var xForce = Math.cos(angleRadians) * 100;
+				var yForce = Math.sin(angleRadians) * 100;
 				
 				bullet.applyForceX(xForce);
 				bullet.applyForceY(yForce);

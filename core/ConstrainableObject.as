@@ -19,16 +19,24 @@ package beta.core {
 		
 		override protected function onAddedToStage(e) {
 			
+			var container:* = parent;
+			
+			if (!container.containerWidth) {
+				trace("Constrainable objects must have a parent subclassing BasicContainer.");
+				return;
+			}
+			
 			minX = 0;
 			minY = 10;
-			maxX = parent.width;
-			maxY = parent.height - height;
+			maxX = container.containerWidth;
+			maxY = container.containerHeight - height;
 			
 			super.onAddedToStage(e);
 		}
 		
 		override protected function tick() {
 			super.tick();
+			
 			
 			if (constrainToScreen) {		
 				if (x < minX) {
