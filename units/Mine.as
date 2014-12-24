@@ -36,11 +36,6 @@ package beta.units {
 				
 				bullet.x = x;
 				bullet.y = y;
-								
-				//var pos = entity.localToGlobal(new Point());
-				//bullet.x = pos.x;
-				//bullet.y = pos.y;
-			//	trace("Mine bullet...", pos);
 				
 				var xForce = Math.cos(angleRadians) * 100;
 				var yForce = Math.sin(angleRadians) * 100;

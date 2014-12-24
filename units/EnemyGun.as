@@ -12,9 +12,7 @@ package beta.units {
 		
 		
 		override protected function getBullet() {
-			trace("Enemy firing bullet");
 			return new EnemyBullet();			
-			
 		}
 	}
 }
