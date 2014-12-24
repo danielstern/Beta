@@ -3,7 +3,7 @@ package beta.core {
 	import flash.events.Event;
 	import com.coreyoneil.collision.CollisionList;
 	import flash.geom.Point;
-	public class CollidableObject extends ConstrainableObject
+	public class CollidableObject extends BoxModelObject
 	{	
 		protected var collisionList:CollisionList;
 		

@@ -1,4 +1,5 @@
 package beta.core {
+	import Box2D.Common.Math.b2Vec2;
 	import flash.display.*;
 	import flash.events.Event;
 	
@@ -19,55 +20,58 @@ package beta.core {
 		protected var doesMove:Boolean = true;
 		
 		public function PropellableObject() {
-			super();			
+			super();		
 		}
 		
 		public function applyForceX(x:Number) {
-			xInertia += x;
+			boxModelBody.ApplyForce(new b2Vec2(x, 0), boxModelBody.GetLocalCenter());
 		}
 		
 		public function applyForceY(y:Number) {
-			yInertia += y;
+			boxModelBody.ApplyForce(new b2Vec2(0, y), boxModelBody.GetLocalCenter());
 		}
 		
 		override protected function tick() {
 			super.tick();
+			var position:b2Vec2 = boxModelBody.GetPosition();
+			x = position.x;
+			y = position.y;
 			
-			if (xInertia > maxInertiaX) {
-				xInertia = maxInertiaX;
-			} else if (xInertia < -maxInertiaX) {
-				xInertia = -maxInertiaX;
-			}
-			
-			if (yInertia > maxInertiaY) {
-				yInertia = maxInertiaY;
-			} else if (yInertia < -maxInertiaY) {
-				yInertia = -maxInertiaY;
-			}
-			
-		
-			  
-			xVelocity = xInertia / Math.pow(mass,2);
-			yVelocity = yInertia / Math.pow(mass, 2);
-			
-			if (xVelocity > maxVelocityX) {
-				xVelocity = maxVelocityX;
-			} else if (xVelocity < -maxVelocityX) {
-				xVelocity = -maxVelocityX;
-			}
-			
-			if (yVelocity > maxVelocityY) {
-				yVelocity = maxVelocityY;
-			} else if (yVelocity < -maxVelocityY) {
-				yVelocity = -maxVelocityY;
-			}
-			
-			if (doesMove) {
-				x += xVelocity;
-				y += yVelocity;
-			} else {
-				//trace("does not move");
-			}
+			//if (xInertia > maxInertiaX) {
+				//xInertia = maxInertiaX;
+			//} else if (xInertia < -maxInertiaX) {
+				//xInertia = -maxInertiaX;
+			//}
+			//
+			//if (yInertia > maxInertiaY) {
+				//yInertia = maxInertiaY;
+			//} else if (yInertia < -maxInertiaY) {
+				//yInertia = -maxInertiaY;
+			//}
+			//
+		//
+			  //
+			//xVelocity = xInertia / Math.pow(mass,2);
+			//yVelocity = yInertia / Math.pow(mass, 2);
+			//
+			//if (xVelocity > maxVelocityX) {
+				//xVelocity = maxVelocityX;
+			//} else if (xVelocity < -maxVelocityX) {
+				//xVelocity = -maxVelocityX;
+			//}
+			//
+			//if (yVelocity > maxVelocityY) {
+				//yVelocity = maxVelocityY;
+			//} else if (yVelocity < -maxVelocityY) {
+				//yVelocity = -maxVelocityY;
+			//}
+			//
+			//if (doesMove) {
+				//x += xVelocity;
+				//y += yVelocity;
+			//} else {
+				////trace("does not move");
+			//}
 		}
 		
 		override protected function kill() {

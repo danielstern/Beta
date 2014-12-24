@@ -5,7 +5,6 @@ package beta.core {
 	public class DisplayableObject extends TimekeepingObject
 	{
 		protected var _orientation = 0;
-		public var container:MovieClip;
 		public function DisplayableObject() {
 			super();
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
@@ -15,10 +14,10 @@ package beta.core {
 			
 		}
 		
-		public function appendTo(_container:MovieClip) {
-			container = _container;
-			container.addChild(this);
-		}
+		//public function appendTo(_container:MovieClip) {
+			//container = _container;
+			//container.addChild(this);
+		//}
 		
 		public function set orientation(val) {
 			_orientation = val;

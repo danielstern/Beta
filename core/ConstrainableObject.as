@@ -1,4 +1,5 @@
 package beta.core {
+	import beta.containers.BoxWorldContainer;
 	import flash.display.*;
 	import flash.events.Event;
 	
@@ -12,6 +13,7 @@ package beta.core {
 		protected var killOffScreen:Boolean = false;
 		protected var isOffScreen:Boolean = false;
 		protected var constrainToScreen = false;
+		protected var container:BoxWorldContainer;
 
 		public function ConstrainableObject() {
 			super();
@@ -19,12 +21,8 @@ package beta.core {
 		
 		override protected function onAddedToStage(e) {
 			
-			var container:* = parent;
-			
-			if (!container.containerWidth) {
-				trace("Constrainable objects must have a parent subclassing BasicContainer.");
-				return;
-			}
+			var _container:* = parent;
+			container = _container;
 			
 			minX = 0;
 			minY = 10;

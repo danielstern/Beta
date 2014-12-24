@@ -1,6 +1,8 @@
 package beta.worlds 
 {
 	import beta.components.Bullet;
+	import beta.components.Gunship;
+	import beta.containers.BoxWorldContainer;
 	import beta.core.ControllableObject;
 	import beta.core.DestructibleObject;
 	import beta.core.ActivatableObject;
@@ -8,6 +10,13 @@ package beta.worlds
 	import beta.core.UpgradableObject;
 	import beta.extras.BasicSoundOutput;
 	import beta.containers.BasicContainer;
+	import Box2D.Collision.Shapes.b2CircleShape;
+	import Box2D.Common.Math.b2Vec2;
+	import Box2D.Dynamics.b2Body;
+	import Box2D.Dynamics.b2BodyDef;
+	import Box2D.Dynamics.b2DebugDraw;
+	import Box2D.Dynamics.b2Fixture;
+	import Box2D.Dynamics.b2FixtureDef;
 
 	import beta.powerups.BasicGunCountPowerup;
 	import beta.powerups.BasicHealthPowerup;
@@ -25,22 +34,25 @@ package beta.worlds
 	import com.kircode.EasyKeyboard.*;
 	import flash.display.*;
 	import flash.utils.*;
+	
+	import Box2D.Dynamics.b2World;
 
 	import beta.containers.MetaDisplayingContainer;
 	
 	public class BasicTestWorld 
 	{
-		public function BasicTestWorld(gameContainer:BasicContainer,stage:Stage) 
+		public function BasicTestWorld(gameContainer:BoxWorldContainer,stage:Stage) 
 		{
 			var controlledObject:ControllableObject;
 			var keyboard:EasyKeyboard = new EasyKeyboard(stage);
 			var sounds = new BasicSoundOutput(gameContainer);
-			
+			var gameHeight = gameContainer.containerHeight;
+			var gameWidth = gameContainer.containerWidth;		
 			
 			function spawnHero() { 
 				setTimeout(function() {
-					var hero = new BasicHeroShip();
-					gameContainer.addChild(hero)
+					var hero:Gunship = new BasicHeroShip();
+					gameContainer.addChild(hero);
 					controlledObject = hero;
 					hero.activate();					
 					
@@ -50,8 +62,30 @@ package beta.worlds
 					keyboard.addEasyListener("D", controlledObject.startRight, controlledObject.stopRight);
 					keyboard.addListener(32, controlledObject.startAction1, controlledObject.stopAction1);
 					
-					hero.x = 50;
-					hero.y = 150;
+					//hero.x = 50;
+					//hero.y = 150;
+					
+					
+					
+					var heroBodyDef = new b2BodyDef();
+					var heroBody:b2Body = gameContainer.getBody();
+					
+					heroBody.SetPosition(new b2Vec2(50, 150));
+					
+				//	heroBody.SetLinearDamping(0.4);
+					var circleShape:b2CircleShape = new b2CircleShape(5);
+					var fixtureDef:b2FixtureDef = new b2FixtureDef();
+					fixtureDef.shape = circleShape;
+					fixtureDef.density = 0.5;
+					heroBody.SetType(2);
+
+					var heroBodyFixture:b2Fixture = heroBody.CreateFixture(fixtureDef);
+					hero.setBoxModelBody(heroBody);
+					
+					//heroBody.ApplyForce(new b2Vec2(5, 5));
+				
+					
+					
 				},700);
 			}
 			
@@ -59,14 +93,14 @@ package beta.worlds
 			spawnHero();
 			
 			
-			setInterval(function() {
-				var enemy:ActivatableObject = getRandomEnemy();
-				enemy.x = gameContainer.containerWidth - 5;
-				enemy.y = Math.random() * gameContainer.containerHeight -25;
-				gameContainer.addChild(enemy);
-				enemy.activate();
-			},1000)
-			
+			//setInterval(function() {
+				//var enemy:ActivatableObject = getRandomEnemy();
+				//enemy.x = gameWidth - 5;
+				//enemy.y = Math.random() * gameHeight -25;
+				//gameContainer.addChild(enemy);
+				//enemy.activate();
+			//},1000)
+
 			function getRandomEnemy() {
 				var enemies = [
 					new Asteroid(),
@@ -87,6 +121,8 @@ package beta.worlds
 			function handleHeroDie(e) {
 				spawnHero();
 			}
+			
+			
 			
 
 			
