@@ -24,12 +24,12 @@ package beta.core {
 		}
 		
 		public function applyForceX(x:Number) {
-			//boxModelBody.ApplyForce(new b2Vec2(x, 0), boxModelBody.GetLocalCenter());
+			boxModelBody.ApplyForce(new b2Vec2(x * boxModelBody.GetMass(), 0), boxModelBody.GetLocalCenter());
 			//boxModelBody.SetLinearVelocity(new b2Vec2(100, 0));
 		}
 		
 		public function applyForceY(y:Number) {
-			//boxModelBody.ApplyForce(new b2Vec2(0, y), boxModelBody.GetLocalCenter());
+			boxModelBody.ApplyForce(new b2Vec2(0, y * boxModelBody.GetMass()), boxModelBody.GetLocalCenter());
 		}
 		
 		override protected function tick() {

@@ -16,7 +16,7 @@ package beta.core {
 	public class BoxModelObject  extends TimekeepingObject
 	{	
 		private var hasBoxModel = true;
-		protected var boxModelBody:b2Body;
+		public var boxModelBody:b2Body;
 		public var world:b2World;
 		public var defaultWorld:b2World = new b2World(new b2Vec2(0, 0), false); 
 		
@@ -27,8 +27,7 @@ package beta.core {
 		public var maxVelocityX;
 		public var maxInertiaX;
 		
-		
-				protected var stablizerPowerX = 1;
+		protected var stablizerPowerX = 1;
 		protected var stablizerPowerY = 1;
 		protected var stabilizersEnabledLeft = true;
 		protected var stabilizersEnabledRight = true;
@@ -36,28 +35,30 @@ package beta.core {
 		protected var stabilizersEnabledDown = true;
 		
 		protected var stabilizersEnabled = false;
+		
+		protected var boxModelRadius = 0.2;
 
 		public function BoxModelObject(_world) {
 			world = _world;
 			
+			//trace("Create box model object.");
+			
 			
 			var bodyDef:b2BodyDef = new b2BodyDef();
 			bodyDef.type = b2Body.b2_dynamicBody;
-			//bodyDef.linearDamping = 0;
+
 			var body:b2Body = world.CreateBody(bodyDef);
 			
-			//heroBody.SetPosition(new b2Vec2(50, 150));
-			//heroBody.SetPosition(new b2Vec2(0,0));
-			//heroBody.SetLinearDamping(0);
-			var circleShape:b2CircleShape = new b2CircleShape(0.2);
-			var fixtureDef:b2FixtureDef = new b2FixtureDef();
-			fixtureDef.shape = circleShape;
-			//fixtureDef.density = 0.7;
-			//fixtureDef.friction = 0;
-			//heroBody.SetType(2);
+			//if (hasFixture) {					
+					
+				var circleShape:b2CircleShape = new b2CircleShape(boxModelRadius);
+				var fixtureDef:b2FixtureDef = new b2FixtureDef();
+				fixtureDef.shape = circleShape;
 
-			var fixture:b2Fixture = body.CreateFixture(fixtureDef);
-			setBoxModelBody(body);
+				var fixture:b2Fixture = body.CreateFixture(fixtureDef);
+				fixture.SetSensor(true);
+				setBoxModelBody(body);
+			//}
 			
 			super();	
 		}

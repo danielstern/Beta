@@ -67,38 +67,38 @@ package beta.units {
 			
 		}
 		
-		override protected function gunsStartFiring() {
-			switch (gunCountLevel + upgradeGunCountLevel) {
-				case 1:
-					gun1.startFiring();
-					break;
-				case 2:
-					gun2.startFiring();
-					gun3.startFiring();
-					break;
-				case 3:
-					gun1.startFiring();
-					gun4.startFiring();
-					gun5.startFiring();
-					break;
-				case 4:
-					gun2.startFiring();
-					gun3.startFiring();
-					gun4.startFiring();
-					gun5.startFiring();
-					break;
-				case 5:
-					gun1.startFiring();
-					gun4.startFiring();
-					gun5.startFiring();
-					gun6.startFiring();
-					gun7.startFiring();
-					break;
-				default:
-					super.gunsStartFiring();
-					break;
-			}
-		}
+		//override protected function gunsStartFiring() {
+			//switch (gunCountLevel + upgradeGunCountLevel) {
+				//case 1:
+					//gun1.startFiring();
+					//break;
+				//case 2:
+					//gun2.startFiring();
+					//gun3.startFiring();
+					//break;
+				//case 3:
+					//gun1.startFiring();
+					//gun4.startFiring();
+					//gun5.startFiring();
+					//break;
+				//case 4:
+					//gun2.startFiring();
+					//gun3.startFiring();
+					//gun4.startFiring();
+					//gun5.startFiring();
+					//break;
+				//case 5:
+					//gun1.startFiring();
+					//gun4.startFiring();
+					//gun5.startFiring();
+					//gun6.startFiring();
+					//gun7.startFiring();
+					//break;
+				//default:
+					//super.gunsStartFiring();
+					//break;
+			//}
+		//}
 	}
 }
 

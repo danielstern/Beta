@@ -1,9 +1,11 @@
 package beta.components {
+	import Box2D.Dynamics.b2Fixture;
 	import flash.display.*;
 	import flash.events.Event;
 	import flash.geom.Point;
 	import beta.core.*;
 	import beta.units.ShipBullet;
+	import beta.core.BoxModelObject;
 	
 	public class Gun extends BoxModelObject
 	{
@@ -14,9 +16,11 @@ package beta.components {
 		public static var SHOOT:String = "shoot";
 		public static var NAME:String = "gun";
 		public var orientation = 0;
+		var fixture:b2Fixture;
 		
-		public function Gun(ship:Gunship) {
-			super(ship.world);
+		public function Gun(_fixture:b2Fixture) {
+			fixture = _fixture;
+			super(fixture.GetBody().GetWorld());
 			activate();
 			name = NAME;
 		}
@@ -26,6 +30,7 @@ package beta.components {
 		} 
 		
 		public function stopFiring() {
+			//trace("gun stop firing.");
 			firing = false;
 		} 
 		
@@ -33,9 +38,12 @@ package beta.components {
 			
 			//dispatchEvent(new Event(Gun.SHOOT,true));
 			//return;
-			
+			//trace('fire!');
 				
-				var bullet = getBullet();
+				var bullet:Bullet = getBullet();
+				bullet.boxModelBody.SetPosition(fixture.GetBody().GetPosition());
+				bullet.applyForceX(10);
+			
 				//var container = parent.parent;
 				//container.addChild(bullet);
 				

@@ -8,24 +8,35 @@ package beta.components {
 	{		
 		public static var NAME = "bullet";
 		
-		public function Bullet(gun:Gun) {
+		public function Bullet(world) {
+			
+			//hasFixture = false;
+			boxModelRadius = 0.1;
 			
 			//setBoxModelBody(body);
-			super(gun.world);
+			super(world);
+			
+					
+			
+			//var bodyDef:b2BodyDef = new b2BodyDef();
+			//bodyDef.type = b2Body.b2_dynamicBody;
+//
+			//var body:b2Body = world.CreateBody(bodyDef);
+//
+			//var circleShape:b2CircleShape = new b2CircleShape(0.2);
+			//var fixtureDef:b2FixtureDef = new b2FixtureDef();
+			//fixtureDef.shape = circleShape;
+//
+			//var fixture:b2Fixture = body.CreateFixture(fixtureDef);
+			//setBoxModelBody(body);
 			
 			
-			
-			enableCollisions();
 			
 			mass = 10;		
 			damage = 10;
 			
 			expireOnDamageDeal = true;
-
 			killOffScreen = true;
-			
-			//maxVelocityX = 1000;
-			//maxInertiaX = 1000;
 			
 			doesExplode = true;
 			explosionParticleCount = 2;
