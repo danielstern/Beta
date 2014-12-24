@@ -67,17 +67,20 @@ package beta.worlds
 					
 					
 					
-					var heroBodyDef = new b2BodyDef();
-					var heroBody:b2Body = gameContainer.getBody();
+					var heroBodyDef:b2BodyDef = new b2BodyDef();
+					heroBodyDef.type = b2Body.b2_dynamicBody;
+					heroBodyDef.linearDamping = 0;
+					var heroBody:b2Body = gameContainer.getBody(heroBodyDef);
 					
-					heroBody.SetPosition(new b2Vec2(50, 150));
-					
-				//	heroBody.SetLinearDamping(0.4);
-					var circleShape:b2CircleShape = new b2CircleShape(5);
+					//heroBody.SetPosition(new b2Vec2(50, 150));
+					//heroBody.SetPosition(new b2Vec2(0,0));
+					//heroBody.SetLinearDamping(0);
+					var circleShape:b2CircleShape = new b2CircleShape(0.2);
 					var fixtureDef:b2FixtureDef = new b2FixtureDef();
 					fixtureDef.shape = circleShape;
-					fixtureDef.density = 0.5;
-					heroBody.SetType(2);
+					fixtureDef.density = 0.7;
+					fixtureDef.friction = 0;
+					//heroBody.SetType(2);
 
 					var heroBodyFixture:b2Fixture = heroBody.CreateFixture(fixtureDef);
 					hero.setBoxModelBody(heroBody);

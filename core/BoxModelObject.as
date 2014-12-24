@@ -10,14 +10,20 @@ package beta.core {
 		protected var boxContainer:BoxWorldContainer;
 
 		public function BoxModelObject() {
+			
 			super();	
 			
-			var _container:* = parent;
-			boxContainer = _container;
+	
 		}
 		
 		override protected function kill() {
 			super.kill();
+		}
+		
+		override protected function onAddedToStage(e) {
+			super.onAddedToStage(e);
+			var _container:* = parent;
+			boxContainer = _container;
 		}
 		
 		override protected function tick() {

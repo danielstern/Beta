@@ -24,18 +24,25 @@ package beta.core {
 		}
 		
 		public function applyForceX(x:Number) {
-			boxModelBody.ApplyForce(new b2Vec2(x, 0), boxModelBody.GetLocalCenter());
+			//boxModelBody.ApplyForce(new b2Vec2(x, 0), boxModelBody.GetLocalCenter());
+			boxModelBody.SetLinearVelocity(new b2Vec2(100, 0));
 		}
 		
 		public function applyForceY(y:Number) {
-			boxModelBody.ApplyForce(new b2Vec2(0, y), boxModelBody.GetLocalCenter());
+			//boxModelBody.ApplyForce(new b2Vec2(0, y), boxModelBody.GetLocalCenter());
 		}
 		
 		override protected function tick() {
 			super.tick();
-			var position:b2Vec2 = boxModelBody.GetPosition();
-			x = position.x;
-			y = position.y;
+			if (boxContainer) {
+				
+			
+				var position:b2Vec2 = boxModelBody.GetPosition();
+				x = position.x * boxContainer.boxScale;
+				y = position.y * boxContainer.boxScale;
+				//scaleX = boxContainer.boxScale;
+				//scaleY = boxContainer.boxScale;
+			}
 			
 			//if (xInertia > maxInertiaX) {
 				//xInertia = maxInertiaX;

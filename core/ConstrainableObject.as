@@ -35,31 +35,31 @@ package beta.core {
 		override protected function tick() {
 			super.tick();
 			
-			
-			if (constrainToScreen) {		
-				if (x < minX) {
-					x = minX;
-				} else if (x > maxX) {
-					x = maxX;
-				}
-				
-				if (y < minY) {
-					y = minY;
-				} else if (y > maxY) {
-					y = maxY;
-				}
-			} else {
-				if (parent) {
-					
-					if (x < 0 || x >= parent.width - 10 || y < 0 || y >= parent.height - 10) {
-						isOffScreen = true;
-					};
-				}
-			}			
-			
-			if (isOffScreen && killOffScreen) {
-				kill();
-			}
+			//
+			//if (constrainToScreen) {		
+				//if (x < minX) {
+					//x = minX;
+				//} else if (x > maxX) {
+					//x = maxX;
+				//}
+				//
+				//if (y < minY) {
+					//y = minY;
+				//} else if (y > maxY) {
+					//y = maxY;
+				//}
+			//} else {
+				//if (parent) {
+					//
+					//if (x < 0 || x >= parent.width - 10 || y < 0 || y >= parent.height - 10) {
+						//isOffScreen = true;
+					//};
+				//}
+			//}			
+			//
+			//if (isOffScreen && killOffScreen) {
+				//kill();
+			//}
 			
 		}
 	}

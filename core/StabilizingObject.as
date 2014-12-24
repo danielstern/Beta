@@ -23,34 +23,34 @@ package beta.core {
 			
 			if (stabilizersEnabled) {
 				
-				var xSpeed:Number = boxModelBody.GetLinearVelocity().x;
-				var ySpeed:Number = boxModelBody.GetLinearVelocity().y;
-				
-				trace("Speed?", xSpeed,ySpeed);
-				
-				if (stabilizersEnabledRight) {
-					if (xSpeed < 0) {
-						applyForceX(1);
-					}
-				}
-				
-				if (stabilizersEnabledLeft) {
-					if (xSpeed > 0) {
-						applyForceX(-1);
-					}
-				}
-				
-				if (stabilizersEnabledDown) {
-					if (ySpeed > 0) {
-						applyForceY(-1);
-					}
-				}
-				
-				if (stabilizersEnabledUp) {
-					if (ySpeed < 0) {
-						applyForceY(1);
-					}
-				}
+				//var xSpeed:Number = boxModelBody.GetLinearVelocity().x;
+				//var ySpeed:Number = boxModelBody.GetLinearVelocity().y;
+				//
+				//trace("Speed?", xSpeed,ySpeed);
+				//
+				//if (stabilizersEnabledRight) {
+					//if (xSpeed < 0) {
+						//applyForceX(1);
+					//}
+				//}
+				//
+				//if (stabilizersEnabledLeft) {
+					//if (xSpeed > 0) {
+						//applyForceX(-1);
+					//}
+				//}
+				//
+				//if (stabilizersEnabledDown) {
+					//if (ySpeed > 0) {
+						//applyForceY(-1);
+					//}
+				//}
+				//
+				//if (stabilizersEnabledUp) {
+					//if (ySpeed < 0) {
+						//applyForceY(1);
+					//}
+				//}
 						
 				//var xForceToApply = stablizerPowerX;
 				//if (Math.abs(xInertia) < stablizerPowerX) {
