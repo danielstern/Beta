@@ -29,6 +29,10 @@ package beta.units {
 			name = NAME;
 			
 		}
+		
+		override protected function getGun() {
+			return new EnemyGun();
+		}
 	}
 }
 

@@ -7,8 +7,6 @@ package beta.units {
 		protected var attacks = false;
 		public function EnemyBasicAttackingShip() {
 			super();
-			
-			//addGun();
 			attacks = true;
 			enemyAICurves = false;
 			addGuns();
@@ -29,10 +27,6 @@ package beta.units {
 					gunsStartFiring();
 				}
 			}
-		}
-		
-		override protected function getGun() {
-			return new EnemyGun();
 		}
 	}
 }

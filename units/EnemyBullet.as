@@ -7,7 +7,7 @@ package beta.units {
 		public function EnemyBullet() {
 			collisionType = 'enemy';
 			collidesWith = 'friend';	
-			mass = 0.3;
+			mass = 5;
 			damage = 5;
 		}
 	}
