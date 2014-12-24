@@ -5,6 +5,7 @@ package beta.core {
 	
 	public class AutoControlMappingObject extends ControllableObject
 	{
+		public var controlledViaOverride = false;
 		public function AutoControlMappingObject() {
 			
 			super();
@@ -12,29 +13,31 @@ package beta.core {
 		}
 		
 		override protected function tick() {
-			if (controlsGoingRight) {
-				thrustingRight = true;
-			} else {
-				thrustingRight = false;
-			}
-			
-			if (controlsGoingLeft) {
-				thrustingLeft = true;
-			} else {
-				thrustingLeft = false;
-			}
-			
+			if (controlledViaOverride) {				
+				if (controlsGoingRight) {
+					thrustingRight = true;
+				} else {
+					thrustingRight = false;
+				}
+				
+				if (controlsGoingLeft) {
+					thrustingLeft = true;
+				} else {
+					thrustingLeft = false;
+				}
+				
 
-			if (controlsGoingUp) {
-				thrustingUp = true;
-			} else {
-				thrustingUp = false;
-			}
-			
-			if (controlsGoingDown) {
-				thrustingDown = true;
-			} else {
-				thrustingDown = false;			
+				if (controlsGoingUp) {
+					thrustingUp = true;
+				} else {
+					thrustingUp = false;
+				}
+				
+				if (controlsGoingDown) {
+					thrustingDown = true;
+				} else {
+					thrustingDown = false;			
+				}
 			}
 			
 			super.tick();

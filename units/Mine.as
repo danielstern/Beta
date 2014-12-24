@@ -2,7 +2,7 @@ package beta.units {
 
 	import flash.geom.Point;
 	
-	public class Mine extends Enemy
+	public class Mine extends EnemyStaticUnit
 	{
 		public static var NAME = "mine";
 		public function Mine() {

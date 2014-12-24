@@ -3,7 +3,7 @@ package beta.core {
 	import flash.events.Event;
 	import flash.filters.ColorMatrixFilter;
 	
-	public class KillableObject extends ActivatableObject
+	public class KillableObject extends MetaObject
 	{
 		public var killed = false;
 

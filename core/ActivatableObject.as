@@ -1,10 +1,8 @@
 package beta.core {
-	import flash.display.*;
+	import flash.display.MovieClip;
 	import flash.events.Event;
-	import flash.filters.ColorMatrixFilter;
-	import flash.utils.getAliasName;
-	import flash.utils.getQualifiedClassName;
 	import beta.events.MetaEvent;
+	import beta.events.DamageEvent;
 	
 	public class ActivatableObject extends MovieClip
 	{
@@ -17,17 +15,6 @@ package beta.core {
 		
 		public function activate() {
 			activated = true;
-		}
-		
-		public function meta(type) {
-			var origin = name + ":" + type;
-			var mainEvent:Event = new Event(origin, true);
-			var audioEvent:MetaEvent = new MetaEvent("audio", true);
-			audioEvent.origin = origin;
-			//trace("Meta event...", origin);
-			dispatchEvent(mainEvent);			
-			dispatchEvent(audioEvent);			
-			
 		}
 	}
 }

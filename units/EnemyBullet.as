@@ -8,6 +8,7 @@ package beta.units {
 			collisionType = 'enemy';
 			collidesWith = 'friend';	
 			mass = 0.3;
+			damage = 5;
 		}
 	}
 }

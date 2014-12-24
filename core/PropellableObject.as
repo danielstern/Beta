@@ -13,6 +13,9 @@ package beta.core {
 		protected var maxVelocityY:Number = 5;
 		protected var maxVelocityX:Number = 5;
 		
+		protected var maxInertiaY:Number = 1000;
+		protected var maxInertiaX:Number = 1000;
+		
 		protected var doesMove:Boolean = true;
 		
 		public function PropellableObject() {
@@ -29,6 +32,20 @@ package beta.core {
 		
 		override protected function tick() {
 			super.tick();
+			
+			if (xInertia > maxInertiaX) {
+				xInertia = maxInertiaX;
+			} else if (xInertia < -maxInertiaX) {
+				xInertia = -maxInertiaX;
+			}
+			
+			if (yInertia > maxInertiaY) {
+				yInertia = maxInertiaY;
+			} else if (yInertia < -maxInertiaY) {
+				yInertia = -maxInertiaY;
+			}
+			
+		
 			  
 			xVelocity = xInertia / Math.pow(mass,2);
 			yVelocity = yInertia / Math.pow(mass, 2);

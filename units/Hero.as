@@ -13,14 +13,7 @@ package beta.units {
 			collisionType = "friend";
 			collidesWith = "enemy";
 	
-			health = 25;
-			
-			constrainToScreen = true;
-			minY = 10;
-			minX = 10;
-			maxX = 590;
-			maxY = 490;
-			
+			constrainToScreen = true;			
 			name = NAME;
 		
 		}

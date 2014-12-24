@@ -1,7 +1,5 @@
 package beta.events {
-	import flash.display.*;
 	import flash.events.Event;
-	import flash.filters.ColorMatrixFilter;
 	
 	public class MetaEvent extends Event
 	{

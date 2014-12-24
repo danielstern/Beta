@@ -18,21 +18,19 @@ package beta.core {
 			if (collisions[0] && thorned) {
 				
 				var other:DestructibleObject = collisions[0];
-				if (!other.killed) {					
-					other.takeDamage(damage);
+				other.takeDamage(damage);
+				
+				//buggy
+				//if (applyForceOnImpact) {
+				//	other.applyForceX(this.xInertia);			
+				//	other.applyForceY(this.yInertia);	
 					
-					//buggy
-					//if (applyForceOnImpact) {
-					//	other.applyForceX(this.xInertia);			
-					//	other.applyForceY(this.yInertia);	
-						
-					//	applyForceX( -this.xInertia);
-					//	applyForceY( -this.yInertia);
-					//}
-					
-					if (expireOnDamageDeal) {
-						health = 0;
-					}
+				//	applyForceX( -this.xInertia);
+				//	applyForceY( -this.yInertia);
+				//}
+				
+				if (expireOnDamageDeal) {
+					health = 0;
 				}
 			}
 			

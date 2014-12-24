@@ -12,7 +12,7 @@ package beta.core {
 			super();
 		}
 		
-		protected function turnRed() {			
+		public function turnRed() {			
 			var matrix:Array = new Array();
 			matrix=matrix.concat([1,1,1,0,0]);// red
 			matrix=matrix.concat([0,0,0,0,0]);// green
@@ -30,7 +30,7 @@ package beta.core {
 			doAfter(count, clearFilters);
 		}
 		
-		protected function turnWhite() {			
+		public function turnWhite() {			
 			var matrix:Array = new Array();
 			matrix=matrix.concat([1,1,1,0,0]);
 			matrix=matrix.concat([1,1,1,0,0]);

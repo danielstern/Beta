@@ -1,6 +1,6 @@
 package beta.units {
 	
-	public class Asteroid extends Enemy
+	public class Asteroid extends EnemyStaticUnit
 	{
 		public static var NAME = "asteroid";
 		public function Asteroid() {

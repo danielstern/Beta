@@ -17,9 +17,8 @@ package beta.core {
 			health -= damage;
 			turnRed();
 			clearFiltersAfter(5);
-			//trace(entity, "Health:", health);
-			//trace("Dispatch damage event.", parent);
 			meta(DestructibleObject.TAKE_DAMAGE);
+			metaTookDamage(damage);
 		}
 		
 		public function restoreHealth(restorationAmount:Number) {

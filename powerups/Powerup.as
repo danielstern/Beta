@@ -1,4 +1,4 @@
-package beta.units {
+package beta.powerups {
 	
 	import beta.core.ThornedObject;
 	import beta.upgrades.BasicHealthRestoreUpgrade;
@@ -6,6 +6,7 @@ package beta.units {
 	public class Powerup extends ThornedObject
 	{
 		public static var NAME = "powerup";
+		public static var FULFILL = 'fulfill';
 		public function Powerup() {
 			
 			super();
@@ -15,7 +16,7 @@ package beta.units {
 			
 			stabilizersEnabled = false;
 			
-			health = 100;
+			health = 25;
 			damage = 0;
 			mass = 40;
 			
@@ -26,6 +27,8 @@ package beta.units {
 			
 			doesExplode = true;
 			explosionParticleCount = 4;
+			metaShowsDamage = false;
+			thorned = false;
 			
 			name = NAME;	
 		}
@@ -38,6 +41,7 @@ package beta.units {
 				upgrade.health = 25;
 				hero.upgrade(upgrade);
 				kill();
+				meta(FULFILL);
 			}
 			super.tick();
 		}

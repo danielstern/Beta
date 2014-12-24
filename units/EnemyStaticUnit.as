@@ -2,25 +2,18 @@ package beta.units {
 	
 	import beta.components.Gunship;
 	
-	public class Enemy extends Gunship
+	public class EnemyStaticUnit extends Enemy
 	{
 		public static var NAME = "enemy";
-		public function Enemy() {
+		public function EnemyStaticUnit() {
 			
 			super();
-			
-			collisionType = 'enemy';
-			collidesWith = 'friend';
-			
+		
 			health = 10;
 			damage = 4;
-			mass = 40;
-			
-			
+			mass = 5;			
 			
 			killOffScreen = true;
-			
-			//enableCollisions();
 			stabilizersEnabled = false;
 			
 			doesExplode = true;

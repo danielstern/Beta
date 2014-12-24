@@ -17,6 +17,16 @@ package beta.core {
 			super();
 		}
 		
+		override protected function onAddedToStage(e) {
+			
+			minX = 0;
+			minY = 10;
+			maxX = parent.width;
+			maxY = parent.height;
+			
+			super.onAddedToStage(e);
+		}
+		
 		override protected function tick() {
 			super.tick();
 			
@@ -33,14 +43,10 @@ package beta.core {
 					y = maxY;
 				}
 			} else {
-				if (stage) {
-					//var stageWidth = stage.stageWidth;
-					var stageWidth = 600;
-					var stageHeight = stage.height;
-					if (x < 0 || x > stageWidth || y < 0 || y > stageHeight) {
+				if (parent) {
+					if (x < 0 || x > parent.width || y < 0 || y > parent.height) {
 						isOffScreen = true;
 					};
-					
 				}
 			}			
 			

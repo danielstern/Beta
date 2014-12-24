@@ -6,6 +6,7 @@ package beta.core {
 	{
 		
 		protected var upgrades = [];
+		public static var UPGRADED = 'upgrade';
 		public var upgradable = false; 
 		public function UpgradableObject() {
 			super();
@@ -18,6 +19,8 @@ package beta.core {
 				if (scheme.health) {
 					restoreHealth(health);
 				}
+				
+				meta(UPGRADED);
 			}
 		}
 	}

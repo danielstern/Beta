@@ -12,13 +12,16 @@ package beta.components {
 			
 			enableCollisions();
 			
-			maxVelocityX = 7;
-			maxVelocityY = 7;
-			mass = 0.2;		
+			mass = 10;		
+			damage = 10;
 			
 			expireOnDamageDeal = true;
+
 			killOffScreen = true;
-			damage = 10;
+			
+			maxVelocityX = 1000;
+			maxInertiaX = 1000;
+			
 			doesExplode = true;
 			explosionParticleCount = 2;
 			activate();
