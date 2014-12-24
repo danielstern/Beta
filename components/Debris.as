@@ -8,10 +8,11 @@ package beta.components {
 		public function Debris(world) {
 			
 			super(world);
-			mass = 5;		
-			killOffScreen = true;
+			
 			thorned = false;
 			doesExplode = false;
+			
+			addBoxModelCircleFixture(0.05);
 			
 			doAfter(100, kill);
 			activate();

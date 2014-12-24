@@ -9,21 +9,16 @@ package beta.components {
 		protected var guns = [];
 		public function Gunship(world) {
 			super(world);
-			mass += 0.2;
-			stabilizersEnabled = true;
-			
-		
+			addBoxModelCircleFixture(0.3);
+	
+			addGun(new b2Vec2(0.5, 0.5));
+			addGun(new b2Vec2(0.5, -0.5));		
 		}
 		
-		public function addGun() {
-	
-			var circleShape:b2CircleShape = new b2CircleShape(0.1);
-			circleShape.SetLocalPosition(new b2Vec2(2, 2));
-			var fixtureDef:b2FixtureDef = new b2FixtureDef();
-			fixtureDef.shape = circleShape;
-			var fixture:b2Fixture = boxModelBody.CreateFixture(fixtureDef);
+		public function addGun(position) {
+			
+			var fixture:b2Fixture = addBoxModelCircleFixture(0.1,position);
 			var gun = new Gun(fixture);
-			//parent.addChild(gun);
 			guns.push(gun);
 			return gun;
 		}
@@ -33,7 +28,6 @@ package beta.components {
 		}
 		
 		protected function gunsStartFiring() {
-			trace("guns start firing.");
 			guns.forEach(function(gun) {
 				gun.startFiring();
 			});
@@ -48,14 +42,10 @@ package beta.components {
 		
 		override protected function tick() {
 			super.tick();			
-			
-			//trace("should guns fire?", controlsAction1);
-			
+
 			if (controlsAction1) {
-				//turnWhite();
 				gunsStartFiring();
 			} else {
-				//clearFilters();
 				gunsStopFiring();
 			}
 			

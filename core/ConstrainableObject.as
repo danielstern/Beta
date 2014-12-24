@@ -1,65 +1,49 @@
 package beta.core {
-	import beta.containers.BoxWorldContainer;
 	import flash.display.*;
 	import flash.events.Event;
 	
 	public class ConstrainableObject extends BoxModelObject
 	{
 
-		protected var maxX;
-		protected var minX;
-		protected var maxY;
-		protected var minY:Number;
+		protected var maxX = 500;
+		protected var minX = 0;
+		protected var maxY = 500;
+		protected var minY:Number = 0;
 		protected var killOffScreen:Boolean = false;
 		protected var isOffScreen:Boolean = false;
 		protected var constrainToScreen = false;
-		protected var container:BoxWorldContainer;
 
 		public function ConstrainableObject(world) {
 			super(world);
 		}
 		
-		//override protected function onAddedToStage(e) {
-			//
-			//var _container:* = parent;
-			//container = _container;
-			//
-			//minX = 0;
-			//minY = 10;
-			//maxX = container.containerWidth;
-			//maxY = container.containerHeight - height;
-			//
-			//super.onAddedToStage(e);
-		//}
 		
 		override protected function tick() {
 			super.tick();
+			var x = getBoxModelPosition().x;
+			var y = getBoxModelPosition().y;
 			
-			//
-			//if (constrainToScreen) {		
-				//if (x < minX) {
+			if (constrainToScreen) {		
+				if (x < minX) {
 					//x = minX;
-				//} else if (x > maxX) {
+				} else if (x > maxX) {
 					//x = maxX;
-				//}
-				//
-				//if (y < minY) {
+				}
+				
+				if (y < minY) {
 					//y = minY;
-				//} else if (y > maxY) {
+				} else if (y > maxY) {
 					//y = maxY;
-				//}
-			//} else {
-				//if (parent) {
-					//
-					//if (x < 0 || x >= parent.width - 10 || y < 0 || y >= parent.height - 10) {
-						//isOffScreen = true;
-					//};
-				//}
-			//}			
+				}
+			} else {	
+				if (x < minX || x >= maxX || y < minY || y >= maxY) {
+					isOffScreen = true;
+				};
+			}			
 			//
-			//if (isOffScreen && killOffScreen) {
-				//kill();
-			//}
+			if (isOffScreen && killOffScreen) {
+				kill();
+			}
 			
 		}
 	}

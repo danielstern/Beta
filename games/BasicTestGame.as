@@ -1,44 +1,24 @@
-package beta.worlds 
-{
-	import beta.components.Bullet;
-	import beta.components.Gunship;
-	import beta.containers.BoxWorldContainer;
-	import beta.core.ControllableObject;
-	import beta.core.DestructibleObject;
-	import beta.core.ActivatableObject;
-	import beta.components.Gun;
-	import beta.core.UpgradableObject;
-	import beta.extras.BasicSoundOutput;
-	import beta.containers.BasicContainer;
-	import Box2D.Collision.Shapes.b2CircleShape;
-	import Box2D.Common.Math.b2Vec2;
-	import Box2D.Dynamics.b2Body;
-	import Box2D.Dynamics.b2BodyDef;
-	import Box2D.Dynamics.b2DebugDraw;
-	import Box2D.Dynamics.b2Fixture;
-	import Box2D.Dynamics.b2FixtureDef;
+package beta.games {
+	import beta.components.*;
+	import beta.core.*;
+	import beta.units.*;
+	import Box2D.Common.Math.*;
+	import Box2D.Dynamics.*;
+	import com.kircode.EasyKeyboard.*;
+	import flash.display.*;
+	import flash.utils.*;
 		
-	import Box2D.Dynamics.b2World;
 
-	import beta.powerups.BasicGunCountPowerup;
-	import beta.powerups.BasicHealthPowerup;
 	//import beta.units.Mine;
-	import beta.units.BasicHeroShip;
 	//import beta.units.Asteroid;
-	import beta.units.Hero;
 	//import beta.units.EnemyGun;
 	//import beta.units.Enemy;
 	//import beta.units.EnemyCurvyThrusterShip;
 	//import beta.units.EnemyBasicThrusterShip;
 	//import beta.units.EnemyBasicAttackingShip;
 	//import beta.units.EnemyForkedAttackingShip;
-	import beta.powerups.Powerup;
-	import com.kircode.EasyKeyboard.*;
-	import flash.display.*;
-	import flash.utils.*;
 
 
-	import beta.containers.MetaDisplayingContainer;
 	
 	public class BasicTestGame 
 	{
@@ -70,7 +50,7 @@ package beta.worlds
 				world.DrawDebugData();
 				//trace("World update.");			
 			
-			}, 25,world);
+			}, 100,world);
 			
 			function spawnHero() { 
 				setTimeout(function() {

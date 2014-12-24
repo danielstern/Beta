@@ -13,13 +13,6 @@ package beta.components {
 			doesExplode = true;
 			explosionParticleCount = 4;
 			
-			mass = 1;
-			xThrusterPower = 1;
-			yThrusterPower = 1;
-			stablizerPowerX = 3;
-			stablizerPowerY = 3;
-			
-			
 		}
 	}
 }

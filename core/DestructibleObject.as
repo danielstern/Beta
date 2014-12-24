@@ -16,8 +16,6 @@ package beta.core {
 		
 		public function takeDamage(damage:Number) {
 			health -= damage;
-			//turnRed();
-			//clearFiltersAfter(5);
 			meta(DestructibleObject.TAKE_DAMAGE);
 			metaTookDamage(damage);
 		}

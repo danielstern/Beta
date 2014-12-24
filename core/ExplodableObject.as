@@ -25,18 +25,14 @@ package beta.core {
 		
 		protected function explode() {
 			for (var i = 0; i < explosionParticleCount; i++) {
-				//var debris = new Debris();
-				//parent.addChild(debris);
-				//
-				//var pos = entity.localToGlobal(new Point());
-				//debris.x = pos.x - parent.x;
-				//debris.y = pos.y - parent.y;
-				//
-				//var xForce = Math.random() * 100 - 50;
-				//var yForce = Math.random() * 100 - 50;
-				//
-				//debris.applyForceX(xForce);
-				//debris.applyForceY(yForce);
+				var debris:Debris = new Debris(world);
+				debris.setBoxModelPosition(getBoxModelPosition());
+				
+				var xForce = Math.random() * 100 - 50;
+				var yForce = Math.random() * 100 - 50;
+				
+				debris.applyForceX(xForce);
+				debris.applyForceY(yForce);
 			}
 			
 		}

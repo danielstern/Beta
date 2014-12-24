@@ -1,4 +1,6 @@
 package beta.components {
+	import Box2D.Common.Math.b2Transform;
+	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Fixture;
 	import flash.display.*;
 	import flash.events.Event;
@@ -30,39 +32,23 @@ package beta.components {
 		} 
 		
 		public function stopFiring() {
-			//trace("gun stop firing.");
 			firing = false;
 		} 
 		
 		public function fire() {
+
+			var bullet:Bullet = getBullet();
+			var targetPosition:b2Vec2 = fixture.GetBody().GetPosition();
+			var transform:b2Transform = fixture.GetBody().GetTransform();
 			
-			//dispatchEvent(new Event(Gun.SHOOT,true));
-			//return;
-			//trace('fire!');
-				
-				var bullet:Bullet = getBullet();
-				bullet.boxModelBody.SetPosition(fixture.GetBody().GetPosition());
-				bullet.applyForceX(10);
+			targetPosition.x += fixture.GetUserData().localPosition.x;
+			targetPosition.y += fixture.GetUserData().localPosition.y;
+			bullet.boxModelBody.SetPosition(targetPosition);
+			bullet.applyForce(new b2Vec2(10 * bullet.boxModelBody.GetMass(),0));
 			
-				//var container = parent.parent;
-				//container.addChild(bullet);
-				
-				//var bulletPos = entity.localToGlobal(new Point());
-				//bullet.x = bulletPos.x - container.x;
-				//bullet.y = bulletPos.y - container.y;
-				
-				//var angleRadians = 2 * Math.PI * (orientation) / 360;
-				//var baseForce = 250;
-						
-				//var xForce = Math.cos(angleRadians) *baseForce;
-				//var yForce = Math.sin(angleRadians) *baseForce;
-				
-				//bullet.applyForceX(xForce);
-				//bullet.applyForceY(yForce);
-				
-				timeUntilCanShoot = cooldownTime;
-				
-				meta(Gun.SHOOT);
+			timeUntilCanShoot = cooldownTime;
+			
+			meta(Gun.SHOOT);
 		}
 		
 		protected function getBullet() {
