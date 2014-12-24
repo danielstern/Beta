@@ -39,6 +39,26 @@ package beta.core {
 
 		public function BoxModelObject(_world) {
 			world = _world;
+			
+			
+			var bodyDef:b2BodyDef = new b2BodyDef();
+			bodyDef.type = b2Body.b2_dynamicBody;
+			//bodyDef.linearDamping = 0;
+			var body:b2Body = world.CreateBody(bodyDef);
+			
+			//heroBody.SetPosition(new b2Vec2(50, 150));
+			//heroBody.SetPosition(new b2Vec2(0,0));
+			//heroBody.SetLinearDamping(0);
+			var circleShape:b2CircleShape = new b2CircleShape(0.2);
+			var fixtureDef:b2FixtureDef = new b2FixtureDef();
+			fixtureDef.shape = circleShape;
+			//fixtureDef.density = 0.7;
+			//fixtureDef.friction = 0;
+			//heroBody.SetType(2);
+
+			var fixture:b2Fixture = body.CreateFixture(fixtureDef);
+			setBoxModelBody(body);
+			
 			super();	
 		}
 		

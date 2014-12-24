@@ -22,16 +22,16 @@ package beta.worlds
 
 	import beta.powerups.BasicGunCountPowerup;
 	import beta.powerups.BasicHealthPowerup;
-	import beta.units.Mine;
+	//import beta.units.Mine;
 	import beta.units.BasicHeroShip;
-	import beta.units.Asteroid;
+	//import beta.units.Asteroid;
 	import beta.units.Hero;
-	import beta.units.EnemyGun;
-	import beta.units.Enemy;
-	import beta.units.EnemyCurvyThrusterShip;
-	import beta.units.EnemyBasicThrusterShip;
-	import beta.units.EnemyBasicAttackingShip;
-	import beta.units.EnemyForkedAttackingShip;
+	//import beta.units.EnemyGun;
+	//import beta.units.Enemy;
+	//import beta.units.EnemyCurvyThrusterShip;
+	//import beta.units.EnemyBasicThrusterShip;
+	//import beta.units.EnemyBasicAttackingShip;
+	//import beta.units.EnemyForkedAttackingShip;
 	import beta.powerups.Powerup;
 	import com.kircode.EasyKeyboard.*;
 	import flash.display.*;
@@ -40,20 +40,42 @@ package beta.worlds
 
 	import beta.containers.MetaDisplayingContainer;
 	
-	public class BasicTestWorld 
+	public class BasicTestGame 
 	{
-		public function BasicTestWorld(gameContainer:BoxWorldContainer,stage:Stage) 
+		protected var world:b2World;
+		public var boxScale = 30;
+	
+		public function BasicTestGame(gameContainer:MovieClip,stage:Stage) 
 		{
 			var controlledObject:ControllableObject;
 			var keyboard:EasyKeyboard = new EasyKeyboard(stage);
-			var sounds = new BasicSoundOutput(gameContainer);
+			//var sounds = new BasicSoundOutput(gameContainer);
 			var gameHeight = gameContainer.containerHeight;
-			var gameWidth = gameContainer.containerWidth;		
+			var gameWidth = gameContainer.containerWidth;	
+			
+			
+			
+			world = new b2World(new b2Vec2(0, 0), false); 
+			var debug:b2DebugDraw = new b2DebugDraw();
+			debug.SetSprite(gameContainer);
+			debug.SetDrawScale(boxScale);
+			debug.SetAlpha(1);
+			debug.SetFillAlpha(1);
+			debug.SetLineThickness(1);
+			debug.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit | b2DebugDraw.e_aabbBit | b2DebugDraw.e_pairBit | b2DebugDraw.e_centerOfMassBit);
+
+			world.SetDebugDraw(debug);
+			setInterval(function(world:b2World) {
+				world.Step(3, 1, 1);
+				world.DrawDebugData();
+				//trace("World update.");			
+			
+			}, 25,world);
 			
 			function spawnHero() { 
 				setTimeout(function() {
-					var hero:Gunship = new BasicHeroShip();
-					gameContainer.addChild(hero);
+					var hero:Gunship = new BasicHeroShip(world);
+					//gameContainer.addChild(hero);
 					controlledObject = hero;
 					hero.activate();					
 					
@@ -88,19 +110,19 @@ package beta.worlds
 				//enemy.activate();
 			//},1000)
 
-			function getRandomEnemy() {
-				var enemies = [
-					new Asteroid(),
-					new EnemyBasicThrusterShip(),
-					new EnemyCurvyThrusterShip, 
-					new Mine(), 
-					new EnemyBasicAttackingShip(),
-					new EnemyForkedAttackingShip(), 
-					new BasicGunCountPowerup(),
-					new BasicHealthPowerup()
-				];
-				return enemies[Math.floor(Math.random() * enemies.length)];
-			}
+			//function getRandomEnemy() {
+				//var enemies = [
+					//new Asteroid(),
+					//new EnemyBasicThrusterShip(),
+					//new EnemyCurvyThrusterShip, 
+					//new Mine(), 
+					//new EnemyBasicAttackingShip(),
+					//new EnemyForkedAttackingShip(), 
+					//new BasicGunCountPowerup(),
+					//new BasicHealthPowerup()
+				//];
+				//return enemies[Math.floor(Math.random() * enemies.length)];
+			//}
 			
 			gameContainer.addEventListener(Hero.NAME + ":" + DestructibleObject.DESTROYED, handleHeroDie);
 			

@@ -54,14 +54,14 @@ package beta.units {
 			doesExplode = true;
 			explosionParticleCount = 45;
 			
-			xThrusterPower = 10;
-			yThrusterPower = 10;
-			stablizerPowerX = 10;
-			stablizerPowerY = 10;
-			maxInertiaX = 5;
-			maxInertiaY = 5;
-			mass = 1;
-			
+			//xThrusterPower = 10;
+			//yThrusterPower = 10;
+			//stablizerPowerX = 10;
+			//stablizerPowerY = 10;
+			//maxInertiaX = 5;
+			//maxInertiaY = 5;
+			//mass = 1;
+			//
 			upgradable = true;
 			controlledViaOverride = true;
 			

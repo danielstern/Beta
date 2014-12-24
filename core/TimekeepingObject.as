@@ -16,7 +16,7 @@ package beta.core {
 			setInterval(onEnterFrame, 50);
 		}
 		
-		protected function onEnterFrame(e) {
+		protected function onEnterFrame() {
 			if (activated && !killed) {			
 				cycle++;
 				tick();

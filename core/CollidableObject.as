@@ -1,11 +1,11 @@
 package beta.core {
 	import flash.display.*;
 	import flash.events.Event;
-	import com.coreyoneil.collision.CollisionList;
+	//import com.coreyoneil.collision.CollisionList;
 	import flash.geom.Point;
 	public class CollidableObject extends ExplodableObject
 	{	
-		protected var collisionList:CollisionList;
+		//protected var collisionList:CollisionList;
 		
 		protected var collisionType = 0;
 		protected var collidesWith = 0;
@@ -17,7 +17,7 @@ package beta.core {
 		}
 		
 		public function enableCollisions() {
-			collisionList = new CollisionList(this);
+			//collisionList = new CollisionList(this);
 			collidable = true;
 		}
 		//
@@ -36,7 +36,7 @@ package beta.core {
 		
 		override protected function kill() {
 			if (collidable) {
-				collisionList.dispose();
+				//collisionList.dispose();
 				collidable = false;			
 			}
 			
@@ -46,19 +46,19 @@ package beta.core {
 		
 		override protected function tick() {
 			super.tick();
-			if (collidable) {			
-				collisions = [];
-				
-				var collisionsThisFrame = collisionList.checkCollisions();
-				
-				collisionsThisFrame.forEach(function(collision) {
-					var other = collision.object1 === entity ? collision.object2 : collision.object1;
-					if (other.collisionType === collidesWith) {
-						collisions.push(other);
-						other.collisions.push(entity);
-					}
-				});
-			}
+			//if (collidable) {			
+				//collisions = [];
+				//
+				//var collisionsThisFrame = collisionList.checkCollisions();
+				//
+				//collisionsThisFrame.forEach(function(collision) {
+					//var other = collision.object1 === entity ? collision.object2 : collision.object1;
+					//if (other.collisionType === collidesWith) {
+						//collisions.push(other);
+						//other.collisions.push(entity);
+					//}
+				//});
+			//}
 		}
 	}
 }
