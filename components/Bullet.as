@@ -6,6 +6,7 @@ package beta.components {
 	public class Bullet extends UpgradableObject
 	{		
 		public static var NAME = "bullet";
+		
 		public function Bullet() {
 			
 			super();

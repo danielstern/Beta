@@ -28,6 +28,12 @@ package beta.components {
 			});
 		}
 		
+		protected function gunsStopFiring() {
+			guns.forEach(function(gun) {
+				gun.stopFiring();
+			});
+		}
+		
 		override protected function tick() {
 			super.tick();			
 			
@@ -36,9 +42,7 @@ package beta.components {
 				gunsStartFiring();
 			} else {
 				clearFilters();
-				guns.forEach(function(gun) {
-					gun.stopFiring();
-				});
+				gunsStopFiring();
 			}
 			
 		}

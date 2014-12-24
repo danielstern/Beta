@@ -1,7 +1,9 @@
 package beta.powerups {
 	
 	import beta.core.ThornedObject;
+	import beta.units.Hero;
 	import beta.upgrades.BasicHealthRestoreUpgrade;
+	import beta.upgrades.Upgrade;
 	
 	public class Powerup extends ThornedObject
 	{
@@ -33,12 +35,20 @@ package beta.powerups {
 			name = NAME;	
 		}
 		
+		protected function getUpgrade():Upgrade {
+			return new Upgrade();
+		}
+		
 		override protected function tick() {
+			var hero:Hero;
+			var upgrade:Upgrade;
+			
 			if (collisions[0] && collisions[0].upgradable) {
+				upgrade = getUpgrade();
+				hero = collisions[0];
+			
 				doesExplode = false;
-				var hero = collisions[0];
-				var upgrade = new BasicHealthRestoreUpgrade();
-				upgrade.health = 25;
+				
 				hero.upgrade(upgrade);
 				kill();
 				meta(FULFILL);
