@@ -6,14 +6,14 @@ package beta.core {
 	import beta.*;
 	import beta.components.Debris;
 	
-	public class ExplodableObject extends FilterableObject
+	public class ExplodableObject extends ConstrainableObject
 	{
 		protected var explosionType = "debris";
 		protected var explosionParticleCount = 5;
 		protected var doesExplode = false;
 
-		public function ExplodableObject() {
-			super();
+		public function ExplodableObject(world) {
+			super(world);
 		}
 		
 		override protected function kill() {			
@@ -25,18 +25,18 @@ package beta.core {
 		
 		protected function explode() {
 			for (var i = 0; i < explosionParticleCount; i++) {
-				var debris = new Debris();
-				parent.addChild(debris);
-				
-				var pos = entity.localToGlobal(new Point());
-				debris.x = pos.x - parent.x;
-				debris.y = pos.y - parent.y;
-				
-				var xForce = Math.random() * 100 - 50;
-				var yForce = Math.random() * 100 - 50;
-				
-				debris.applyForceX(xForce);
-				debris.applyForceY(yForce);
+				//var debris = new Debris();
+				//parent.addChild(debris);
+				//
+				//var pos = entity.localToGlobal(new Point());
+				//debris.x = pos.x - parent.x;
+				//debris.y = pos.y - parent.y;
+				//
+				//var xForce = Math.random() * 100 - 50;
+				//var yForce = Math.random() * 100 - 50;
+				//
+				//debris.applyForceX(xForce);
+				//debris.applyForceY(yForce);
 			}
 			
 		}

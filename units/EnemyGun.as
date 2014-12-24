@@ -4,15 +4,15 @@ package beta.units {
 	public class EnemyGun extends Gun
 	{
 		public static var NAME = "enemyGun";
-		public function EnemyGun() {
-			super();
+		public function EnemyGun(ship) {
+			super(ship);
 			cooldownTime = 100;			
 			name = NAME;
 		}
 		
 		
 		override protected function getBullet() {
-			return new EnemyBullet();			
+			return new EnemyBullet(world);			
 		}
 	}
 }

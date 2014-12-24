@@ -1,15 +1,19 @@
 package beta.components {
+	import Box2D.Dynamics.b2Body;
 	import flash.display.*;
 	import flash.events.Event;
 	import beta.core.*;
 	
-	public class Bullet extends UpgradableObject
+	public class Bullet extends ThornedObject
 	{		
 		public static var NAME = "bullet";
 		
-		public function Bullet() {
+		public function Bullet(gun:Gun) {
 			
-			super();
+			//setBoxModelBody(body);
+			super(gun.world);
+			
+			
 			
 			enableCollisions();
 			
@@ -20,8 +24,8 @@ package beta.components {
 
 			killOffScreen = true;
 			
-			maxVelocityX = 1000;
-			maxInertiaX = 1000;
+			//maxVelocityX = 1000;
+			//maxInertiaX = 1000;
 			
 			doesExplode = true;
 			explosionParticleCount = 2;

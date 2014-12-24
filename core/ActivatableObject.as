@@ -4,13 +4,13 @@ package beta.core {
 	import beta.events.MetaEvent;
 	import beta.events.DamageEvent;
 	
-	public class ActivatableObject extends MovieClip
+	public class ActivatableObject
 	{
 		protected var activated = false;
 
 		public function ActivatableObject() {
 			super();
-			name = 'object';
+	
 		}
 		
 		public function activate() {

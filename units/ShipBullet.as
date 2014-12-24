@@ -6,9 +6,10 @@ package beta.units {
 	
 	public class ShipBullet extends Bullet
 	{
-		public function ShipBullet() {
+		public function ShipBullet(world) {
 			collisionType = 'friend';
 			collidesWith = 'enemy';	
+			super(world);
 		}
 		
 		override protected function tick() {

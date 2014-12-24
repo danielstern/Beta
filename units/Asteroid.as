@@ -1,10 +1,10 @@
 package beta.units {
 	
-	public class Asteroid extends EnemyStaticUnit
+	public class Asteroid extends Enemy
 	{
 		public static var NAME = "asteroid";
 		public function Asteroid() {
-			super();
+			super(world);
 			
 			health = 10;
 			damage = 4;

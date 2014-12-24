@@ -10,14 +10,14 @@ package beta.core {
 		public static var RESTORE_HEALTH = "restoreHealth";
 		public static var DESTROYED = "destroyed";
 		
-		public function DestructibleObject() {
-			super();
+		public function DestructibleObject(world) {
+			super(world);
 		}
 		
 		public function takeDamage(damage:Number) {
 			health -= damage;
-			turnRed();
-			clearFiltersAfter(5);
+			//turnRed();
+			//clearFiltersAfter(5);
 			meta(DestructibleObject.TAKE_DAMAGE);
 			metaTookDamage(damage);
 		}

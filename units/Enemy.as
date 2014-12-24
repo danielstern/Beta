@@ -5,9 +5,9 @@ package beta.units {
 	public class Enemy extends Gunship
 	{
 		public static var NAME = "enemy";
-		public function Enemy() {
+		public function Enemy(world) {
 			
-			super();
+			super(world);
 			
 			collisionType = 'enemy';
 			collidesWith = 'friend';
@@ -31,7 +31,7 @@ package beta.units {
 		}
 		
 		override protected function getGun() {
-			return new EnemyGun();
+			return new EnemyGun(this);
 		}
 	}
 }

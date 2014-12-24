@@ -1,6 +1,7 @@
 package beta.core {
 	import flash.display.*;
 	import flash.events.Event;
+	import flash.utils.setInterval;
 	
 	public class TimekeepingObject extends KillableObject
 	{
@@ -11,7 +12,8 @@ package beta.core {
 
 		public function TimekeepingObject() {
 			super();	
-			addEventListener(Event.ENTER_FRAME, onEnterFrame);
+			//addEventListener(Event.ENTER_FRAME, onEnterFrame);
+			setInterval(onEnterFrame, 50);
 		}
 		
 		protected function onEnterFrame(e) {
@@ -47,7 +49,7 @@ package beta.core {
 		}
 		
 		override protected function kill() {
-			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+			//removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 			super.kill();
 		}
 	}

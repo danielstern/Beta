@@ -17,6 +17,8 @@ package beta.worlds
 	import Box2D.Dynamics.b2DebugDraw;
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
+		
+	import Box2D.Dynamics.b2World;
 
 	import beta.powerups.BasicGunCountPowerup;
 	import beta.powerups.BasicHealthPowerup;
@@ -34,8 +36,7 @@ package beta.worlds
 	import com.kircode.EasyKeyboard.*;
 	import flash.display.*;
 	import flash.utils.*;
-	
-	import Box2D.Dynamics.b2World;
+
 
 	import beta.containers.MetaDisplayingContainer;
 	
@@ -66,24 +67,7 @@ package beta.worlds
 					//hero.y = 150;
 					
 					
-					
-					var heroBodyDef:b2BodyDef = new b2BodyDef();
-					heroBodyDef.type = b2Body.b2_dynamicBody;
-					heroBodyDef.linearDamping = 0;
-					var heroBody:b2Body = gameContainer.getBody(heroBodyDef);
-					
-					//heroBody.SetPosition(new b2Vec2(50, 150));
-					//heroBody.SetPosition(new b2Vec2(0,0));
-					//heroBody.SetLinearDamping(0);
-					var circleShape:b2CircleShape = new b2CircleShape(0.2);
-					var fixtureDef:b2FixtureDef = new b2FixtureDef();
-					fixtureDef.shape = circleShape;
-					fixtureDef.density = 0.7;
-					fixtureDef.friction = 0;
-					//heroBody.SetType(2);
-
-					var heroBodyFixture:b2Fixture = heroBody.CreateFixture(fixtureDef);
-					hero.setBoxModelBody(heroBody);
+				
 					
 					//heroBody.ApplyForce(new b2Vec2(5, 5));
 				

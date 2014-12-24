@@ -10,8 +10,8 @@ package beta.core {
 		protected var controlsGoingDown = false;
 		protected var controlsAction1 = false;
 		
-		public function ControllableObject() {
-			super();
+		public function ControllableObject(world) {
+			super(world);
 		}
 		
 		public function startRight() {

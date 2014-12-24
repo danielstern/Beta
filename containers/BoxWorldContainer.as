@@ -20,22 +20,22 @@ package beta.containers
 		{
 			super();
 			
-			world = new b2World(new b2Vec2(0, 0), false); 
-			var debug:b2DebugDraw = new b2DebugDraw();
-			debug.SetSprite(this);
-			debug.SetDrawScale(boxScale);
-			debug.SetAlpha(1);
-			debug.SetFillAlpha(1);
-			debug.SetLineThickness(1);
-			debug.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit | b2DebugDraw.e_aabbBit | b2DebugDraw.e_pairBit | b2DebugDraw.e_centerOfMassBit);
-
-			world.SetDebugDraw(debug);
-			setInterval(function(world:b2World) {
-				world.Step(3, 1, 1);
-				world.DrawDebugData();
-				//trace("World update.");			
-			
-			}, 25,world);
+			//world = new b2World(new b2Vec2(0, 0), false); 
+			//var debug:b2DebugDraw = new b2DebugDraw();
+			//debug.SetSprite(this);
+			//debug.SetDrawScale(boxScale);
+			//debug.SetAlpha(1);
+			//debug.SetFillAlpha(1);
+			//debug.SetLineThickness(1);
+			//debug.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit | b2DebugDraw.e_aabbBit | b2DebugDraw.e_pairBit | b2DebugDraw.e_centerOfMassBit);
+//
+			//world.SetDebugDraw(debug);
+			//setInterval(function(world:b2World) {
+				//world.Step(3, 1, 1);
+				//world.DrawDebugData();
+				////trace("World update.");			
+			//
+			//}, 25,world);
 			
 		}
 		

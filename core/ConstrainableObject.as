@@ -3,7 +3,7 @@ package beta.core {
 	import flash.display.*;
 	import flash.events.Event;
 	
-	public class ConstrainableObject extends ExplodableObject
+	public class ConstrainableObject extends BoxModelObject
 	{
 
 		protected var maxX;
@@ -15,22 +15,22 @@ package beta.core {
 		protected var constrainToScreen = false;
 		protected var container:BoxWorldContainer;
 
-		public function ConstrainableObject() {
-			super();
+		public function ConstrainableObject(world) {
+			super(world);
 		}
 		
-		override protected function onAddedToStage(e) {
-			
-			var _container:* = parent;
-			container = _container;
-			
-			minX = 0;
-			minY = 10;
-			maxX = container.containerWidth;
-			maxY = container.containerHeight - height;
-			
-			super.onAddedToStage(e);
-		}
+		//override protected function onAddedToStage(e) {
+			//
+			//var _container:* = parent;
+			//container = _container;
+			//
+			//minX = 0;
+			//minY = 10;
+			//maxX = container.containerWidth;
+			//maxY = container.containerHeight - height;
+			//
+			//super.onAddedToStage(e);
+		//}
 		
 		override protected function tick() {
 			super.tick();

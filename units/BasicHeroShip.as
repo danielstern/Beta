@@ -15,8 +15,8 @@ package beta.units {
 		var gun6;
 		var gun7;
 		
-		public function BasicHeroShip() {
-			super();
+		public function BasicHeroShip(world) {
+			super(world);
 			
 			health = 25;
 			damage = 0;

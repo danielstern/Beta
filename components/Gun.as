@@ -5,7 +5,7 @@ package beta.components {
 	import beta.core.*;
 	import beta.units.ShipBullet;
 	
-	public class Gun extends DisplayableObject
+	public class Gun extends BoxModelObject
 	{
 		protected var cooldownTime = 20;
 		protected var timeUntilCanShoot:Number = 0;
@@ -13,9 +13,10 @@ package beta.components {
 		protected var firing:Boolean = false;
 		public static var SHOOT:String = "shoot";
 		public static var NAME:String = "gun";
+		public var orientation = 0;
 		
-		public function Gun() {
-			super();
+		public function Gun(ship:Gunship) {
+			super(ship.world);
 			activate();
 			name = NAME;
 		}
@@ -31,34 +32,33 @@ package beta.components {
 		public function fire() {
 			
 			//dispatchEvent(new Event(Gun.SHOOT,true));
+			//return;
 			
-			if (parent && parent.parent) {	
 				
 				var bullet = getBullet();
-				var container = parent.parent;
-				container.addChild(bullet);
+				//var container = parent.parent;
+				//container.addChild(bullet);
 				
-				var bulletPos = entity.localToGlobal(new Point());
-				bullet.x = bulletPos.x - container.x;
-				bullet.y = bulletPos.y - container.y;
+				//var bulletPos = entity.localToGlobal(new Point());
+				//bullet.x = bulletPos.x - container.x;
+				//bullet.y = bulletPos.y - container.y;
 				
-				var angleRadians = 2 * Math.PI * (orientation) / 360;
-				var baseForce = 250;
+				//var angleRadians = 2 * Math.PI * (orientation) / 360;
+				//var baseForce = 250;
 						
-				var xForce = Math.cos(angleRadians) *baseForce;
-				var yForce = Math.sin(angleRadians) *baseForce;
+				//var xForce = Math.cos(angleRadians) *baseForce;
+				//var yForce = Math.sin(angleRadians) *baseForce;
 				
-				bullet.applyForceX(xForce);
-				bullet.applyForceY(yForce);
+				//bullet.applyForceX(xForce);
+				//bullet.applyForceY(yForce);
 				
 				timeUntilCanShoot = cooldownTime;
 				
 				meta(Gun.SHOOT);
-			}
 		}
 		
 		protected function getBullet() {
-			return new ShipBullet();			
+			return new ShipBullet(world);			
 		}
 		
 		override protected function tick() {

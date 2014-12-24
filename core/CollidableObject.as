@@ -3,7 +3,7 @@ package beta.core {
 	import flash.events.Event;
 	import com.coreyoneil.collision.CollisionList;
 	import flash.geom.Point;
-	public class CollidableObject extends BoxModelObject
+	public class CollidableObject extends ExplodableObject
 	{	
 		protected var collisionList:CollisionList;
 		
@@ -12,28 +12,27 @@ package beta.core {
 		public var collisions:Array = [];
 		private var collidable = false;
 
-		public function CollidableObject() {
-
-			super();	
+		public function CollidableObject(world) {
+			super(world);	
 		}
 		
 		public function enableCollisions() {
 			collisionList = new CollisionList(this);
 			collidable = true;
 		}
-		
-		override protected function onAddedToStage(e) {
-			if (collidable) {					
-				super.onAddedToStage(e);
-				dispatchEvent(new Event("collidableObject", true));
-				stage.addEventListener("collidableObject", function(e) {
-					var other = e.target;
-					if (other.collisionType === collidesWith && other.collidable) {
-						collisionList.addItem(other);
-					}
-				})
-			}
-		}
+		//
+		//override protected function onAddedToStage(e) {
+			//if (collidable) {					
+				//super.onAddedToStage(e);
+				//dispatchEvent(new Event("collidableObject", true));
+				//stage.addEventListener("collidableObject", function(e) {
+					//var other = e.target;
+					//if (other.collisionType === collidesWith && other.collidable) {
+						//collisionList.addItem(other);
+					//}
+				//})
+			//}
+		//}
 		
 		override protected function kill() {
 			if (collidable) {

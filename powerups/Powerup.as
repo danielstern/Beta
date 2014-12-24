@@ -9,9 +9,9 @@ package beta.powerups {
 	{
 		public static var NAME = "powerup";
 		public static var FULFILL = 'fulfill';
-		public function Powerup() {
+		public function Powerup(world) {
 			
-			super();
+			super(world);
 			
 			collisionType = 'enemy';
 			collidesWith = 'friend';

@@ -9,8 +9,8 @@ package beta.core {
 		protected var thorned = true;
 		protected var applyForceOnImpact = true;
 		
-		public function ThornedObject() {
-			super();
+		public function ThornedObject(world) {
+			super(world);
 		}
 		
 		override protected function tick() {

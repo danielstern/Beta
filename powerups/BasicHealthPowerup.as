@@ -5,8 +5,8 @@ package beta.powerups {
 	
 	public class BasicHealthPowerup extends Powerup
 	{
-		public function BasicHealthPowerup() {
-			super();
+		public function BasicHealthPowerup(world) {
+			super(world);
 		}
 		
 		override protected function getUpgrade():Upgrade {

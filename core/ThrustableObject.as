@@ -3,7 +3,7 @@ package beta.core {
 	import flash.events.Event;
 	import Box2D.Common.Math.b2Vec2;
 	
-	public class ThrustableObject extends StabilizingObject
+	public class ThrustableObject extends PropellableObject
 	{
 		protected var thrustingRight:Boolean = false;
 		protected var thrustingLeft:Boolean = false;
@@ -12,17 +12,36 @@ package beta.core {
 		protected var xThrusterPower = 0.2;
 		protected var yThrusterPower = 0.2;
 		
+		protected var thrustForce = 0.07;
+		
+		public function ThrustableObject(world) {
+			super(world);	
+		}
+		
+		
 		override protected function tick() {
 			super.tick();
 			
-			if (thrustingRight) {
-				//boxModelBody.SetLinearVelocity(new b2Vec2(0.01, 0));
-				boxModelBody.SetSleepingAllowed(false);
-				//boxModelBody.
-				trace("setlinearvelocity...", boxModelBody.GetLinearVelocity().x,boxModelBody.GetInertia());
-				boxModelBody.ApplyForce(new b2Vec2(boxModelBody.GetMass() / 1000, 0), boxModelBody.GetLocalCenter());
-				//trace(boxModelBody.GetMass(),boxModelBody.GetLinearVelocity().x);
+			if (!boxModelBody) {
+				trace("no box model body.");
+				 return;
 			}
+			
+			var vec:b2Vec2 = new b2Vec2(0, 0);
+			
+			if (thrustingRight) {
+				vec.x = thrustForce;
+			} else if (thrustingLeft) {
+				vec.x = -thrustForce
+			} 
+			
+			if (thrustingUp) {
+				vec.y = -thrustForce;
+			} else if (thrustingDown) {
+				vec.y = thrustForce
+			} 
+			
+			boxModelBody.SetLinearVelocity(vec);
 			
 			//if (thrustingRight) {
 				//applyForceX(xThrusterPower);

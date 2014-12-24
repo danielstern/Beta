@@ -6,9 +6,9 @@ package beta.core {
 	public class AutoControlMappingObject extends ControllableObject
 	{
 		public var controlledViaOverride = false;
-		public function AutoControlMappingObject() {
+		public function AutoControlMappingObject(world) {
 			
-			super();
+			super(world);
 			
 		}
 		

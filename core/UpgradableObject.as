@@ -8,8 +8,8 @@ package beta.core {
 		protected var upgrades = [];
 		public static var UPGRADED = 'upgrade';
 		public var upgradable = false; 
-		public function UpgradableObject() {
-			super();
+		public function UpgradableObject(world) {
+			super(world);
 		}
 		
 		public function upgrade(scheme:Upgrade) {

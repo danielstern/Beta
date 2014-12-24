@@ -5,8 +5,9 @@ package beta.components {
 	
 	public class Debris extends ThornedObject
 	{		
-		public function Debris() {
+		public function Debris(world) {
 			
+			super(world);
 			mass = 5;		
 			killOffScreen = true;
 			thorned = false;

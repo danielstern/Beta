@@ -7,8 +7,8 @@ package beta.units {
 	public class Hero extends Gunship
 	{
 		public static var NAME = "hero";
-		public function Hero() {
-			super();
+		public function Hero(world) {
+			super(world);
 			
 			collisionType = "friend";
 			collidesWith = "enemy";

@@ -3,8 +3,8 @@ package beta.components {
 	public class Gunship extends Ship
 	{
 		protected var guns = [];
-		public function Gunship() {
-			super();
+		public function Gunship(world) {
+			super(world);
 			mass += 0.2;
 			stabilizersEnabled = true;
 			
@@ -13,13 +13,13 @@ package beta.components {
 		
 		public function addGun() {
 			var gun = getGun();
-			addChild(gun);
+			//parent.addChild(gun);
 			guns.push(gun);
 			return gun;
 		}
 		
 		protected function getGun() {
-			return new Gun();
+			return new Gun(this);
 		}
 		
 		protected function gunsStartFiring() {
@@ -38,10 +38,10 @@ package beta.components {
 			super.tick();			
 			
 			if (controlsAction1) {
-				turnWhite();
+				//turnWhite();
 				gunsStartFiring();
 			} else {
-				clearFilters();
+				//clearFilters();
 				gunsStopFiring();
 			}
 			

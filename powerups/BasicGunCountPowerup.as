@@ -5,8 +5,8 @@ package beta.powerups {
 	
 	public class BasicGunCountPowerup extends Powerup
 	{
-		public function BasicGunCountPowerup() {
-			super();
+		public function BasicGunCountPowerup(world) {
+			super(world);
 		}
 		
 		override protected function getUpgrade():Upgrade {
