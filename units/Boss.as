@@ -25,7 +25,8 @@ package beta.units
 		}
 		
 		override protected function createShipFixtures() {
-			addBoxModelCircleFixture(3.5);
+			addBoxModelCircleFixture(1.5, new b2Vec2(0, -1));
+			addBoxModelCircleFixture(2.5,new b2Vec2(0,1.5));
 		}
 		
 		protected function spawnMinion() {
