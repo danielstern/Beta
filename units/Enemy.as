@@ -16,6 +16,7 @@ package beta.units {
 			damage = 4;
 
 			killOffScreen = true;
+			constrainToScreen = false;
 						
 			doesExplode = true;
 			explosionParticleCount = 4;
