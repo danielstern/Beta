@@ -15,7 +15,7 @@ package beta.units
 		{
 			super(world);
 			thrustForce = 0.05;
-			health = 100;
+			health = 500;
 			
 			var gun1:Gun = addGun(new SmartGun(world), new b2Vec2( -4, 0));
 			gun1.bulletsCollideWith = 'friend';
@@ -28,10 +28,20 @@ package beta.units
 			addBoxModelCircleFixture(3.5);
 		}
 		
+		protected function spawnMinion() {
+			var minion:Enemy = new EnemyRandomThrusterShip(world);
+			minion.setBoxModelPosition(getBoxModelPosition());
+			minion.activate();
+		}
+		
 		override protected function tick() {
 			super.tick();
 			if (getBoxModelPosition().x < 15) {
 				enemyAIThrustLeft = false;
+			}
+			
+			if (cycle % 4500 === 0) {
+				spawnMinion();
 			}
 		}
 		

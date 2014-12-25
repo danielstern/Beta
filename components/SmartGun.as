@@ -12,11 +12,11 @@ package beta.components
 	 */
 	public class SmartGun extends Gun 
 	{
-		protected var orientationSmartOffset = orientation;		
+		//protected var orientationSmartOffset = orientation;		
+		protected var trackTarget = true;
 		public function SmartGun(world) 
 		{
 			super(world);
-			trace("smartgun init.");
 			cooldownTime = 2000;
 		}
 		
@@ -24,7 +24,7 @@ package beta.components
 			super.tick();	
 			//trace("cycle",cycle);
 		
-			if (cycle % 100 === 0) {			
+			if (cycle % 100 === 0 && trackTarget) {			
 				var pos = getGunPosition();
 				var rayLength = 50;
 				var precision = 100;
@@ -63,9 +63,7 @@ package beta.components
 				
 				function onRayCastHit(a) {
 					trace("ray ray!",a);
-				}
-				
-				
+				}		
 			}
 			
 		}
