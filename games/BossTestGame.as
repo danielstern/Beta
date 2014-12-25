@@ -1,19 +1,9 @@
 package beta.games {
-	import beta.components.*;
-	import beta.core.*;
-	import beta.events.*;
-	import beta.powerups.*;
-	import beta.representations.*;
-	import beta.units.*;
-	import Box2D.Common.Math.*;
-	import Box2D.Dynamics.*;
-	import com.kircode.EasyKeyboard.*;
-	import flash.display.*;
-	import flash.utils.*;
-		
-
-
-
+	import beta.core.DestructibleObject;
+	import beta.units.enemies.Boss;
+	import Box2D.Common.Math.b2Vec2;
+	import flash.display.MovieClip;
+	import flash.display.Stage;
 	
 	public class BossTestGame extends BasicTestGame
 	{
@@ -27,7 +17,7 @@ package beta.games {
 		}
 		
 		public function  spawnBoss(e = null) {
-			var boss:ThornedObject = getBoss();
+			var boss:Boss = getBoss();
 			boss.setBoxModelPosition(new b2Vec2(20, 4));
 			boss.activate();
 			boss.addEventListener(DestructibleObject.DESTROYED, spawnBoss);

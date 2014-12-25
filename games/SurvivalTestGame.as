@@ -11,8 +11,8 @@ package beta.games {
 	import flash.utils.*;
 		
 
-	import beta.units.Mine;
-	import beta.units.Asteroid;
+	import beta.units.enemies.Mine;
+	import beta.units.enemies.Asteroid;
 	import beta.units.*;
 	import beta.powerups.*;
 

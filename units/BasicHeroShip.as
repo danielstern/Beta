@@ -1,9 +1,9 @@
 package beta.units {
-	import beta.components.Gun;
 	import flash.display.*;
 	import flash.events.Event;
 	import beta.core.*;
-	import beta.components.Gunship;
+	import beta.components.ships.Gunship;
+	import beta.components.guns.*;
 	import Box2D.Common.Math.b2Vec2;
 	
 	public class BasicHeroShip extends Hero

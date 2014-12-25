@@ -1,6 +1,6 @@
-package beta.units {
+package beta.units.enemies {
 	
-	import beta.components.Bullet;
+	import beta.components.bullets.Bullet;
 
 	public class EnemyBullet extends Bullet
 	{

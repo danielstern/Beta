@@ -1,4 +1,4 @@
-package beta.components {
+package beta.components.misc {
 	import flash.display.*;
 	import flash.events.Event;
 	import beta.core.*;

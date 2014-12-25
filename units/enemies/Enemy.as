@@ -1,6 +1,6 @@
-package beta.units {
+package beta.units.enemies {
 	
-	import beta.components.Gunship;
+	import beta.components.ships.Gunship;
 	
 	public class Enemy extends Gunship
 	{

@@ -11,10 +11,11 @@ package beta.games {
 	import flash.utils.*;
 		
 
-	import beta.units.Mine;
-	import beta.units.Asteroid;
+	import beta.units.enemies.*;
 	import beta.units.*;
 	import beta.powerups.*;
+	
+	import beta.components.ships.*;
 
 
 	

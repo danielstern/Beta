@@ -1,5 +1,5 @@
-package beta.units {
-	import beta.components.Gun;
+package beta.units.enemies {
+	import beta.components.guns.Gun;
 	
 	public class EnemyGun extends Gun
 	{

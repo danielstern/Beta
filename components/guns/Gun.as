@@ -1,4 +1,4 @@
-package beta.components {
+package beta.components.guns {
 	import Box2D.Collision.b2AABB;
 	import Box2D.Common.Math.b2Transform;
 	import Box2D.Common.Math.b2Vec2;
@@ -7,8 +7,9 @@ package beta.components {
 	import flash.events.Event;
 	import flash.geom.Point;
 	import beta.core.*;
-	import beta.units.ShipBullet;
 	import beta.core.BoxModelObject;
+	
+	import beta.components.bullets.*;
 	
 	public class Gun extends BoxModelObject
 	{

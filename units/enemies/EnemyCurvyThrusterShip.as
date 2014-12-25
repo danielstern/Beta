@@ -1,4 +1,4 @@
-package beta.units {
+package beta.units.enemies {
 	
 	public class EnemyCurvyThrusterShip extends EnemyBasicThrusterShip
 	{

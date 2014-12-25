@@ -1,10 +1,11 @@
-package beta.components {
+package beta.components.ships {
 	
 	import beta.events.SpawnedChildEvent;
 	import Box2D.Collision.Shapes.b2CircleShape;
 	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
+	import beta.components.guns.*;
 	public class Gunship extends Ship
 	{
 		protected var guns = [];

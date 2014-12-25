@@ -5,7 +5,7 @@ package beta.core {
 	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Point;
 	import beta.*;
-	import beta.components.Debris;
+	import beta.components.misc.Debris;
 	
 	public class ExplodableObject extends ConstrainableObject
 	{

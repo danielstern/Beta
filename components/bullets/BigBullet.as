@@ -1,5 +1,4 @@
-package beta.components 
-{
+package beta.components.bullets {
 	import Box2D.Common.Math.b2Vec2;
 	public class BigBullet extends Bullet 
 	{

@@ -1,5 +1,4 @@
-package beta.components 
-{
+package beta.components.guns {
 	import beta.core.ThornedObject;
 	import Box2D.Collision.b2AABB;
 	import Box2D.Collision.b2RayCastInput;

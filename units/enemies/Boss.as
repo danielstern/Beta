@@ -1,8 +1,7 @@
-package beta.units 
-{
-	import beta.components.BigGun;
-	import beta.components.Gun;
-	import beta.components.SmartGun;
+package beta.units.enemies {
+	import beta.components.guns.BigGun;
+	import beta.components.guns.Gun;
+	import beta.components.guns.SmartGun;
 	import Box2D.Common.Math.b2Vec2;
 	/**
 	 * ...

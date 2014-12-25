@@ -1,4 +1,4 @@
-package beta.components {
+package beta.components.ships {
 	import flash.display.*;
 	import flash.events.Event;
 	import beta.core.AutoControlMappingObject;

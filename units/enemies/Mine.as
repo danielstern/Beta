@@ -1,6 +1,6 @@
-package beta.units {
+package beta.units.enemies {
 
-	import beta.components.Bullet;
+	import beta.components.bullets.Bullet;
 	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2World;
 	import flash.geom.Point;

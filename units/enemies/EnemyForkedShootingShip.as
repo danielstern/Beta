@@ -1,6 +1,5 @@
-package beta.units 
-{
-	import beta.components.Gun;
+package beta.units.enemies {
+	import beta.components.guns.Gun;
 	import Box2D.Common.Math.b2Vec2;
 	public class EnemyForkedShootingShip extends EnemyBasicShootingShip 
 	{

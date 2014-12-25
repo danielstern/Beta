@@ -1,9 +1,6 @@
-package beta.components 
-{
-	/**
-	 * ...
-	 * @author daniel
-	 */
+package beta.components.guns {
+	import beta.components.bullets.*;
+	
 	public class BigGun extends SmartGun 
 	{
 		
