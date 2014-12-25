@@ -92,8 +92,8 @@ package beta.games {
 					//EnemyRandomThrusterShip,
 					//EnemyBasicShootingShip,
 					//EnemyForkedShootingShip
-					//BasicGunCountPowerup,
-					BasicHealthPowerup
+					BasicGunCountPowerup
+					//BasicHealthPowerup
 				];
 				var Constructor = enemies[Math.floor(Math.random() * enemies.length)];
 				return new Constructor(world);
