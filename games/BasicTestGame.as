@@ -40,8 +40,8 @@ package beta.games {
 			debug.SetAlpha(1);
 			debug.SetFillAlpha(1);
 			debug.SetLineThickness(1);
-			//debug.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit | b2DebugDraw.e_aabbBit | b2DebugDraw.e_pairBit | b2DebugDraw.e_centerOfMassBit);
-			debug.SetFlags(b2DebugDraw.e_shapeBit);
+			debug.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit | b2DebugDraw.e_aabbBit | b2DebugDraw.e_pairBit | b2DebugDraw.e_centerOfMassBit);
+			//debug.SetFlags(b2DebugDraw.e_shapeBit);
 
 			world.SetDebugDraw(debug);
 			setInterval(function(world:b2World) {
@@ -83,7 +83,8 @@ package beta.games {
 			function spawnEnemy() {
 				var enemy:ThornedObject = getRandomEnemy();
 				trace("Spawn enemy: ", enemy);
-				enemy.setBoxModelPosition(new b2Vec2(20, Math.random() * 10));
+				//enemy.setBoxModelPosition(new b2Vec2(20, Math.random() * 10));
+				enemy.setBoxModelPosition(new b2Vec2(20, 5));
 				enemy.activate();
 			}
 

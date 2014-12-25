@@ -2,6 +2,7 @@ package beta.units
 {
 	import beta.components.BigGun;
 	import beta.components.Gun;
+	import beta.components.SmartGun;
 	import Box2D.Common.Math.b2Vec2;
 	/**
 	 * ...
@@ -14,9 +15,9 @@ package beta.units
 		{
 			super(world);
 			thrustForce = 0.05;
-			health = 1000;
+			health = 100;
 			
-			var gun1:Gun = addGun(new Gun(world), new b2Vec2( -4, 0));
+			var gun1:Gun = addGun(new SmartGun(world), new b2Vec2( -4, 0));
 			gun1.bulletsCollideWith = 'friend';
 			var gun2:Gun = addGun(new BigGun(world), new b2Vec2( -3.5, -2));
 			gun2.bulletsCollideWith = 'friend';

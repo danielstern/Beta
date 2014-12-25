@@ -48,12 +48,9 @@ package beta.components {
 				return;
 			}
 			
-			var aabb:b2AABB = new b2AABB();
-			fixture.GetShape().ComputeAABB(aabb, fixture.GetBody().GetTransform());
-
 			var bullet:Bullet = getBullet();			
 			bullet.collidesWith = bulletsCollideWith;			
-			bullet.boxModelBody.SetPosition(aabb.GetCenter());
+			bullet.boxModelBody.SetPosition(getGunPosition());
 			
 			var totalForce = 0.05 * bullet.boxModelBody.GetMass();
 			var forceX = Math.sin(orientation) * totalForce;
@@ -66,12 +63,25 @@ package beta.components {
 			metaSpawnedChild(bullet);
 		}
 		
+		protected function getGunPosition() {
+		
+			
+			var aabb:b2AABB = new b2AABB();
+			fixture.GetShape().ComputeAABB(aabb, fixture.GetBody().GetTransform());
+			return aabb.GetCenter();
+		
+		}
+		
 		protected function getBullet() {
 			return new Bullet(world);			
 		}
 		
 		override protected function tick() {
 			super.tick();	
+			if (!fixture || !fixture.GetBody()) {
+				// ship's been destroyed
+				kill();
+			}
 			if (timeUntilCanShoot <= 0) {
 				canShoot = true;	
 			} else {
