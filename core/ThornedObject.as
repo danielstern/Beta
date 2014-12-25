@@ -19,7 +19,7 @@ package beta.core {
 				
 				//collisions.forEach(function(other:ThornedObject) {
 				var other:ThornedObject = collisions[0];			
-					trace(entity, "Dealing damage to", other, damage);
+					//trace(entity, "Dealing damage to", other, damage);
 					if (collidesWith === other.collisionType) {
 						other.takeDamage(damage);
 				

@@ -13,6 +13,7 @@ package beta.games {
 
 	import beta.units.Mine;
 	import beta.units.Asteroid;
+	import beta.units.*;
 	//import beta.units.EnemyGun;
 	//import beta.units.Enemy;
 	//import beta.units.EnemyCurvyThrusterShip;
@@ -82,6 +83,7 @@ package beta.games {
 			
 			setInterval(function() {
 				var enemy:Enemy = getRandomEnemy();
+				trace("Spawn enemy: ", enemy);
 				enemy.setBoxModelPosition(new b2Vec2(20, Math.random() * 10));
 				enemy.activate();
 			},1500)
@@ -89,9 +91,10 @@ package beta.games {
 			function getRandomEnemy() {
 				var enemies = [
 					Asteroid,
-					//new EnemyBasicThrusterShip(),
-					//new EnemyCurvyThrusterShip, 
+					EnemyBasicThrusterShip,
+					EnemyCurvyThrusterShip, 
 					Mine,
+					EnemyRandomThrusterShip
 					//new EnemyBasicAttackingShip(),
 					//new EnemyForkedAttackingShip(), 
 					//new BasicGunCountPowerup(),

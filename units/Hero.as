@@ -13,7 +13,8 @@ package beta.units {
 			collisionType = "friend";
 			collidesWith = "enemy";
 	
-			constrainToScreen = true;			
+			constrainToScreenY = true;			
+			constrainToScreenX = true;			
 			name = NAME;
 		
 		}
