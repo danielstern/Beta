@@ -10,6 +10,7 @@ package beta.units
 	 */
 	public class Boss extends EnemyBasicShootingShip 
 	{
+		public static var NAME = "boss";
 		
 		public function Boss(world) 
 		{
@@ -21,6 +22,8 @@ package beta.units
 			gun1.bulletsCollideWith = 'friend';
 			var gun2:Gun = addGun(new BigGun(world), new b2Vec2( -3.5, -2));
 			gun2.bulletsCollideWith = 'friend';
+			
+			name = NAME;
 			
 		}
 		

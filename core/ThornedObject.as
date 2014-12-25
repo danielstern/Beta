@@ -19,7 +19,7 @@ package beta.core {
 				
 				var other:ThornedObject = collisions[0];		
 				
-					trace(entity, "Dealing damage to", other, damage);
+					//trace(entity, "Dealing damage to", other, damage);
 					if (collidesWith === other.collisionType && !killed && !other.killed) {
 						other.takeDamage(damage);
 				

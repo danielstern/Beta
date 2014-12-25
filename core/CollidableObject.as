@@ -40,8 +40,6 @@ package beta.core {
 						var other:CollidableObject;
 						
 						if (entity1 === entity || entity2 === entity) {
-							//trace("nothing doing.");						
-						
 							if (entity1 === entity) {
 								other = entity2;		
 							} else {
@@ -49,9 +47,8 @@ package beta.core {
 							}
 
 							if (collidable && other.collidable && collidesWith === other.collisionType && other.collisionType !== -1 && contact.IsTouching()) {
-							//if (collidesWith === other.collisionType && other.collisionType !== -1) {
 								collisions.push(other);
-								trace(entity, "Collide with..", other);
+								//trace(entity, "Collide with..", other);
 							}						
 						}
 		

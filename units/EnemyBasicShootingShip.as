@@ -9,6 +9,7 @@ package beta.units
 		{
 			super(world);
 			movesRandomly = false;
+			addGuns();
 		}
 		
 		protected function addGuns() {

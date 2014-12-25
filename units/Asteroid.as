@@ -9,7 +9,7 @@ package beta.units {
 			health = 10;
 			damage = 4;
 
-			applyForceX(-0.05);
+			applyForceX(-0.01);
 
 			doesExplode = true;
 			explosionParticleCount = 6;
