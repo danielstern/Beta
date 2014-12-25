@@ -27,7 +27,7 @@ package beta.core {
 			for (var i = 0; i < explosionParticleCount; i++) {
 				var debris:Debris = new Debris(world);
 				debris.setBoxModelPosition(getBoxModelPosition());
-				debris.boxModelBody.SetAngularVelocity(Math.PI * 2);
+				debris.boxModelBody.SetAngularVelocity(Math.random() * Math.PI / 50 - Math.PI / 100);
 				
 				var xForce = Math.random() * 0.1 - 0.05;
 				var yForce = Math.random() * 0.1 - 0.05;

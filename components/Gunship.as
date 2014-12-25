@@ -1,5 +1,6 @@
 package beta.components {
 	
+	import beta.events.SpawnedChildEvent;
 	import Box2D.Collision.Shapes.b2CircleShape;
 	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Fixture;
@@ -17,9 +18,14 @@ package beta.components {
 		public function addGun(position) {
 			
 			var fixture:b2Fixture = addBoxModelCircleFixture(0.1,position);
-			var gun = new Gun(fixture);
+			var gun:Gun = new Gun(fixture);
 			guns.push(gun);
+			gun.addEventListener(SpawnedChildEvent.SPAWNED, onGunshot);
 			return gun;
+		}
+		
+		private function onGunshot(e) {
+			metaSpawnedChild(e.child);			
 		}
 		
 		protected function getGun() {
@@ -40,7 +46,12 @@ package beta.components {
 		}
 		
 		override protected function tick() {
-			super.tick();			
+			super.tick();	
+			
+			if (killed) {
+				gunsStopFiring();
+				return;
+			}
 
 			if (controlsAction1) {
 				gunsStartFiring();

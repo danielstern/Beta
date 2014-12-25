@@ -51,6 +51,7 @@ package beta.components {
 			timeUntilCanShoot = cooldownTime;
 			
 			meta(Gun.SHOOT);
+			metaSpawnedChild(bullet);
 		}
 		
 		protected function getBullet() {

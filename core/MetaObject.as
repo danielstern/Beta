@@ -1,5 +1,6 @@
 package beta.core {
 	import beta.events.HealingEvent;
+	import beta.events.SpawnedChildEvent;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import beta.events.MetaEvent;
@@ -22,6 +23,12 @@ package beta.core {
 			//trace("Meta event...", origin);
 			dispatchEvent(mainEvent);			
 			//dispatchEvent(audioEvent);			
+		}
+		
+		public function metaSpawnedChild(child:ThornedObject) {
+			var event:SpawnedChildEvent = new SpawnedChildEvent(SpawnedChildEvent.SPAWNED);
+			event.child = child;
+			dispatchEvent(event);
 		}
 		
 		public function metaTookDamage(damage) {

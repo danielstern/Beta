@@ -1,6 +1,8 @@
 package beta.games {
 	import beta.components.*;
 	import beta.core.*;
+	import beta.events.SpawnedChildEvent;
+	import beta.representations.BasicRepresentation;
 	import beta.units.*;
 	import Box2D.Common.Math.*;
 	import Box2D.Dynamics.*;
@@ -63,7 +65,14 @@ package beta.games {
 				keyboard.addEasyListener("D", controlledObject.startRight, controlledObject.stopRight);
 				keyboard.addListener(32, controlledObject.startAction1, controlledObject.stopAction1);
 				
+				var rep = new BasicRepresentation(hero,boxScale);
+				gameContainer.addChild(rep);
+				
 				hero.addEventListener(DestructibleObject.DESTROYED, spawnHero);
+				hero.addEventListener(SpawnedChildEvent.SPAWNED, function(e:SpawnedChildEvent) {
+					//trace("Hero spawned a child.");
+					//gameContainer.addChild(new BasicRepresentation(e.child, boxScale));
+				})
 					
 			}
 			

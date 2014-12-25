@@ -1,4 +1,5 @@
 package beta.core {
+	import Box2D.Common.Math.b2Vec2;
 	import flash.display.*;
 	import flash.events.Event;
 	
@@ -19,28 +20,30 @@ package beta.core {
 		
 		
 		override protected function tick() {
-			super.tick();
+			
 			var x = getBoxModelPosition().x;
 			var y = getBoxModelPosition().y;
 			
 			if (constrainToScreen) {		
 				if (x < minX) {
-					//x = minX;
+					boxModelBody.SetPosition(new b2Vec2(minX, y));
 				} else if (x > maxX) {
-					//x = maxX;
+					boxModelBody.SetPosition(new b2Vec2(maxX, y));
 				}
 				
 				if (y < minY) {
-					//y = minY;
+					boxModelBody.SetPosition(new b2Vec2(x, minY));
 				} else if (y > maxY) {
-					//y = maxY;
+					boxModelBody.SetPosition(new b2Vec2(x, maxY));
 				}
 			} else {	
 				if (x < minX || x >= maxX || y < minY || y >= maxY) {
 					isOffScreen = true;
 				};
-			}			
-			//
+			}		
+			
+			super.tick();
+			
 			if (isOffScreen && killOffScreen) {
 				kill();
 			}
