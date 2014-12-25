@@ -15,6 +15,8 @@ package beta.components {
 	
 			damage = 10;
 			
+			//boxModelBody.GetFixtureList().SetDensity(1);
+			
 			expireOnDamageDeal = true;
 			killOffScreen = true;
 			

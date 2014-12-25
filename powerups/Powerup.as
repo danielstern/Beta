@@ -16,16 +16,13 @@ package beta.powerups {
 			collisionType = 'enemy';
 			collidesWith = 'friend';
 			
-			stabilizersEnabled = false;
-			
 			health = 25;
 			damage = 0;
-			mass = 40;
 			
-			applyForceX(-1000);
+			applyForceX(-0.01);
 			killOffScreen = true;
 			
-			enableCollisions();
+			addBoxModelSquareFixture(0.2);
 			
 			doesExplode = true;
 			explosionParticleCount = 4;

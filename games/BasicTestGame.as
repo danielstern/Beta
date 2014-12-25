@@ -14,12 +14,7 @@ package beta.games {
 	import beta.units.Mine;
 	import beta.units.Asteroid;
 	import beta.units.*;
-	//import beta.units.EnemyGun;
-	//import beta.units.Enemy;
-	//import beta.units.EnemyCurvyThrusterShip;
-	//import beta.units.EnemyBasicThrusterShip;
-	//import beta.units.EnemyBasicAttackingShip;
-	//import beta.units.EnemyForkedAttackingShip;
+	import beta.powerups.*;
 
 
 	
@@ -82,7 +77,7 @@ package beta.games {
 			
 			
 			setInterval(function() {
-				var enemy:Enemy = getRandomEnemy();
+				var enemy:ThornedObject = getRandomEnemy();
 				trace("Spawn enemy: ", enemy);
 				enemy.setBoxModelPosition(new b2Vec2(20, Math.random() * 10));
 				enemy.activate();
@@ -90,16 +85,15 @@ package beta.games {
 
 			function getRandomEnemy() {
 				var enemies = [
-					Asteroid,
+					//Asteroid,
 					//EnemyBasicThrusterShip,
 					//EnemyCurvyThrusterShip, 
 					//Mine,
-					//EnemyRandomThrusterShip
-					EnemyBasicShootingShip,
-					EnemyForkedShootingShip
-					//new EnemyForkedAttackingShip(), 
-					//new BasicGunCountPowerup(),
-					//new BasicHealthPowerup()
+					//EnemyRandomThrusterShip,
+					//EnemyBasicShootingShip,
+					//EnemyForkedShootingShip
+					//BasicGunCountPowerup,
+					BasicHealthPowerup
 				];
 				var Constructor = enemies[Math.floor(Math.random() * enemies.length)];
 				return new Constructor(world);

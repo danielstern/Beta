@@ -37,18 +37,15 @@ package beta.components {
 		} 
 		
 		public function fire() {
-
-			var bullet:Bullet = getBullet();
-			bullet.collidesWith = bulletsCollideWith;
+			
 			var aabb:b2AABB = new b2AABB();
 			fixture.GetShape().ComputeAABB(aabb, fixture.GetBody().GetTransform());
-			var targetPosition:b2Vec2 = aabb.GetCenter();
+
+			var bullet:Bullet = getBullet();			
+			bullet.collidesWith = bulletsCollideWith;			
+			bullet.boxModelBody.SetPosition(aabb.GetCenter());
 			
-			//targetPosition.x += fixture.GetUserData().localPosition.x;
-			//targetPosition.y += fixture.GetUserData().localPosition.y;
-			//trace("LOcal y?",fixture.GetUserData().localPosition.y);
-			bullet.boxModelBody.SetPosition(targetPosition);
-			var totalForce = 0.5 * bullet.boxModelBody.GetMass();
+			var totalForce = 0.1 * bullet.boxModelBody.GetMass();
 			var forceX = Math.sin(orientation) * totalForce;
 			var forceY = Math.cos(orientation) * totalForce;
 			bullet.applyForce(new b2Vec2(forceX,forceY));

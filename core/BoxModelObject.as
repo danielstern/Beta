@@ -36,7 +36,17 @@ package beta.core {
 			fixture.SetSensor(true);
 			
 			return fixture;
+		}
+		
+		public function addBoxModelSquareFixture(sideLength:Number, offset = null) {
+			var polygon:b2PolygonShape = new b2PolygonShape();
+			polygon.SetAsBox(sideLength, sideLength);
+			var fixtureDef:b2FixtureDef = new b2FixtureDef();
+			fixtureDef.shape = polygon;
+			var fixture:b2Fixture = boxModelBody.CreateFixture(fixtureDef);
+			fixture.SetSensor(true);
 			
+			return fixture;
 		}
 		
 		override protected function kill() {

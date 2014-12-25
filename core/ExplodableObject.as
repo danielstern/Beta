@@ -25,15 +25,17 @@ package beta.core {
 		}
 		
 		protected function explode() {
-			for (var i = 0; i < explosionParticleCount; i++) {
-				var debris:ThornedObject = getDebris();
-				var vector = getDebrisVector(i);
-				
-				debris.setBoxModelPosition(getBoxModelPosition());
-				debris.boxModelBody.SetAngularVelocity(Math.random() * Math.PI / 50 - Math.PI / 100);
-				
-				debris.applyForce(vector);
-			}		
+			if (!isOffScreen) {			
+				for (var i = 0; i < explosionParticleCount; i++) {
+					var debris:ThornedObject = getDebris();
+					var vector = getDebrisVector(i);
+					
+					debris.setBoxModelPosition(getBoxModelPosition());
+					debris.boxModelBody.SetAngularVelocity(Math.random() * Math.PI / 50 - Math.PI / 100);
+					
+					debris.applyForce(vector);
+				}		
+			}
 		}
 		
 		protected function getDebris() {
