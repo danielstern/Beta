@@ -50,7 +50,13 @@ package beta.core {
 		}
 		
 		override protected function kill() {
+			while (boxModelBody.GetFixtureList()) {
+				boxModelBody.DestroyFixture(boxModelBody.GetFixtureList());
+			}
+			
 			world.DestroyBody(boxModelBody);
+			
+			trace("Kill box model body...");
 			super.kill();
 		}
 		

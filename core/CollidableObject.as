@@ -45,7 +45,8 @@ package beta.core {
 							other = entity1;		
 						}
 
-						if (collidesWith === other.collisionType && other.collisionType !== -1) {
+						if (collidesWith === other.collisionType && other.collisionType !== -1 && contact.IsTouching()) {
+						//if (collidesWith === other.collisionType && other.collisionType !== -1) {
 							collisions.push(other);
 						}						
 		

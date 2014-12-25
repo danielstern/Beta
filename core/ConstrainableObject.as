@@ -8,7 +8,7 @@ package beta.core {
 
 		protected var maxX = 500;
 		protected var minX = 0;
-		protected var maxY = 500;
+		protected var maxY = 200;
 		protected var minY:Number = 0;
 		protected var killOffScreen:Boolean = false;
 		protected var isOffScreen:Boolean = false;
@@ -28,16 +28,17 @@ package beta.core {
 			
 			//if (constrainToScreenX) {		
 			if (constrainToScreenX) {
-			
-				if (x < minX) {
+				if (x <= minX) {
+					x = minX;
 					boxModelBody.SetPosition(new b2Vec2(minX, y));
 				} else if (x > maxX) {
+					x = maxX;
 					boxModelBody.SetPosition(new b2Vec2(maxX, y));
 				}
 			}
 			
 			if (constrainToScreenY) {
-				if (y < minY) {
+				if (y <= minY) {
 					boxModelBody.SetPosition(new b2Vec2(x, minY));
 				} else if (y > maxY) {
 					boxModelBody.SetPosition(new b2Vec2(x, maxY));

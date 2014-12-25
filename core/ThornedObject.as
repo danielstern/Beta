@@ -17,20 +17,16 @@ package beta.core {
 		
 			if (collisions[0] && thorned) {
 				
-				//collisions.forEach(function(other:ThornedObject) {
-				var other:ThornedObject = collisions[0];			
-					//trace(entity, "Dealing damage to", other, damage);
-					if (collidesWith === other.collisionType) {
+				var other:ThornedObject = collisions[0];		
+				
+					trace(entity, "Dealing damage to", other, damage);
+					if (collidesWith === other.collisionType && !killed && !other.killed) {
 						other.takeDamage(damage);
 				
 						if (expireOnDamageDeal) {
 							health = 0;
 						}
-					}
-					
-				//});				
-				
-					
+					}				
 			}
 			
 			super.tick();

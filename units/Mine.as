@@ -19,7 +19,7 @@ package beta.units {
 			doesExplode = true;
 			explosionType = 'mine';
 			
-			applyForceX(-0.005);
+			applyForceX(-0.05);
 			killOffScreen = true;
 			
 			explosionParticleCount = 4;

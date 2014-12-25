@@ -18,7 +18,7 @@ package beta.units {
 			super(world);
 			
 			health = 25;
-			damage = 0;	
+			damage = 100;	
 			
 			orientation = Math.PI / 2;
 			

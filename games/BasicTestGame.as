@@ -40,11 +40,12 @@ package beta.games {
 			debug.SetAlpha(1);
 			debug.SetFillAlpha(1);
 			debug.SetLineThickness(1);
-			debug.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit | b2DebugDraw.e_aabbBit | b2DebugDraw.e_pairBit | b2DebugDraw.e_centerOfMassBit);
+			//debug.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit | b2DebugDraw.e_aabbBit | b2DebugDraw.e_pairBit | b2DebugDraw.e_centerOfMassBit);
+			debug.SetFlags(b2DebugDraw.e_shapeBit);
 
 			world.SetDebugDraw(debug);
 			setInterval(function(world:b2World) {
-				world.Step(3, 1, 1);
+				world.Step(1,5,5);
 				world.DrawDebugData();
 			}, 25,world);
 			
@@ -81,19 +82,19 @@ package beta.games {
 				trace("Spawn enemy: ", enemy);
 				enemy.setBoxModelPosition(new b2Vec2(20, Math.random() * 10));
 				enemy.activate();
-			},1500)
+			},1000)
 
 			function getRandomEnemy() {
 				var enemies = [
-					//Asteroid,
-					//EnemyBasicThrusterShip,
-					//EnemyCurvyThrusterShip, 
-					//Mine,
-					//EnemyRandomThrusterShip,
-					//EnemyBasicShootingShip,
-					//EnemyForkedShootingShip
-					BasicGunCountPowerup
-					//BasicHealthPowerup
+					Asteroid,
+					EnemyBasicThrusterShip,
+					EnemyCurvyThrusterShip,
+					Mine,
+					EnemyRandomThrusterShip,
+					EnemyBasicShootingShip,
+					EnemyForkedShootingShip,
+					BasicGunCountPowerup,
+					BasicHealthPowerup
 				];
 				var Constructor = enemies[Math.floor(Math.random() * enemies.length)];
 				return new Constructor(world);

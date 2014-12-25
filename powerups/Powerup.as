@@ -19,7 +19,7 @@ package beta.powerups {
 			health = 25;
 			damage = 0;
 			
-			applyForceX(-0.01);
+			applyForceX(-0.1);
 			killOffScreen = true;
 			
 			addBoxModelSquareFixture(0.2);

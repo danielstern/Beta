@@ -12,7 +12,7 @@ package beta.core {
 		protected var xThrusterPower = 0.2;
 		protected var yThrusterPower = 0.2;
 		
-		protected var thrustForce = 0.07;
+		protected var thrustForce = 0.4;
 		
 		public function ThrustableObject(world) {
 			super(world);	

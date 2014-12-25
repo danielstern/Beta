@@ -45,7 +45,7 @@ package beta.components {
 			bullet.collidesWith = bulletsCollideWith;			
 			bullet.boxModelBody.SetPosition(aabb.GetCenter());
 			
-			var totalForce = 0.1 * bullet.boxModelBody.GetMass();
+			var totalForce = 1 * bullet.boxModelBody.GetMass();
 			var forceX = Math.sin(orientation) * totalForce;
 			var forceY = Math.cos(orientation) * totalForce;
 			bullet.applyForce(new b2Vec2(forceX,forceY));
