@@ -3,7 +3,7 @@ package beta.units {
 	public class EnemyRandomThrusterShip extends EnemyBasicThrusterShip
 	{
 		protected var movesRandomly = true;
-		protected var directionChangeFrequency = 5;
+		protected var directionChangeFrequency = 200;
 		
 		protected static var MOVING_UP = 'movingUp';
 		protected static var MOVING_DOWN = 'movingDown';

@@ -12,7 +12,7 @@ package beta.components {
 	
 	public class Gun extends BoxModelObject
 	{
-		public var cooldownTime = 5;
+		public var cooldownTime = 200;
 		protected var timeUntilCanShoot:Number = 0;
 		protected var canShoot:Boolean = true;
 		protected var firing:Boolean = false;
@@ -45,7 +45,7 @@ package beta.components {
 			bullet.collidesWith = bulletsCollideWith;			
 			bullet.boxModelBody.SetPosition(aabb.GetCenter());
 			
-			var totalForce = 1 * bullet.boxModelBody.GetMass();
+			var totalForce = 0.05 * bullet.boxModelBody.GetMass();
 			var forceX = Math.sin(orientation) * totalForce;
 			var forceY = Math.cos(orientation) * totalForce;
 			bullet.applyForce(new b2Vec2(forceX,forceY));

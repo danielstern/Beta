@@ -13,6 +13,7 @@ package beta.components {
 			doesExplode = true;
 			explosionParticleCount = 4;
 			
+			
 		}
 	}
 }

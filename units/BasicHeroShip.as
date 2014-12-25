@@ -35,7 +35,7 @@ package beta.units {
 			
 			doesExplode = true;
 		
-			explosionParticleCount = 45;
+			explosionParticleCount = 10;
 			
 			upgradable = true;
 			controlledViaOverride = true;

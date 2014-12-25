@@ -43,8 +43,9 @@ package beta.core {
 		}
 		
 		protected function getDebrisVector(i):b2Vec2 {
-			var xForce = Math.random() * 0.1 - 0.05;
-			var yForce = Math.random() * 0.1 - 0.05;
+			var debrisForce = 0.005;
+			var xForce = Math.random() * debrisForce - debrisForce / 2;
+			var yForce = Math.random() * debrisForce - debrisForce / 2;
 			return new b2Vec2(xForce,yForce);
 		}
 	}

@@ -45,9 +45,9 @@ package beta.games {
 
 			world.SetDebugDraw(debug);
 			setInterval(function(world:b2World) {
-				world.Step(1,5,5);
+				world.Step(1,1,1);
 				world.DrawDebugData();
-			}, 25,world);
+			}, 1,world);
 			
 			function spawnHero() { 
 				

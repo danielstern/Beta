@@ -20,6 +20,8 @@ package beta.units {
 			killOffScreen = true;
 			constrainToScreenX = false;
 			constrainToScreenY = false;
+			
+			thrustForce = 0.01;
 						
 			doesExplode = true;
 			explosionParticleCount = 4;

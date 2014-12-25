@@ -17,7 +17,7 @@ package beta.units
 			var gun:Gun = addGun(new b2Vec2(-0.5,0));
 			gun.bulletsCollideWith = 'friend';
 			gun.startFiring();
-			gun.cooldownTime = 15;
+			gun.cooldownTime = 500;
 		}
 		
 		override protected function tick() {

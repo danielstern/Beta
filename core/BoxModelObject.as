@@ -56,7 +56,6 @@ package beta.core {
 			
 			world.DestroyBody(boxModelBody);
 			
-			trace("Kill box model body...");
 			super.kill();
 		}
 		

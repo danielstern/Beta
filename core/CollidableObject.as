@@ -39,16 +39,21 @@ package beta.core {
 						var entity2 = contact.GetFixtureB().GetBody().GetUserData().entity;
 						var other:CollidableObject;
 						
-						if (entity1 === entity) {
-							other = entity2;		
-						} else {
-							other = entity1;		
-						}
+						if (entity1 === entity || entity2 === entity) {
+							//trace("nothing doing.");						
+						
+							if (entity1 === entity) {
+								other = entity2;		
+							} else {
+								other = entity1;		
+							}
 
-						if (collidesWith === other.collisionType && other.collisionType !== -1 && contact.IsTouching()) {
-						//if (collidesWith === other.collisionType && other.collisionType !== -1) {
-							collisions.push(other);
-						}						
+							if (collidable && other.collidable && collidesWith === other.collisionType && other.collisionType !== -1 && contact.IsTouching()) {
+							//if (collidesWith === other.collisionType && other.collisionType !== -1) {
+								collisions.push(other);
+								trace(entity, "Collide with..", other);
+							}						
+						}
 		
 						contact = contact.GetNext();
 					}

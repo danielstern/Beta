@@ -12,7 +12,7 @@ package beta.core {
 		protected var xThrusterPower = 0.2;
 		protected var yThrusterPower = 0.2;
 		
-		protected var thrustForce = 0.4;
+		protected var thrustForce = 0.02;
 		
 		public function ThrustableObject(world) {
 			super(world);	
@@ -22,14 +22,11 @@ package beta.core {
 		override protected function tick() {
 			super.tick();
 			
-			if (!boxModelBody) {
-				trace("no box model body.");
-				 return;
-			}
-			
 			var vec:b2Vec2 = new b2Vec2(0, 0);
 			
+			
 			if (thrustingRight) {
+		
 				vec.x = thrustForce;
 			} else if (thrustingLeft) {
 				vec.x = -thrustForce

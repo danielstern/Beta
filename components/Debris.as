@@ -12,11 +12,11 @@ package beta.components {
 			thorned = false;
 			doesExplode = false;
 			
-			collidable = false;
+			collisionType = -1;
 			
 			addBoxModelCircleFixture(0.05);
 			
-			doAfter(100, kill);
+			doAfter(1000, kill);
 			activate();
 			
 		

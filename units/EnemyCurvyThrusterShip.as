@@ -10,7 +10,7 @@ package beta.units {
 		override protected function tick() {
 			super.tick();
 			
-			var direction = Math.sin(cycle / 3);
+			var direction = Math.sin(cycle / 200);
 			
 			if (enemyAICurves) {
 							

@@ -6,9 +6,9 @@ package beta.core {
 	public class ConstrainableObject extends BoxModelObject
 	{
 
-		protected var maxX = 500;
+		protected var maxX = 30;
 		protected var minX = 0;
-		protected var maxY = 200;
+		protected var maxY = 10;
 		protected var minY:Number = 0;
 		protected var killOffScreen:Boolean = false;
 		protected var isOffScreen:Boolean = false;
