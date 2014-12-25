@@ -11,7 +11,7 @@ package beta.games {
 	import flash.utils.*;
 		
 
-	//import beta.units.Mine;
+	import beta.units.Mine;
 	import beta.units.Asteroid;
 	//import beta.units.EnemyGun;
 	//import beta.units.Enemy;
@@ -88,16 +88,17 @@ package beta.games {
 
 			function getRandomEnemy() {
 				var enemies = [
-					new Asteroid(world)
+					Asteroid,
 					//new EnemyBasicThrusterShip(),
 					//new EnemyCurvyThrusterShip, 
-					//new Mine(), 
+					Mine,
 					//new EnemyBasicAttackingShip(),
 					//new EnemyForkedAttackingShip(), 
 					//new BasicGunCountPowerup(),
 					//new BasicHealthPowerup()
 				];
-				return enemies[Math.floor(Math.random() * enemies.length)];
+				var Constructor = enemies[Math.floor(Math.random() * enemies.length)];
+				return new Constructor(world);
 			}
 			
 			gameContainer.addEventListener(Hero.NAME + ":" + DestructibleObject.DESTROYED, handleHeroDie);

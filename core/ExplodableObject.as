@@ -1,4 +1,5 @@
 package beta.core {
+	import Box2D.Common.Math.b2Vec2;
 	import flash.display.*;
 	import flash.events.Event;
 	import flash.filters.ColorMatrixFilter;
@@ -25,17 +26,24 @@ package beta.core {
 		
 		protected function explode() {
 			for (var i = 0; i < explosionParticleCount; i++) {
-				var debris:Debris = new Debris(world);
+				var debris:ThornedObject = getDebris();
+				var vector = getDebrisVector(i);
+				
 				debris.setBoxModelPosition(getBoxModelPosition());
 				debris.boxModelBody.SetAngularVelocity(Math.random() * Math.PI / 50 - Math.PI / 100);
 				
-				var xForce = Math.random() * 0.1 - 0.05;
-				var yForce = Math.random() * 0.1 - 0.05;
-				
-				debris.applyForceX(xForce);
-				debris.applyForceY(yForce);
-			}
-			
+				debris.applyForce(vector);
+			}		
+		}
+		
+		protected function getDebris() {
+			return new Debris(world);
+		}
+		
+		protected function getDebrisVector(i):b2Vec2 {
+			var xForce = Math.random() * 0.1 - 0.05;
+			var yForce = Math.random() * 0.1 - 0.05;
+			return new b2Vec2(xForce,yForce);
 		}
 	}
 }
