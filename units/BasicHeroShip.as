@@ -16,11 +16,23 @@ package beta.units {
 			health = 25;
 			damage = 0;	
 			
-			var gun1:Gun = addGun(new b2Vec2(0.5, 0.5));
-			//addGun(new b2Vec2(0.5, -0.5));		
+				orientation = Math.PI / 2;
+			
+			var gun1:Gun = addGun(new b2Vec2(0.5, 0.5));	
 			gun1.bulletsCollideWith = 'enemy';
 			
+			var gun2:Gun = addGun(new b2Vec2(0.5, -0.5));	
+			gun2.bulletsCollideWith = 'enemy';
+			
+			// too f'in sweet
+			//var gun3:Gun = addGun(new b2Vec2(0.25, 1));	
+			//gun3.bulletsCollideWith = 'enemy';
+			//
+			//var gun4:Gun = addGun(new b2Vec2(0.25, -1));	
+			//gun4.bulletsCollideWith = 'enemy';
+			//
 			doesExplode = true;
+		
 			explosionParticleCount = 45;
 			
 			upgradable = true;

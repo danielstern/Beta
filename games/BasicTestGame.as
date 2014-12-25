@@ -93,9 +93,10 @@ package beta.games {
 					Asteroid,
 					//EnemyBasicThrusterShip,
 					//EnemyCurvyThrusterShip, 
-					Mine,
+					//Mine,
 					//EnemyRandomThrusterShip
-					EnemyBasicShootingShip
+					EnemyBasicShootingShip,
+					EnemyForkedShootingShip
 					//new EnemyForkedAttackingShip(), 
 					//new BasicGunCountPowerup(),
 					//new BasicHealthPowerup()

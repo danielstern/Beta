@@ -1,4 +1,5 @@
 package beta.components {
+	import Box2D.Collision.b2AABB;
 	import Box2D.Common.Math.b2Transform;
 	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Fixture;
@@ -11,13 +12,12 @@ package beta.components {
 	
 	public class Gun extends BoxModelObject
 	{
-		protected var cooldownTime = 5;
+		public var cooldownTime = 5;
 		protected var timeUntilCanShoot:Number = 0;
 		protected var canShoot:Boolean = true;
 		protected var firing:Boolean = false;
 		public static var SHOOT:String = "shoot";
 		public static var NAME:String = "gun";
-		public var orientation = 0;
 		public var bulletsCollideWith = -1;
 		var fixture:b2Fixture;
 		
@@ -40,13 +40,18 @@ package beta.components {
 
 			var bullet:Bullet = getBullet();
 			bullet.collidesWith = bulletsCollideWith;
-			var targetPosition:b2Vec2 = fixture.GetBody().GetPosition();
-			var transform:b2Transform = fixture.GetBody().GetTransform();
+			var aabb:b2AABB = new b2AABB();
+			fixture.GetShape().ComputeAABB(aabb, fixture.GetBody().GetTransform());
+			var targetPosition:b2Vec2 = aabb.GetCenter();
 			
-			targetPosition.x += fixture.GetUserData().localPosition.x;
-			targetPosition.y += fixture.GetUserData().localPosition.y;
+			//targetPosition.x += fixture.GetUserData().localPosition.x;
+			//targetPosition.y += fixture.GetUserData().localPosition.y;
+			//trace("LOcal y?",fixture.GetUserData().localPosition.y);
 			bullet.boxModelBody.SetPosition(targetPosition);
-			bullet.applyForce(new b2Vec2(2.5 * bullet.boxModelBody.GetMass(),0));
+			var totalForce = 0.5 * bullet.boxModelBody.GetMass();
+			var forceX = Math.sin(orientation) * totalForce;
+			var forceY = Math.cos(orientation) * totalForce;
+			bullet.applyForce(new b2Vec2(forceX,forceY));
 			
 			timeUntilCanShoot = cooldownTime;
 			

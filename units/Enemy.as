@@ -14,6 +14,8 @@ package beta.units {
 			
 			health = 10;
 			damage = 4;
+			
+			orientation = Math.PI * 3 / 2;
 
 			killOffScreen = true;
 			constrainToScreenX = false;

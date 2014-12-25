@@ -15,11 +15,12 @@ package beta.components {
 		
 		}
 		
-		public function addGun(position) {
+		public function addGun(position, orientationOffset:Number = 0 ) {
 			
 			var fixture:b2Fixture = addBoxModelCircleFixture(0.1,position);
 			var gun:Gun = new Gun(fixture);
 			guns.push(gun);
+			gun.orientation = orientation + orientationOffset;
 			gun.addEventListener(SpawnedChildEvent.SPAWNED, onGunshot);
 			return gun;
 		}

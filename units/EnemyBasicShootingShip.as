@@ -10,14 +10,21 @@ package beta.units
 			super(world);
 			movesRandomly = false;
 			
+			enemyShipAddGuns();
+		}
+		
+		protected function enemyShipAddGuns() {
 			var gun:Gun = addGun(new b2Vec2(-0.5,0));
 			gun.bulletsCollideWith = 'friend';
 			gun.startFiring();
+			gun.cooldownTime = 15;
 		}
 		
 		override protected function tick() {
 			super.tick();
-			gunsStartFiring();
+			if (!killed) {
+				gunsStartFiring();
+			}
 		}
 		
 	}

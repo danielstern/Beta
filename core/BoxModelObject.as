@@ -7,6 +7,7 @@ package beta.core {
 	{	
 		public var boxModelBody:b2Body;
 		public var world:b2World;
+		public var orientation = 0;
 
 
 		public function BoxModelObject(_world) {
@@ -33,7 +34,6 @@ package beta.core {
 
 			var fixture:b2Fixture = boxModelBody.CreateFixture(fixtureDef);
 			fixture.SetSensor(true);
-			fixture.SetUserData({localPosition:offset})
 			
 			return fixture;
 			
