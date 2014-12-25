@@ -1,4 +1,5 @@
 package beta.units {
+	import beta.components.Gun;
 	import flash.display.*;
 	import flash.events.Event;
 	import beta.core.*;
@@ -15,8 +16,9 @@ package beta.units {
 			health = 25;
 			damage = 0;	
 			
-			addGun(new b2Vec2(0.5, 0.5));
-			addGun(new b2Vec2(0.5, -0.5));		
+			var gun1:Gun = addGun(new b2Vec2(0.5, 0.5));
+			//addGun(new b2Vec2(0.5, -0.5));		
+			gun1.bulletsCollideWith = 'enemy';
 			
 			doesExplode = true;
 			explosionParticleCount = 45;

@@ -10,7 +10,7 @@ package beta.games {
 		
 
 	//import beta.units.Mine;
-	//import beta.units.Asteroid;
+	import beta.units.Asteroid;
 	//import beta.units.EnemyGun;
 	//import beta.units.Enemy;
 	//import beta.units.EnemyCurvyThrusterShip;
@@ -48,34 +48,23 @@ package beta.games {
 			setInterval(function(world:b2World) {
 				world.Step(3, 1, 1);
 				world.DrawDebugData();
-				//trace("World update.");			
-			
 			}, 25,world);
 			
 			function spawnHero() { 
-				setTimeout(function() {
-					var hero:Gunship = new BasicHeroShip(world);
-					//gameContainer.addChild(hero);
-					controlledObject = hero;
-					hero.activate();					
-					
-					keyboard.addEasyListener("W", controlledObject.startUp, controlledObject.stopUp);
-					keyboard.addEasyListener("A", controlledObject.startLeft, controlledObject.stopLeft);
-					keyboard.addEasyListener("S", controlledObject.startDown, controlledObject.stopDown);
-					keyboard.addEasyListener("D", controlledObject.startRight, controlledObject.stopRight);
-					keyboard.addListener(32, controlledObject.startAction1, controlledObject.stopAction1);
-					
-					//hero.x = 50;
-					//hero.y = 150;
-					
-					
 				
-					
-					//heroBody.ApplyForce(new b2Vec2(5, 5));
+				var hero:Gunship = new BasicHeroShip(world);
 				
+				controlledObject = hero;
+				hero.activate();					
+				
+				keyboard.addEasyListener("W", controlledObject.startUp, controlledObject.stopUp);
+				keyboard.addEasyListener("A", controlledObject.startLeft, controlledObject.stopLeft);
+				keyboard.addEasyListener("S", controlledObject.startDown, controlledObject.stopDown);
+				keyboard.addEasyListener("D", controlledObject.startRight, controlledObject.stopRight);
+				keyboard.addListener(32, controlledObject.startAction1, controlledObject.stopAction1);
+				
+				hero.addEventListener(DestructibleObject.DESTROYED, spawnHero);
 					
-					
-				},700);
 			}
 			
 			
@@ -84,12 +73,9 @@ package beta.games {
 			
 			setInterval(function() {
 				var enemy:Enemy = getRandomEnemy();
-				//enemy.x = gameWidth - 5;
 				enemy.setBoxModelPosition(new b2Vec2(20, Math.random() * 10));
-				//enemy.y = Math.random() * gameHeight -25;
-				//gameContainer.addChild(enemy);
 				enemy.activate();
-			},1000)
+			},1500)
 
 			function getRandomEnemy() {
 				var enemies = [

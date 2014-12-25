@@ -17,21 +17,20 @@ package beta.core {
 		
 			if (collisions[0] && thorned) {
 				
-				var other:DestructibleObject = collisions[0];
-				other.takeDamage(damage);
+				//collisions.forEach(function(other:ThornedObject) {
+				var other:ThornedObject = collisions[0];			
+					trace(entity, "Dealing damage to", other, damage);
+					if (collidesWith === other.collisionType) {
+						other.takeDamage(damage);
 				
-				//buggy
-				//if (applyForceOnImpact) {
-				//	other.applyForceX(this.xInertia);			
-				//	other.applyForceY(this.yInertia);	
+						if (expireOnDamageDeal) {
+							health = 0;
+						}
+					}
 					
-				//	applyForceX( -this.xInertia);
-				//	applyForceY( -this.yInertia);
-				//}
+				//});				
 				
-				if (expireOnDamageDeal) {
-					health = 0;
-				}
+					
 			}
 			
 			super.tick();

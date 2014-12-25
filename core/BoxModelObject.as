@@ -2,9 +2,7 @@ package beta.core {
 	import Box2D.Collision.Shapes.*;
 	import Box2D.Common.Math.*;
 	import Box2D.Dynamics.*;
-	
-	
-	//public class BoxModelObject
+
 	public class BoxModelObject  extends TimekeepingObject
 	{	
 		public var boxModelBody:b2Body;
@@ -19,6 +17,7 @@ package beta.core {
 			var body:b2Body = world.CreateBody(bodyDef);
 
 			boxModelBody = body;
+			body.SetUserData( { entity:this } );
 			
 			super();	
 		}
@@ -41,6 +40,7 @@ package beta.core {
 		}
 		
 		override protected function kill() {
+			world.DestroyBody(boxModelBody);
 			super.kill();
 		}
 		

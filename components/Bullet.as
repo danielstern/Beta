@@ -11,7 +11,7 @@ package beta.components {
 			
 			super(world);
 			
-			addBoxModelCircleFixture(0.1, new b2Vec2(0, 0));
+			addBoxModelCircleFixture(0.15, new b2Vec2(0, 0));
 	
 			damage = 10;
 			

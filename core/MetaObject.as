@@ -14,12 +14,13 @@ package beta.core {
 		}
 		
 		public function meta(type) {
-			//var origin = name + ":" + type;
+			var origin = name + ":" + type;
 			//var mainEvent:Event = new Event(origin, true);
+			var mainEvent:Event = new Event(type, true);
 			//var audioEvent:MetaEvent = new MetaEvent("audio", true);
 			//audioEvent.origin = origin;
 			//trace("Meta event...", origin);
-			//dispatchEvent(mainEvent);			
+			dispatchEvent(mainEvent);			
 			//dispatchEvent(audioEvent);			
 		}
 		
