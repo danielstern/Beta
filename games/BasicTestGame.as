@@ -77,24 +77,28 @@ package beta.games {
 			spawnHero();
 			
 			
-			setInterval(function() {
+			//setInterval(spawnEnemy, 1000);
+			spawnEnemy();
+			
+			function spawnEnemy() {
 				var enemy:ThornedObject = getRandomEnemy();
 				trace("Spawn enemy: ", enemy);
 				enemy.setBoxModelPosition(new b2Vec2(20, Math.random() * 10));
 				enemy.activate();
-			},1000)
+			}
 
 			function getRandomEnemy() {
 				var enemies = [
-					Asteroid,
-					EnemyBasicThrusterShip,
-					EnemyCurvyThrusterShip,
-					Mine,
-					EnemyRandomThrusterShip,
-					EnemyBasicShootingShip,
-					EnemyForkedShootingShip,
-					BasicGunCountPowerup,
-					BasicHealthPowerup
+					//Asteroid,
+					//EnemyBasicThrusterShip,
+					//EnemyCurvyThrusterShip,
+					//Mine,
+					//EnemyRandomThrusterShip,
+					//EnemyBasicShootingShip,
+					//EnemyForkedShootingShip,
+					//BasicGunCountPowerup,
+					//BasicHealthPowerup
+					Boss
 				];
 				var Constructor = enemies[Math.floor(Math.random() * enemies.length)];
 				return new Constructor(world);

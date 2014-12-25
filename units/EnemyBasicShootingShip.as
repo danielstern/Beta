@@ -9,12 +9,10 @@ package beta.units
 		{
 			super(world);
 			movesRandomly = false;
-			
-			enemyShipAddGuns();
 		}
 		
-		protected function enemyShipAddGuns() {
-			var gun:Gun = addGun(new b2Vec2(-0.5,0));
+		protected function addGuns() {
+			var gun:Gun = addGun(new Gun(world),new b2Vec2(-0.5,0));
 			gun.bulletsCollideWith = 'friend';
 			gun.startFiring();
 			gun.cooldownTime = 500;

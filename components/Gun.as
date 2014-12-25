@@ -19,13 +19,18 @@ package beta.components {
 		public static var SHOOT:String = "shoot";
 		public static var NAME:String = "gun";
 		public var bulletsCollideWith = -1;
+		
 		var fixture:b2Fixture;
 		
-		public function Gun(_fixture:b2Fixture) {
-			fixture = _fixture;
-			super(fixture.GetBody().GetWorld());
+		public function Gun(world) {
+			//fixture = _fixture;
+			super(world);
 			activate();
 			name = NAME;
+		}
+		
+		public function setFixture(_fixture:b2Fixture) {
+			fixture = _fixture;
 		}
 		
 		public function startFiring() {
@@ -37,6 +42,11 @@ package beta.components {
 		} 
 		
 		public function fire() {
+			
+			if (!fixture) {
+				trace("Guns cannot fire without being attached to a fixture.");
+				return;
+			}
 			
 			var aabb:b2AABB = new b2AABB();
 			fixture.GetShape().ComputeAABB(aabb, fixture.GetBody().GetTransform());
@@ -57,7 +67,7 @@ package beta.components {
 		}
 		
 		protected function getBullet() {
-			return new ShipBullet(world);			
+			return new Bullet(world);			
 		}
 		
 		override protected function tick() {

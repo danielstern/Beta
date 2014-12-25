@@ -10,7 +10,7 @@ package beta.units
 			super(world);
 		}
 		
-		override protected function enemyShipAddGuns() {
+		override protected function addGuns() {
 			var gun:Gun = addGun(new b2Vec2(-0.5,0.5),Math.PI * 1/4);
 			gun.bulletsCollideWith = 'friend';
 			

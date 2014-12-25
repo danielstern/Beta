@@ -11,7 +11,8 @@ package beta.components {
 			
 			super(world);
 			
-			addBoxModelCircleFixture(0.15, new b2Vec2(0, 0));
+			addBulletFixtures();
+		
 	
 			damage = 10;
 			
@@ -25,6 +26,10 @@ package beta.components {
 			activate();
 			
 			name = NAME;
+		}
+		
+		protected function addBulletFixtures() {
+			addBoxModelCircleFixture(0.15, new b2Vec2(0, 0));
 		}
 		
 		override protected function kill() {

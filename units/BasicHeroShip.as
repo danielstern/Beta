@@ -15,22 +15,17 @@ package beta.units {
 		protected var gun3:Gun;
 		
 		public function BasicHeroShip(world) {
-			super(world);
 			
-			health = 25;
-			damage = 100;	
-			
+					
 			orientation = Math.PI / 2;
 			
-			gun1 = addGun(new b2Vec2(0.5, 0));	
-			gun1.bulletsCollideWith = 'enemy';
+			super(world);
 			
-			gun2 = addGun(new b2Vec2(0.5, 0.5));	
-			gun2.bulletsCollideWith = 'enemy';
-			
-			gun3 = addGun(new b2Vec2(0.5, -0.5));	
-			gun3.bulletsCollideWith = 'enemy';
-			
+			orientation = Math.PI / 2;
+	
+			health = 25;
+			damage = 100;	
+	
 			
 			
 			doesExplode = true;
@@ -41,6 +36,22 @@ package beta.units {
 			controlledViaOverride = true;
 			
 			addBoxModelCircleFixture(0.3);
+			
+
+			
+			
+		}
+		
+		override protected function createGuns() {
+			orientation = Math.PI / 2;
+			gun1 = addGun(new Gun(world),new b2Vec2(0.5, 0));	
+			gun1.bulletsCollideWith = 'enemy';
+			
+			gun2 = addGun(new Gun(world),new b2Vec2(0.5, 0.5));	
+			gun2.bulletsCollideWith = 'enemy';
+			
+			gun3 = addGun(new Gun(world),new b2Vec2(0.5, -0.5));	
+			gun3.bulletsCollideWith = 'enemy';
 			
 		}
 		

@@ -10,27 +10,30 @@ package beta.components {
 		protected var guns = [];
 		public function Gunship(world) {
 			super(world);
-			addBoxModelCircleFixture(0.3);
-	
+			createShipFixtures();
+			createGuns();
+			//addGun(getBasicGun
 		
 		}
 		
-		public function addGun(position, orientationOffset:Number = 0 ) {
-			
+		protected function createShipFixtures() {
+			addBoxModelCircleFixture(0.3);
+		}
+		
+		protected function createGuns() {
+			//var gun = addGun(new Gun(world));
+		}
+		
+		public function addGun(gun:Gun, position = null, orientationOffset:Number = 0 ) {
+			if (!position) {
+				position = new b2Vec2(0, 0);
+			}
 			var fixture:b2Fixture = addBoxModelCircleFixture(0.1,position);
-			var gun:Gun = new Gun(fixture);
+			gun.setFixture(fixture);
 			guns.push(gun);
 			gun.orientation = orientation + orientationOffset;
 			gun.addEventListener(SpawnedChildEvent.SPAWNED, onGunshot);
 			return gun;
-		}
-		
-		private function onGunshot(e) {
-			metaSpawnedChild(e.child);			
-		}
-		
-		protected function getGun() {
-			
 		}
 		
 		protected function gunsStartFiring() {
@@ -60,6 +63,10 @@ package beta.components {
 				gunsStopFiring();
 			}
 			
+		}
+		
+		private function onGunshot(e) {
+			metaSpawnedChild(e.child);			
 		}
 	}
 }

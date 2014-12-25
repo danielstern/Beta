@@ -15,6 +15,11 @@ package beta.components {
 			
 			
 		}
+		
+			
+		protected function createFixtures() {
+			addBoxModelCircleFixture(0.3);
+		}
 	}
 }
 
