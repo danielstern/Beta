@@ -53,7 +53,7 @@ package beta.components {
 				return;
 			}
 
-			if (controlsAction1) {
+			if (controlsAction1 && controlledViaOverride) {
 				gunsStartFiring();
 			} else {
 				gunsStopFiring();

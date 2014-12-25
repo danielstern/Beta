@@ -19,7 +19,7 @@ package beta.units {
 		override protected function tick() {
 			super.tick();
 			
-			if (cycle % directionChangeFrequency === 0) {
+			if (cycle % directionChangeFrequency === 0 && movesRandomly) {
 				if (randomDirection === MOVING_UP || randomDirection === MOVING_DOWN) {
 					randomDirection = MOVING_LEFT;
 				} else {

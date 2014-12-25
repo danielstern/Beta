@@ -91,11 +91,11 @@ package beta.games {
 			function getRandomEnemy() {
 				var enemies = [
 					Asteroid,
-					EnemyBasicThrusterShip,
-					EnemyCurvyThrusterShip, 
+					//EnemyBasicThrusterShip,
+					//EnemyCurvyThrusterShip, 
 					Mine,
-					EnemyRandomThrusterShip
-					//new EnemyBasicAttackingShip(),
+					//EnemyRandomThrusterShip
+					EnemyBasicShootingShip
 					//new EnemyForkedAttackingShip(), 
 					//new BasicGunCountPowerup(),
 					//new BasicHealthPowerup()
