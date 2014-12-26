@@ -2,7 +2,6 @@ package beta.units.enemies {
 	
 	public class Asteroid extends Enemy
 	{
-		public static var NAME = "asteroid";
 		public function Asteroid(world) {
 			super(world);
 			
@@ -13,8 +12,6 @@ package beta.units.enemies {
 
 			doesExplode = true;
 			explosionParticleCount = 6;
-			
-			name = NAME;
 		}
 	}
 }

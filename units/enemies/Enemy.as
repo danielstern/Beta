@@ -4,7 +4,6 @@ package beta.units.enemies {
 	
 	public class Enemy extends Gunship
 	{
-		public static var NAME = "enemy";
 		public function Enemy(world) {
 			
 			super(world);
@@ -26,7 +25,6 @@ package beta.units.enemies {
 			doesExplode = true;
 			explosionParticleCount = 4;
 			
-			name = NAME;
 			
 		}
 	}

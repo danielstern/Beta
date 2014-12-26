@@ -7,7 +7,6 @@ package beta.powerups {
 	
 	public class Powerup extends ThornedObject
 	{
-		public static var NAME = "powerup";
 		public static var FULFILL = 'fulfill';
 		public function Powerup(world) {
 			
@@ -29,7 +28,6 @@ package beta.powerups {
 			metaShowsDamage = false;
 			thorned = false;
 			
-			name = NAME;	
 		}
 		
 		protected function getUpgrade():Upgrade {

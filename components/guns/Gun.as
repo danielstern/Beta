@@ -1,24 +1,22 @@
 package beta.components.guns {
+	import beta.components.bullets.*;
+	import beta.core.*;
+	import beta.core.BoxModelObject;
 	import Box2D.Collision.b2AABB;
-	import Box2D.Common.Math.b2Transform;
 	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Fixture;
 	import flash.display.*;
-	import flash.events.Event;
-	import flash.geom.Point;
-	import beta.core.*;
-	import beta.core.BoxModelObject;
 	
-	import beta.components.bullets.*;
 	
 	public class Gun extends BoxModelObject
 	{
+		public static var SHOOT:String = "shoot";
+		
 		public var cooldownTime = 200;
 		protected var timeUntilCanShoot:Number = 0;
 		protected var canShoot:Boolean = true;
 		protected var firing:Boolean = false;
-		public static var SHOOT:String = "shoot";
-		public static var NAME:String = "gun";
+
 		public var bulletsCollideWith = -1;
 		
 		var fixture:b2Fixture;
@@ -26,7 +24,6 @@ package beta.components.guns {
 		public function Gun(world) {
 			super(world);
 			activate();
-			name = NAME;
 		}
 		
 		public function setFixture(_fixture:b2Fixture) {

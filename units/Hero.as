@@ -6,7 +6,6 @@ package beta.units {
 	
 	public class Hero extends Gunship
 	{
-		public static var NAME = "hero";
 		public function Hero(world) {
 			super(world);
 			
@@ -15,7 +14,6 @@ package beta.units {
 	
 			constrainToScreenY = true;			
 			constrainToScreenX = true;			
-			name = NAME;
 		
 		}
 	}

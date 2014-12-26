@@ -9,20 +9,14 @@ package beta.core {
 	public class MetaObject extends ActivatableObject
 	{
 		protected var metaShowsDamage:Boolean = true;
-		public var name = 'meta-object';
+		
 		public function MetaObject() {
 			super();
 		}
 		
 		public function meta(type) {
-			var origin = name + ":" + type;
-			//var mainEvent:Event = new Event(origin, true);
-			var mainEvent:Event = new Event(type, true);
-			//var audioEvent:MetaEvent = new MetaEvent("audio", true);
-			//audioEvent.origin = origin;
-			//trace("Meta event...", origin);
-			dispatchEvent(mainEvent);			
-			//dispatchEvent(audioEvent);			
+			var mainEvent:MetaEvent = new MetaEvent(type, true);
+			dispatchEvent(mainEvent);						
 		}
 		
 		public function metaSpawnedChild(child:ThornedObject) {
@@ -32,23 +26,15 @@ package beta.core {
 		}
 		
 		public function metaTookDamage(damage) {
-			//if (metaShowsDamage) {
-				//var damageEvent:DamageEvent = new DamageEvent('damage');
-				//damageEvent.damageDealt = damage;
-				//damageEvent.damageX = x;
-				//damageEvent.damageY = y;
-				//damageEvent.origin = this;
-				////dispatchEvent(damageEvent);
-			//}
+			var damageEvent:DamageEvent = new DamageEvent('damage');
+			damageEvent.damageDealt = damage;
+			dispatchEvent(damageEvent);
 		}
 		
 		public function metaRecoveredHealth(recoveryAmount) {
-			//if (metaShowsDamage) {
-				//var healEvent:HealingEvent = new HealingEvent('heal');
-				//healEvent.recoveryAmount = recoveryAmount;
-				//healEvent.origin = this;
-				////dispatchEvent(healEvent);
-			//}
+			var healEvent:HealingEvent = new HealingEvent('heal');
+			healEvent.recoveryAmount = recoveryAmount;
+			healEvent.origin = this;			
 		}
 	}
 }

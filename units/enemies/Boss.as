@@ -9,8 +9,6 @@ package beta.units.enemies {
 	 */
 	public class Boss extends EnemyBasicShootingShip 
 	{
-		public static var NAME = "boss";
-		
 		public function Boss(world) 
 		{
 			super(world);
@@ -20,10 +18,7 @@ package beta.units.enemies {
 			var gun1:Gun = addGun(new SmartGun(world), new b2Vec2( -4, 0));
 			gun1.bulletsCollideWith = 'friend';
 			var gun2:Gun = addGun(new BigGun(world), new b2Vec2( -3.5, -2));
-			gun2.bulletsCollideWith = 'friend';
-			
-			name = NAME;
-			
+			gun2.bulletsCollideWith = 'friend';	
 		}
 		
 		override protected function createShipFixtures() {

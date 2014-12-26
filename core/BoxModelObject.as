@@ -7,20 +7,29 @@ package beta.core {
 	{	
 		public var boxModelBody:b2Body;
 		public var world:b2World;
-		public var orientation = 0;
+		//public var orientation = 0;
 
 
-		public function BoxModelObject(_world) {
+		public function BoxModelObject(_world:b2World,fixture:b2Fixture = null) {
 			world = _world;
 					
-			var bodyDef:b2BodyDef = new b2BodyDef();
-			bodyDef.type = b2Body.b2_dynamicBody;
-			var body:b2Body = world.CreateBody(bodyDef);
-
+			
+			var body = createBoxModelBody();
 			boxModelBody = body;
 			body.SetUserData( { entity:this } );
 			
 			super();	
+		}
+		
+		protected function createBoxModelBody():b2Body {
+			var bodyDef:b2BodyDef = new b2BodyDef();
+			bodyDef.type = b2Body.b2_dynamicBody;
+			var body:b2Body = world.CreateBody(bodyDef);
+			return body;
+		}
+		
+		public function setBoxModelRotation() {
+			
 		}
 		
 		public function addBoxModelCircleFixture(radius, offset = null) {
@@ -34,13 +43,10 @@ package beta.core {
 			
 			
 			
-			fixtureDef.filter.categoryBits = 0;
+			//fixtureDef.filter.categoryBits = 0;
 
 			var fixture:b2Fixture = boxModelBody.CreateFixture(fixtureDef);			
-
-			
-			//fixture.SetSensor(true);
-			
+			fixture.SetSensor(true);
 			
 			return fixture;
 		}
