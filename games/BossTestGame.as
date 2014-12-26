@@ -11,12 +11,15 @@ package beta.games {
 		public function BossTestGame(gameContainer:MovieClip,stage:Stage) 
 		{
 			super(gameContainer, stage);			
-			var boss = spawnBoss();	
-		
 			
 		}
 		
-		public function  spawnBoss(e = null) {
+		override public function start() {
+			super.start();
+			var boss = spawnBoss();	
+		}
+		
+		public function spawnBoss(e = null) {
 			var boss:Boss = getBoss();
 			boss.setBoxModelPosition(new b2Vec2(20, 4));
 			boss.activate();

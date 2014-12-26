@@ -28,39 +28,63 @@ package beta.games {
 		protected var gameHeight;
 		protected var gameWidth;
 		public var cycle = 0;
-		
+		private var active = false;
+		private var timer;
+		public var hero:Hero;
+		protected var container; 
+		public var lastTime;
 	
 		public function BasicTestGame(gameContainer:MovieClip,stage:Stage) 
 		{
+			container = gameContainer;
 			keyboard = new EasyKeyboard(stage);
 			gameHeight = gameContainer.containerHeight;
-			gameWidth = gameContainer.containerWidth;		
+			gameWidth = gameContainer.containerWidth;					
 			
+		}
+		
+		private function onInterval() {
+			if (active) {
+				tick();
+			}
+		}
+		
+		public function start() {
+			active = true;
+			
+			lastTime = getTimer();
+			
+
 			world = new b2World(new b2Vec2(0, 0), false); 
 			var debug:b2DebugDraw = new b2DebugDraw();
-			debug.SetSprite(gameContainer);
+			debug.SetSprite(container);
 			debug.SetDrawScale(boxScale);
 			debug.SetAlpha(1);
 			debug.SetFillAlpha(1);
 			debug.SetLineThickness(1);
-			debug.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit | b2DebugDraw.e_aabbBit | b2DebugDraw.e_pairBit | b2DebugDraw.e_centerOfMassBit);
+			//debug.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit | b2DebugDraw.e_aabbBit | b2DebugDraw.e_pairBit | b2DebugDraw.e_centerOfMassBit);
+			debug.SetFlags(b2DebugDraw.e_shapeBit);
 
 			world.SetDebugDraw(debug);
-			setInterval(tick,1);
-				
-			var hero:Hero = spawnHero();
+			timer = setInterval(onInterval, 1);
 			
-			gameContainer.addEventListener(Hero.NAME + ":" + DestructibleObject.DESTROYED, handleHeroDie);
-			
-			
-
+			hero = spawnHero();
 			
 		}
 		
+		public function stop() {
+			active = false;
+		}
+		
 		public function tick() {
+			var currentTime = getTimer();
+			var dt = (currentTime - lastTime) / 2;
 			cycle++;
-			world.Step(1,1,1);
+			//world.Step(dt,dt,dt);
+			//world.Step(dt,1,1);
+			world.Step(1,2,2);
 			world.DrawDebugData();
+			lastTime = currentTime;
 			
 		}
 		

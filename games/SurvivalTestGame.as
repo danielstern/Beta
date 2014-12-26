@@ -24,19 +24,12 @@ package beta.games {
 		public function SurvivalTestGame(gameContainer:MovieClip,stage:Stage) 
 		{
 			super(gameContainer, stage);			
-			//spawnHero();
-			setInterval(spawnEnemy, 1000);	
-				
-			function handleHeroDie(e) {
-				spawnHero();
-			}
-
 			
 		}
 		
 		override public function tick() {
 			super.tick();
-			if (cycle % 1000 === 0) {
+			if (cycle % 500 === 0) {
 				spawnEnemy();
 			}
 			
