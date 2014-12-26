@@ -15,6 +15,10 @@ package beta.core {
 			killed = true;	
 		}
 		
+		public function destroy() {
+			kill();
+		}
+		
 		
 	}
 }

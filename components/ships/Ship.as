@@ -6,14 +6,9 @@ package beta.components.ships {
 	public class Ship extends AutoControlMappingObject
 	{
 		public function Ship(world) {
-		
 			super(world);
-			
-			enableCollisions();
 			doesExplode = true;
-			explosionParticleCount = 4;
-			
-			
+			explosionParticleCount = 4;			
 		}
 		
 			

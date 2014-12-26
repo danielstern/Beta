@@ -31,9 +31,16 @@ package beta.core {
 			if (offset) {
 				circleShape.SetLocalPosition(offset);
 			}
+			
+			
+			
+			fixtureDef.filter.categoryBits = 0;
 
-			var fixture:b2Fixture = boxModelBody.CreateFixture(fixtureDef);
-			fixture.SetSensor(true);
+			var fixture:b2Fixture = boxModelBody.CreateFixture(fixtureDef);			
+
+			
+			//fixture.SetSensor(true);
+			
 			
 			return fixture;
 		}

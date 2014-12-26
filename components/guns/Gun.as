@@ -24,7 +24,6 @@ package beta.components.guns {
 		var fixture:b2Fixture;
 		
 		public function Gun(world) {
-			//fixture = _fixture;
 			super(world);
 			activate();
 			name = NAME;
@@ -66,7 +65,6 @@ package beta.components.guns {
 		
 		protected function getGunPosition() {
 		
-			
 			var aabb:b2AABB = new b2AABB();
 			fixture.GetShape().ComputeAABB(aabb, fixture.GetBody().GetTransform());
 			return aabb.GetCenter();
@@ -79,10 +77,7 @@ package beta.components.guns {
 		
 		override protected function tick() {
 			super.tick();	
-			if (!fixture || !fixture.GetBody()) {
-				// ship's been destroyed
-				kill();
-			}
+			
 			if (timeUntilCanShoot <= 0) {
 				canShoot = true;	
 			} else {

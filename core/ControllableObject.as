@@ -4,11 +4,11 @@ package beta.core {
 	
 	public class ControllableObject extends UpgradableObject
 	{
-		protected var controlsGoingRight = false;
-		protected var controlsGoingLeft = false;
-		protected var controlsGoingUp = false;
-		protected var controlsGoingDown = false;
-		protected var controlsAction1 = false;
+		protected var controlsGoingRight:Boolean = false;
+		protected var controlsGoingLeft:Boolean = false;
+		protected var controlsGoingUp:Boolean = false;
+		protected var controlsGoingDown:Boolean = false;
+		protected var controlsAction1:Boolean = false;
 		
 		public function ControllableObject(world) {
 			super(world);

@@ -1,12 +1,13 @@
 package beta.core {
+	import Box2D.Dynamics.b2World;
 	import flash.display.*;
 	import flash.events.Event;
 	import beta.core.*;
 	
 	public class AutoControlMappingObject extends ControllableObject
 	{
-		public var controlledViaOverride = false;
-		public function AutoControlMappingObject(world) {
+		public var controlledViaOverride:Boolean = false;
+		public function AutoControlMappingObject(world:b2World) {
 			
 			super(world);
 			

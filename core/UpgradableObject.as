@@ -3,18 +3,18 @@ package beta.core {
 	
 	public class UpgradableObject extends ThornedObject
 	{
-		protected var upgradeGunCountLevel:Number = 0;
-		
-		protected var upgrades = [];
 		public static var UPGRADED = 'upgrade';
 		public var upgradable = false; 
+		
+		protected var upgradeGunCountLevel:Number = 0;
+		protected var upgrades = [];
+		
 		public function UpgradableObject(world) {
 			super(world);
 		}
 		
 		public function upgrade(scheme:Upgrade) {
 			if (upgradable) {			
-				//trace("Power up!", scheme);
 				upgrades.push(scheme);
 				if (scheme.health) {
 					restoreHealth(health);

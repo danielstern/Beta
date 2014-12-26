@@ -6,26 +6,30 @@ package beta.components.ships {
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
 	import beta.components.guns.*;
+	import Box2D.Dynamics.b2World;
 	public class Gunship extends Ship
 	{
-		protected var guns = [];
-		public function Gunship(world) {
+		protected var guns:Array = new Array();
+		public function Gunship(world:b2World) {
 			super(world);
 			createShipFixtures();
 			createGuns();
-			//addGun(getBasicGun
-		
 		}
 		
 		protected function createShipFixtures() {
 			addBoxModelCircleFixture(0.3);
 		}
 		
+		
 		protected function createGuns() {
-			//var gun = addGun(new Gun(world));
+			addGun(getGun());
 		}
 		
-		public function addGun(gun:Gun, position = null, orientationOffset:Number = 0 ) {
+		protected function getGun():Gun {
+			return new Gun(world);
+		}
+		
+		public function addGun(gun:Gun, position:b2Vec2 = null, orientationOffset:Number = 0 ) {
 			if (!position) {
 				position = new b2Vec2(0, 0);
 			}
@@ -43,20 +47,22 @@ package beta.components.ships {
 			});
 		}
 		
+		override protected function kill() {
+			gunsStopFiring();
+			guns.forEach(function(gun) {
+				gun.destroy();
+			});
+			super.kill();
+		}
+		
 		protected function gunsStopFiring() {
-			
 			guns.forEach(function(gun) {
 				gun.stopFiring();
-			});
+			},null);
 		}
 		
 		override protected function tick() {
 			super.tick();	
-			
-			if (killed) {
-				gunsStopFiring();
-				return;
-			}
 
 			if (controlsAction1 && controlledViaOverride) {
 				gunsStartFiring();
