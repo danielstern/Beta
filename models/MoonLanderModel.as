@@ -34,6 +34,7 @@ package beta.models
 	{
 		private var _world:b2World;
 		public var chassis:b2Body;
+		public var joints = [];
 		
 		public function MoonLanderModel(world) 
 		{
@@ -56,6 +57,7 @@ package beta.models
 			podFuelJointDef.localAnchorA = new b2Vec2(0, 3);
 			podFuelJointDef.localAnchorB = new b2Vec2(0, -2);
 			var podFuelJoint = _world.CreateJoint(podFuelJointDef);
+			joints.push(podFuelJoint);
 			
 			attachLegToChassis(fuelCompartment);
 			attachLegToChassis(fuelCompartment, true);
@@ -113,6 +115,8 @@ package beta.models
 			radarPodJointDef.localAnchorA = new b2Vec2(0, -1);
 			var radarPodJoint = _world.CreateJoint(radarPodJointDef);
 			
+			joints.push(radarPodJoint);
+			
 			antennaJointDef.Initialize(podBody, antenna, new b2Vec2(0,0), new b2Vec2(0.7,0.7));
 			antennaJointDef.collideConnected = false;
 			antennaJointDef.enableLimit = true;
@@ -124,6 +128,8 @@ package beta.models
 			antennaJointDef.localAnchorA = new b2Vec2(0, -1);
 			var antennaJoint = _world.CreateJoint(antennaJointDef);
 			
+				joints.push(antennaJoint);
+			
 			sBandJointDef.Initialize(podBody, sBand, new b2Vec2(0,0), new b2Vec2(0.7,0));
 			sBandJointDef.collideConnected = false;
 			sBandJointDef.enableLimit = true;
@@ -134,6 +140,8 @@ package beta.models
 			sBandJointDef.enableMotor = true;;
 			sBandJointDef.localAnchorA = new b2Vec2(0, -1);
 			var sBandJoint = _world.CreateJoint(sBandJointDef);
+			
+				joints.push(sBandJoint);
 			//radarPodJoint.SetLimits(1, 1);
 			
 			return podBody;
@@ -160,6 +168,8 @@ package beta.models
 			shoulderJointDef.upperAngle = -Math.PI / 4 * mirror;
 			shoulderJointDef.lowerAngle = -Math.PI / 4 * mirror;
 			var shoulderJoint = _world.CreateJoint(shoulderJointDef);
+			
+				joints.push(shoulderJoint);
 			
 			var fuelCompartmentLeftLowerWingJointDef:b2RevoluteJointDef = new b2RevoluteJointDef();
 			fuelCompartmentLeftLowerWingJointDef.Initialize(fuelCompartment, leftInnerWing, new b2Vec2(0, 0));
@@ -224,6 +234,13 @@ package beta.models
 			leftTibiaFootJointDef.localAnchorB = new b2Vec2(0, 0);
 			var leftTibiaFootJoint = _world.CreateJoint(leftTibiaFootJointDef);
 			
+			joints.push(leftTibiaFootJoint);
+			joints.push(leftLowerWingKneeJoint);
+			joints.push(leftTibiaOuterWingJoint);
+			joints.push(leftInnerWingOuterWingJoint);
+			joints.push(leftElbowJoint);
+			joints.push(fuelCompartmentLeftLowerWingJoint);
+			joints.push(shoulderJoint);			
 			
 		
 			
