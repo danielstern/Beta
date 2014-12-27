@@ -8,10 +8,8 @@ package beta.displays {
 	import flash.utils.setInterval;
 	
 	public class DebugDisplay extends MovieClip
-	{
-		public var scale = 30;
-		
-		public function DebugDisplay(world:b2World) 
+	{	
+		public function DebugDisplay(world:b2World,scale = 30) 
 		{
 			
 			var debug:b2DebugDraw = new b2DebugDraw();

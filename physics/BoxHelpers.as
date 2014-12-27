@@ -4,6 +4,8 @@ package beta.physics
 	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Body;
 	import Box2D.Dynamics.b2Fixture;
+	import Box2D.Collision.b2AABB;
+	
 	/**
 	 * ...
 	 * @author daniel
@@ -16,8 +18,10 @@ package beta.physics
 			
 		}
 		
-		public static function 	getFixturesThatFixtureCanSee(fixture,range, precision = 100) {
+		public static function 	getFixturesThatFixtureCanSee(fixture:b2Fixture,range, precision = 100) {
 			var fixtures = [];
+			var body:b2Body = fixture.GetBody();
+			var world = body.GetWorld();
 			var position = getFixturePosition(fixture);
 			var rayLength = range;
 			var precision = precision;
@@ -29,7 +33,7 @@ package beta.physics
 				var outPointY = Math.cos(progress) * rayLength;
 				var outPointX = Math.sin(progress) * rayLength;
 				var outPoint = new b2Vec2(outPointX, outPointY);
-				var fixture = world.RayCastOne(pos, outPoint); 
+				var fixture = world.RayCastOne(position, outPoint); 
 				
 				if (fixture) {
 					fixtures.push(fixture);
@@ -41,12 +45,12 @@ package beta.physics
 			return fixtures;
 		}
 		
-		public static function getFixturePosition(fixturePosition) {
+		public static function getFixturePosition(fixture:b2Fixture) {
 			var aabb = new b2AABB();
 			var shape = fixture.GetShape();
 			var body = fixture.GetBody();
 			var transform = body.GetTransform()
-			ComputeAABB(aabb, transform);
+			shape.ComputeAABB(aabb, transform);
 			return aabb.GetCenter();
 		}
 		
@@ -59,16 +63,16 @@ package beta.physics
 		}
 		
 		public static function getPointAtAngleDistance(angle, distance) {
-			var x = Math.sin(angle) * distance;
-			var y = Math.cos(angle) * distance;
+			var x = Math.cos(angle) * distance;
+			var y = Math.sin(angle) * distance;
 			return new b2Vec2(x,y);
 		}
 		
-		public static function applyForceTowardsPoint(body:b2Body, force, point:b2Vec2) {
-			var orientation = BoxHelpers.getAngleToFacePoint(boxModelBody.GetPosition(), point);
-			var point = BoxHelpers.getPointAtAngleDistance(orientation, force);
-			boxModelBody.applyForce(point);
-		}
+		//public static function applyForceTowardsPoint(body:b2Body, force, point:b2Vec2) {
+			//var orientation = BoxHelpers.getAngleToFacePoint(body.GetPosition(), point);
+			//var point = BoxHelpers.getPointAtAngleDistance(orientation, force);
+			//body.ApplyForce(point);
+		//}
 	}
 
 }
