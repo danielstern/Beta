@@ -43,7 +43,6 @@ package beta.entity
 				
 				if (_timeSinceStartedThrusting % _timeToIncreaseIntensity === 0) {
 					if (_intensity < _maxIntensity)	{
-						trace("increasing intensity.");
 						_intensity += 1;
 					}
 				}
@@ -56,7 +55,6 @@ package beta.entity
 		}
 		
 		public function getForce():Number {
-			trace("Force?", _currentForce);
 			return _currentForce;
 		}
 		

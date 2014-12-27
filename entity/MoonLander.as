@@ -2,8 +2,11 @@ package beta.entity
 {
 	import beta.core.ControllableObject;
 	import beta.physics.BoxHelpers;
+	import Box2D.Collision.Shapes.b2CircleShape;
 	import Box2D.Dynamics.b2Body;
 	import Box2D.Common.Math.b2Vec2;
+	import Box2D.Dynamics.b2BodyDef;
+	import Box2D.Dynamics.b2FixtureDef;
 	
 	public class MoonLander extends Ship 
 	{
@@ -25,6 +28,8 @@ package beta.entity
 			upThruster = new Thruster(5, 5, 25);
 			leftThruster = new Thruster(2, 5, 25);
 			rightThruster = new Thruster(2, 5, 25);
+			
+
 		}
 		
 		override protected function tick() {
