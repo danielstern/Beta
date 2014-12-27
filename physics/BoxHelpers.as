@@ -67,18 +67,6 @@ package beta.physics
 			var y = Math.sin(angle) * distance;
 			return new b2Vec2(x,y);
 		}
-		
-		public static function sumVectors(vector1:b2Vec2, vector2:b2Vec2) {
-			var newVector = new b2Vec2(0, 0);
-			newVector.x += vector1.x + vector2.x;
-			
-		}
-		
-		//public static function applyForceTowardsPoint(body:b2Body, force, point:b2Vec2) {
-			//var orientation = BoxHelpers.getAngleToFacePoint(body.GetPosition(), point);
-			//var point = BoxHelpers.getPointAtAngleDistance(orientation, force);
-			//body.ApplyForce(point);
-		//}
 	}
 
 }

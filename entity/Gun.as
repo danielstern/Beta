@@ -6,6 +6,7 @@ package beta.entity
 	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Body;
 	import Box2D.Dynamics.b2BodyDef;
+	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
 	import Box2D.Dynamics.b2World;
 	/**
@@ -39,9 +40,18 @@ package beta.entity
 		{
 			if (!_canFire) return;
 			
+			var tempFixtureDef:b2FixtureDef = new b2FixtureDef();
+			var shape:b2CircleShape = new b2CircleShape(0.1);
+			shape.SetLocalPosition(_positionOffset);
+			tempFixtureDef.shape = shape;
+			var tempFixture:b2Fixture = _body.CreateFixture(tempFixtureDef);
+			var bulletPosition:b2Vec2 = BoxHelpers.getFixturePosition(tempFixture);
+			_body.DestroyFixture(tempFixture);	
+			
 			var childBodyDef:b2BodyDef = new b2BodyDef();
-			childBodyDef.position = _body.GetPosition();
+			childBodyDef.position = bulletPosition;
 			childBodyDef.bullet = true;
+			childBodyDef.angle = _body.GetAngle();
 			childBodyDef.type = b2Body.b2_dynamicBody;
 			var childBody:b2Body = _world.CreateBody(childBodyDef);
 			

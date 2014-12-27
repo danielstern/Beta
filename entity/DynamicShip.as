@@ -14,13 +14,12 @@ package beta.entity
 		}
 		
 		override protected function tick() {
-			super.tick();
-			
-			
+			super.tick();		
 			
 			
 			if (controlsUp) {
-				var vec:b2Vec2 = BoxHelpers.getPointAtAngleDistance(_body.GetAngle(), 0.05);
+				var vec:b2Vec2 = BoxHelpers.getPointAtAngleDistance(_body.GetAngle(), 0.1);
+				
 				_body.ApplyForce(vec, _body.GetPosition());
 			}
 		

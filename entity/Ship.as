@@ -16,7 +16,7 @@ package beta.entity {
 		{
 			_body = body;
 			super();
-			gun = new Gun(_body,new b2Vec2(0,1));
+			gun = new Gun(_body,new b2Vec2(3,0));
 		}
 		
 		override protected function tick() {

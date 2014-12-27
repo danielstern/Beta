@@ -32,6 +32,7 @@ package beta.entity
 			} 
 			
 			_body.SetLinearVelocity(vec);
+			_body.SetAngle(0);
 		}
 		
 	}
