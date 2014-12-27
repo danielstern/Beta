@@ -8,7 +8,7 @@ package beta.core {
 		protected var controlsLeft:Boolean = false;
 		protected var controlsUp:Boolean = false;
 		protected var controlsDown:Boolean = false;
-		protected var shooting:Boolean = false;
+		protected var controlsAction1:Boolean = false;
 		
 		
 		
@@ -49,11 +49,11 @@ package beta.core {
 		}
 		
 		public function startAction1() {
-			shooting = true;
+			controlsAction1 = true;
 		}
 		
 		public function stopAction1() {
-			shooting = false;
+			controlsAction1 = false;
 		}
 		
 	}
