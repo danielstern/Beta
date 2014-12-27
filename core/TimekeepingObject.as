@@ -4,13 +4,10 @@ package beta.core {
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
 	
-	public class TimekeepingObject extends KillableObject
-	{
-		protected var entity = this;
-		
+	public class TimekeepingObject
+	{		
 		protected var cycle = 0;
 		protected var timer;
-		private var timers = [];
 
 		public function TimekeepingObject() {
 			super();	
@@ -18,40 +15,16 @@ package beta.core {
 		}
 		
 		protected function onEnterFrame() {
-			if (activated && !killed) {			
-				cycle++;
-				tick();
-			}
+			tick();
 		}
 		
-		public function doAfter(frames, callback, arg = undefined) {
-			timers.push( {
-				framesUntilResolve:frames,
-				callback:callback,
-				arg:arg
-			})			
-		}
-		
+
 		protected function tick() {
-			timers.forEach(function(timer) {
-				timer.framesUntilResolve--;
-				if (timer.framesUntilResolve === 0) {
-					timer.callback();
-				}
-			})
-			
-			for (var i = timers.length; i > 0; i--) {	
-				var timer = timers[i-1]
-				if (timer.framesUntilResolve === 0) {
-					timers.splice(i - 1, 1);
-				}
-			}
-			
+			cycle++;
 		}
 		
-		override protected function kill() {
+		protected function kill() {
 			clearInterval(timer);
-			super.kill();
 		}
 	}
 }

@@ -2,58 +2,63 @@ package beta.core {
 	import flash.display.*;
 	import flash.events.Event;
 	
-	public class ControllableObject extends UpgradableObject
+	public class ControllableObject extends DestructibleObject
 	{
-		protected var controlsGoingRight:Boolean = false;
-		protected var controlsGoingLeft:Boolean = false;
-		protected var controlsGoingUp:Boolean = false;
-		protected var controlsGoingDown:Boolean = false;
-		protected var controlsAction1:Boolean = false;
+		protected var controlsRight:Boolean = false;
+		protected var controlsLeft:Boolean = false;
+		protected var controlsUp:Boolean = false;
+		protected var controlsDown:Boolean = false;
+		protected var shooting:Boolean = false;
 		
-		public function ControllableObject(world) {
-			super(world);
+		
+		
+		public function ControllableObject() {
+			super();
 		}
 		
 		public function startRight() {
-			controlsGoingRight = true;
+			controlsRight = true;
 		}
 		
 		public function stopRight() {
-			controlsGoingRight = false;
+			controlsRight = false;
 		}
 		
 		public function startLeft() {
-			controlsGoingLeft = true;
+			controlsLeft = true;
 		}
 		
 		public function stopLeft() {
-			controlsGoingLeft = false;
+			controlsLeft = false;
 		}
 		
 		public function startUp() {
-			controlsGoingUp = true;
+			controlsUp = true;
 		}
 		
 		public function stopUp() {
-			controlsGoingUp = false;
+			controlsUp = false;
 		}
 		
 		public function startDown() {
-			controlsGoingDown = true;
+			controlsDown = true;
 		}
 		
 		public function stopDown() {
-			controlsGoingDown = false;
+			controlsDown = false;		
 		}
 		
 		public function startAction1() {
-			controlsAction1 = true;
+			shooting = true;
 		}
 		
 		public function stopAction1() {
-			controlsAction1 = false;
+			shooting = false;
 		}
+		
 	}
+	
+	
 }
 
 

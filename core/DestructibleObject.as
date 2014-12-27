@@ -2,7 +2,7 @@ package beta.core {
 	import flash.display.*;
 	import flash.events.Event;
 	
-	public class DestructibleObject extends ThrustableObject
+	public class DestructibleObject extends TimekeepingObject
 	{
 		protected var health = 25;
 		protected var maxHealth = 25;
@@ -10,14 +10,12 @@ package beta.core {
 		public static var RESTORE_HEALTH = "restoreHealth";
 		public static var DESTROYED = "destroyed";
 		
-		public function DestructibleObject(world) {
-			super(world);
+		public function DestructibleObject() {
+			super();
 		}
 		
 		public function takeDamage(damage:Number) {
 			health -= damage;
-			meta(DestructibleObject.TAKE_DAMAGE);
-			metaTookDamage(damage);
 		}
 		
 		public function restoreHealth(restorationAmount:Number) {
@@ -25,14 +23,15 @@ package beta.core {
 			if (health > maxHealth) {
 				health = maxHealth;
 			}
-			meta(DestructibleObject.RESTORE_HEALTH);
-			metaRecoveredHealth(restorationAmount);
+		}
+		
+		public function destroy() {
+			takeDamage(maxHealth);
 		}
 		
 		override protected function tick() {
 			if (health <= 0) {
 				health = 0;
-				meta(DestructibleObject.DESTROYED);
 				kill();				
 			}
 			super.tick();
