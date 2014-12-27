@@ -15,16 +15,16 @@ package beta.entity
 		protected var leftThruster:Thruster;
 		protected var rightThruster:Thruster;
 		
-		protected var defaultAngle = Math.PI / 2;
+		protected var defaultAngle = 0;
 		
-		protected var autoStabilizerStrength = 0.1;
+		protected var autoStabilizerStrength = 3;
 		
 	
 		
 		public function MoonLander(body) 
 		{
 			super(body);
-			_body.SetAngle(defaultAngle);
+			//_body.SetAngle(defaultAngle);
 			upThruster = new Thruster(5, 5, 25);
 			leftThruster = new Thruster(2, 5, 25);
 			rightThruster = new Thruster(2, 5, 25);
