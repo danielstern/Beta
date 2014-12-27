@@ -38,8 +38,8 @@ package beta.entity
 			
 			
 			var bottomThrusterPosition:b2Vec2 = new b2Vec2(0, 2.5);
-			var leftThrusterPosition:b2Vec2 = new b2Vec2( 3.5, -0.5);
-			var rightThrusterPosition:b2Vec2 = new b2Vec2( -3.5, -0.5);
+			var leftThrusterPosition:b2Vec2 = new b2Vec2( -3.5, -0.5);
+			var rightThrusterPosition:b2Vec2 = new b2Vec2( 3.5, -0.5);
 			bottomThrusterPosition.Add(_body.GetPosition());
 			leftThrusterPosition.Add(_body.GetPosition());
 			rightThrusterPosition.Add(_body.GetPosition());
