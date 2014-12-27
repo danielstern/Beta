@@ -11,7 +11,7 @@ package beta.core {
 
 		public function TimekeepingObject() {
 			super();	
-			timer = setInterval(onEnterFrame, 1);
+			timer = setInterval(onEnterFrame, 33);
 		}
 		
 		protected function onEnterFrame() {

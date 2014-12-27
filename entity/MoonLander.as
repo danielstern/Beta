@@ -7,16 +7,26 @@ package beta.entity
 	
 	public class MoonLander extends Ship 
 	{
-		protected var upThrusterForce = 1.5;
-		protected var leftThrusterForce = 0.5;
-		protected var rightThrusterForce = 0.5;
+		protected var upThrusterForcePerIntensity = 5;
+		protected var leftThrusterForcePerIntensity = 0.2;
+		protected var rightThrusterForcePerIntensity = 0.2;
+		
+		protected var upThrusterIntensity = 0;
+		protected var leftThrusterIntensity = 0;
+		protected var rightThrusterIntensity = 0;
+		
+		protected var upThrustStartCycle:Number = -1;
+		protected var leftThrustStartCycle:Number = -1;
+		protected var rightThrustStartCycle:Number = -1;
 		
 		protected var maxIntensityMultiple = 5;
-		protected var timeToIncreaseJetStream = 100;
+		protected var timeToIncreaseIntensity = 15;
 		
 		protected var defaultAngle = Math.PI / 2;
 		
 		protected var autoStabilizerStrength = 0.1;
+		
+	
 		
 		public function MoonLander(body) 
 		{
@@ -25,27 +35,46 @@ package beta.entity
 		}
 		
 		override protected function tick() {
-			//super.tick();		
+			super.tick();		
 			
 			var bottomThrusterPosition:b2Vec2 = new b2Vec2(0, 2.5);
-			var leftThrusterPosition:b2Vec2 = new b2Vec2( -3.5, -0.5);
-			var rightThrusterPosition:b2Vec2 = new b2Vec2(3.5, -0.5);
+			var leftThrusterPosition:b2Vec2 = new b2Vec2( 3.5, -0.5);
+			var rightThrusterPosition:b2Vec2 = new b2Vec2( -3.5, -0.5);
+			var zero = 0;
 			bottomThrusterPosition.Add(_body.GetPosition());
 			leftThrusterPosition.Add(_body.GetPosition());
 			rightThrusterPosition.Add(_body.GetPosition());
 			
 			
 			if (controlsUp) {
-				_body.ApplyForce(new b2Vec2(0,-upThrusterForce), bottomThrusterPosition);
+				if (upThrustStartCycle === -1) {
+					upThrustStartCycle = cycle;
+				}
+				var timeSinceStartedThrustingUp = cycle - upThrustStartCycle;
+				
+				if (timeSinceStartedThrustingUp % timeToIncreaseIntensity === 0) {
+					if (upThrusterIntensity < maxIntensityMultiple)	{
+						upThrusterIntensity += 1;
+					}
+				}
+				var totalUpForce:Number = upThrusterForcePerIntensity * upThrusterIntensity;
+				trace("total up force?", totalUpForce);
+				_body.ApplyForce(new b2Vec2(zero,-totalUpForce), bottomThrusterPosition);
+			} else {
+				upThrusterIntensity = 0;
+				upThrustStartCycle = -1;
 			}
 		
 			if (controlsLeft) {
-				_body.ApplyForce(new b2Vec2(-leftThrusterForce,0), rightThrusterPosition);
+				_body.ApplyForce(new b2Vec2(-leftThrusterForcePerIntensity * leftThrusterIntensity,zero), leftThrusterPosition);
 			} 
 			
 			if (controlsRight) {
-				_body.ApplyForce(new b2Vec2(rightThrusterForce,0), rightThrusterPosition);
+				_body.ApplyForce(new b2Vec2(rightThrusterForcePerIntensity * rightThrusterIntensity,zero), rightThrusterPosition);
 			} 
+			
+			
+			
 			
 			var currentAngle = _body.GetAngle();
 			if (currentAngle > defaultAngle) {
@@ -53,8 +82,6 @@ package beta.entity
 			} else {
 				_body.ApplyTorque( autoStabilizerStrength);
 			}
-			
-			//_body.SetAngle( -Math.PI / 2);
 			
 		}
 		
