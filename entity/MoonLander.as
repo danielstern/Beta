@@ -17,7 +17,7 @@ package beta.entity
 		
 		protected var defaultAngle = 0;
 		
-		protected var autoStabilizerStrength = 3;
+		protected var autoStabilizerStrength = 0.3;
 		
 	
 		
