@@ -19,16 +19,18 @@ package beta.entity
 		
 		//protected var autoStabilizerStrength = 0;
 		protected var autoStabilizerStrength = 2.5;
+		//private var _body:b2Body;
 		
 	
 		
 		public function MoonLander(body) 
 		{
 			super(body);
+			//_body = body;
 			//_body.SetAngle(defaultAngle);
-			upThruster = new Thruster(5, 5, 25);
-			leftThruster = new Thruster(2, 5, 25);
-			rightThruster = new Thruster(2, 5, 25);
+			upThruster = new Thruster(1, 10, 1000);
+			leftThruster = new Thruster(0.2, 5, 100);
+			rightThruster = new Thruster(0.2, 5, 100);
 			
 
 		}
@@ -70,13 +72,18 @@ package beta.entity
 			}			
 			
 			var currentAngle = _body.GetAngle();
-			if (currentAngle > defaultAngle) {
-				_body.ApplyTorque( -autoStabilizerStrength);
-			} else {
-				_body.ApplyTorque( autoStabilizerStrength);
-			}
+			//if (currentAngle > defaultAngle) {
+				//_body.ApplyTorque( -autoStabilizerStrength);
+			//} else {
+				//_body.ApplyTorque( autoStabilizerStrength);
+			//}
+			_body.SetAngle(defaultAngle);
 			
 		}
+		
+		//override public function destroy() {
+			////super.destroy();			
+		//}
 		
 	}
 

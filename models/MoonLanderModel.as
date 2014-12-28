@@ -36,6 +36,7 @@ package beta.models
 		public var chassis:b2Body;
 		public var joints = [];
 		public var bodies = [];
+		private var destroyed = false;
 		private var _position:b2Vec2;
 		
 		public function MoonLanderModel(world,position) 
@@ -81,6 +82,7 @@ package beta.models
 		public function createLightSteelRodComponent(length ) {
 			var bodyDef:b2BodyDef = new b2BodyDef();
 			bodyDef.type = b2Body.b2_dynamicBody;
+			//bodyDef.
 			bodyDef.linearDamping = 0;
 			var body:b2Body = _world.CreateBody(bodyDef);
 			var bodyFixture = getLightSteelRodFixtureDefinition(length);
@@ -164,7 +166,7 @@ package beta.models
 			//bodies.push(sBand);
 			//bodies.push(antenna);
 			//bodies.push(radar);
-			//
+			
 		}
 		
 		public function bindAtFixedRotation(bodyA, bodyB, localAnchorA, localAnchorB, rotationLower = 0,rotationUpper = 0) {
@@ -178,12 +180,34 @@ package beta.models
 			revoluteJointDef.upperAngle = rotationLower;
 			revoluteJointDef.lowerAngle = rotationUpper;
 			var revoluteJoint = _world.CreateJoint(revoluteJointDef);
+			joints.push(revoluteJoint);
 			
 			return revoluteJoint;
 		}
 		
 		public function getZeroVector() {
 			return new b2Vec2(0, 0);
+		}
+		
+		public function plusOrMinusRandom(number) {
+			return Math.random() * number * 2 - number;
+		}
+		
+		public function explode() {
+			if (destroyed) return;
+			var debrisCount = 35;
+			var debrisForce = 0.01;
+			for (var i = 0; i < debrisCount; i++) {
+				var debris:b2Body = createLightSteelCircularComponent(Math.random()*0.2+0.05);
+				var explosionCenter = chassis.GetPosition();
+				debris.SetPosition(new b2Vec2(explosionCenter.x + plusOrMinusRandom(2), explosionCenter.y - 3 + plusOrMinusRandom(2)));; 
+				debris.ApplyForce(new b2Vec2(plusOrMinusRandom(debrisForce), plusOrMinusRandom(debrisForce)), debris.GetWorldCenter());
+				
+			};
+			joints.forEach(function(_joint,index) {
+				_world.DestroyJoint(_joint);
+			});
+			destroyed = true;
 		}
 			
 		public function attachLegToChassis(fuelCompartment:b2Body, _mirror = false) {
