@@ -36,7 +36,8 @@ package beta.displays {
 			debug.SetAlpha(1);
 			debug.SetFillAlpha(1);
 			debug.SetLineThickness(1);
-			debug.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit | b2DebugDraw.e_aabbBit | b2DebugDraw.e_pairBit | b2DebugDraw.e_centerOfMassBit);
+			//debug.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit | b2DebugDraw.e_aabbBit | b2DebugDraw.e_pairBit | b2DebugDraw.e_centerOfMassBit);
+			debug.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 			world.SetDebugDraw(debug);
 			
 			setInterval(world.DrawDebugData, 1);
@@ -73,6 +74,8 @@ package beta.displays {
 				//projector.x = _screenHeight / 2;
 				//projector.y = _screenWidth / 2;
 			}
+			
+			
 		}
 		
 		public function WASDControl(stage, controllableObject) {
