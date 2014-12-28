@@ -40,9 +40,7 @@ package beta.models
 		{
 			_world = world;
 			
-			//var pod:b2Body = getPod();
 			var fuelCompartment:b2Body = getFuelCompartment();
-
 			
 			attachPodToChassis(fuelCompartment);			
 			attachLegToChassis(fuelCompartment);
@@ -133,13 +131,10 @@ package beta.models
 			podBody.SetPosition(new b2Vec2(0, -5));
 			
 			var podFuelJointDef:b2PrismaticJointDef = new b2PrismaticJointDef();
-			podFuelJointDef.Initialize(podBody, fuelCompartment, new b2Vec2(0,0), new b2Vec2(0,0.2));
+			podFuelJointDef.Initialize(podBody, fuelCompartment, new b2Vec2(0,0), new b2Vec2(0,1));
 			podFuelJointDef.enableLimit = true;
-			podFuelJointDef.lowerTranslation = 3;
-			podFuelJointDef.upperTranslation = 3;
-			podFuelJointDef.maxMotorForce = 1;
-			podFuelJointDef.motorSpeed = 1;
-			podFuelJointDef.enableMotor = true;
+			podFuelJointDef.lowerTranslation = 0;
+			podFuelJointDef.upperTranslation = 0.3;
 			podFuelJointDef.localAnchorA = new b2Vec2(0, 3);
 			podFuelJointDef.localAnchorB = new b2Vec2(0, -2);
 			var podFuelJoint = _world.CreateJoint(podFuelJointDef);
@@ -153,6 +148,8 @@ package beta.models
 			revoluteJointDef.localAnchorA = localAnchorA;
 			revoluteJointDef.localAnchorB = localAnchorB;
 			revoluteJointDef.enableLimit = true;
+			//revoluteJointDef.enableMotor = true;
+			//revoluteJointDef.motorSpeed = 5
 			revoluteJointDef.upperAngle = rotationLower;
 			revoluteJointDef.lowerAngle = rotationUpper;
 			var revoluteJoint = _world.CreateJoint(revoluteJointDef);
@@ -180,17 +177,18 @@ package beta.models
 			var wingLength = 1.5;
 			
 			
-			
-			
 			var femur:b2Body = createLightSteelRodComponent(femurLength);		
 			var wing:b2Body = createLightSteelRodComponent(wingLength);
 			var tibia:b2Body = createLightSteelRodComponent(tibiaLength);
-			var foot:b2Body = getLandingPad();
-						
+			var foot:b2Body = getLandingPad();						
+			
+			tibia.SetAngle(NINETY_DEGREES);
+			tibia.SetPosition(new b2Vec2(( -chassisWidth - femurLength) * mirror, ZERO));
+			//wing.SetAngle(FORTY_FIVE_DEGREES);
 		
 			var shoulderJoint = bindAtFixedRotation(fuelCompartment, femur, new b2Vec2( -chassisWidth * mirror, -chassisHeight), new b2Vec2( femurLength * mirror, ZERO));
 			var bodyWingJoint = bindAtFixedRotation(fuelCompartment, wing, new b2Vec2( -chassisWidth * mirror, chassisHeight), new b2Vec2( wingLength * mirror, ZERO), FORTY_FIVE_DEGREES , FORTY_FIVE_DEGREES );
-			var elbowJoint = bindAtFixedRotation(femur, tibia, new b2Vec2( -femurLength * mirror, ZERO), new b2Vec2(tibiaLength * mirror, ZERO), NINETY_DEGREES, NINETY_DEGREES);
+			var elbowJoint = bindAtFixedRotation(femur, tibia, new b2Vec2( -femurLength * mirror, ZERO), new b2Vec2(tibiaLength * mirror, ZERO), ZERO, ZERO);
 			var ankleJoint = bindAtFixedRotation(tibia, wing, new b2Vec2( -tibiaLength * mirror, ZERO), new b2Vec2( -wingLength * mirror, ZERO), -FORTY_FIVE_DEGREES , -FORTY_FIVE_DEGREES );
 			var heelJoint = bindAtFixedRotation(tibia, foot, new b2Vec2( -tibiaLength * mirror, ZERO), getZeroVector(), NINETY_DEGREES,NINETY_DEGREES);
 		
