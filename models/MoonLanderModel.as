@@ -242,17 +242,7 @@ package beta.models
 			var ankleJoint = bindAtFixedRotation(tibia, wing, new b2Vec2( -tibiaLength * mirror, ZERO), new b2Vec2( -wingLength * mirror, ZERO), -FORTY_FIVE_DEGREES , -FORTY_FIVE_DEGREES );
 			var heelJoint2 = bindAtFixedRotation(tibia, foot, new b2Vec2( -tibiaLength * mirror, ZERO), getZeroVector(), NINETY_DEGREES,NINETY_DEGREES);
 			
-			var heelJointDef:b2PrismaticJointDef = new b2PrismaticJointDef();
-			heelJointDef.Initialize(tibia, foot, new b2Vec2(0,0), new b2Vec2(0,1));
-			heelJointDef.enableLimit = true;
-			heelJointDef.lowerTranslation = 1;
-			heelJointDef.upperTranslation = 2;
-			heelJointDef.localAnchorA = new b2Vec2(-tibiaLength * mirror, ZERO);
-			heelJointDef.localAnchorB = getZeroVector();
-			//heelJointDef.enableMotor = true;
-			//heelJointDef.maxMotorForce = 0.5;
-			//heelJointDef.motorSpeed = 1;
-			//var heelJoint = _world.CreateJoint(heelJointDef);
+			
 		
 			
 		}
