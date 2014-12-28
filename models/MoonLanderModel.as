@@ -35,26 +35,44 @@ package beta.models
 		private var _world:b2World;
 		public var chassis:b2Body;
 		public var joints = [];
+		public var bodies = [];
+		private var _position:b2Vec2;
 		
-		public function MoonLanderModel(world) 
+		public function MoonLanderModel(world,position) 
 		{
+			_position = position;
 			_world = world;
 			
 			var fuelCompartment:b2Body = getFuelCompartment();
+			bodies.push(fuelCompartment);
 			
 			attachPodToChassis(fuelCompartment);			
 			attachLegToChassis(fuelCompartment);
 			attachLegToChassis(fuelCompartment, true);
 			
 			chassis = fuelCompartment;
+			if (position) {
+				move(position);
+			}
+			
+		}
+		
+		public function move(position) {
+			bodies.forEach(function(body) {
+				var currentPosition = body.GetPosition();
+				currentPosition.Add(position);
+				body.SetPosition(currentPosition);
+			})
 		}
 		
 		public function createLightSteelCircularComponent(radius) {
 			var bodyDef:b2BodyDef = new b2BodyDef();
 			bodyDef.type = b2Body.b2_dynamicBody;
+			bodyDef.linearDamping = 0;
 			var body:b2Body = _world.CreateBody(bodyDef);
 			var bodyFixture = getLightSteelCircleFixtureDefinition(radius);
 			body.CreateFixture(bodyFixture);
+			bodies.push(body);
 			
 			return body;
 			
@@ -63,9 +81,11 @@ package beta.models
 		public function createLightSteelRodComponent(length ) {
 			var bodyDef:b2BodyDef = new b2BodyDef();
 			bodyDef.type = b2Body.b2_dynamicBody;
+			bodyDef.linearDamping = 0;
 			var body:b2Body = _world.CreateBody(bodyDef);
 			var bodyFixture = getLightSteelRodFixtureDefinition(length);
 			body.CreateFixture(bodyFixture);
+			bodies.push(body);
 			
 			return body;
 			
@@ -140,6 +160,11 @@ package beta.models
 			var podFuelJoint = _world.CreateJoint(podFuelJointDef);
 			joints.push(podFuelJoint);
 			
+			//bodies.push(podBody);
+			//bodies.push(sBand);
+			//bodies.push(antenna);
+			//bodies.push(radar);
+			//
 		}
 		
 		public function bindAtFixedRotation(bodyA, bodyB, localAnchorA, localAnchorB, rotationLower = 0,rotationUpper = 0) {
@@ -184,13 +209,26 @@ package beta.models
 			
 			tibia.SetAngle(NINETY_DEGREES);
 			tibia.SetPosition(new b2Vec2(( -chassisWidth - femurLength) * mirror, ZERO));
+			foot.SetPosition(new b2Vec2(( -chassisWidth - femurLength) * mirror, tibiaLength));
 			//wing.SetAngle(FORTY_FIVE_DEGREES);
 		
 			var shoulderJoint = bindAtFixedRotation(fuelCompartment, femur, new b2Vec2( -chassisWidth * mirror, -chassisHeight), new b2Vec2( femurLength * mirror, ZERO));
 			var bodyWingJoint = bindAtFixedRotation(fuelCompartment, wing, new b2Vec2( -chassisWidth * mirror, chassisHeight), new b2Vec2( wingLength * mirror, ZERO), FORTY_FIVE_DEGREES , FORTY_FIVE_DEGREES );
 			var elbowJoint = bindAtFixedRotation(femur, tibia, new b2Vec2( -femurLength * mirror, ZERO), new b2Vec2(tibiaLength * mirror, ZERO), ZERO, ZERO);
 			var ankleJoint = bindAtFixedRotation(tibia, wing, new b2Vec2( -tibiaLength * mirror, ZERO), new b2Vec2( -wingLength * mirror, ZERO), -FORTY_FIVE_DEGREES , -FORTY_FIVE_DEGREES );
-			var heelJoint = bindAtFixedRotation(tibia, foot, new b2Vec2( -tibiaLength * mirror, ZERO), getZeroVector(), NINETY_DEGREES,NINETY_DEGREES);
+			var heelJoint2 = bindAtFixedRotation(tibia, foot, new b2Vec2( -tibiaLength * mirror, ZERO), getZeroVector(), NINETY_DEGREES,NINETY_DEGREES);
+			
+			var heelJointDef:b2PrismaticJointDef = new b2PrismaticJointDef();
+			heelJointDef.Initialize(tibia, foot, new b2Vec2(0,0), new b2Vec2(0,1));
+			heelJointDef.enableLimit = true;
+			heelJointDef.lowerTranslation = 1;
+			heelJointDef.upperTranslation = 2;
+			heelJointDef.localAnchorA = new b2Vec2(-tibiaLength * mirror, ZERO);
+			heelJointDef.localAnchorB = getZeroVector();
+			//heelJointDef.enableMotor = true;
+			//heelJointDef.maxMotorForce = 0.5;
+			//heelJointDef.motorSpeed = 1;
+			//var heelJoint = _world.CreateJoint(heelJointDef);
 		
 			
 		}
@@ -202,12 +240,16 @@ package beta.models
 			
 			var fixtureDef:b2FixtureDef = new b2FixtureDef();
 			var polygonShape:b2PolygonShape = new b2PolygonShape();
-			polygonShape.SetAsBox(1.5, 0.5);
+			polygonShape.SetAsBox(1.5, 1);
 			fixtureDef.shape = polygonShape;
 			fixtureDef.restitution = 0.3;
 			fixtureDef.friction 1;
-			fixtureDef.density = 0.3;
+			fixtureDef.filter.categoryBits = 0x0001;
+			fixtureDef.filter.maskBits = 0x0010;
+			fixtureDef.density = 0.1;
 			footBody.CreateFixture(fixtureDef);
+			
+			bodies.push(footBody);
 			
 			return footBody;
 		}
@@ -215,7 +257,7 @@ package beta.models
 		
 		public function getLightSteelCircleFixtureDefinition(radius:Number) {
 			var fixtureDef:b2FixtureDef = new b2FixtureDef();
-			fixtureDef.density = 0.05;
+			fixtureDef.density = 0.1;
 			fixtureDef.restitution = 0.2;
 			fixtureDef.friction = 0.1;
 			fixtureDef.filter.categoryBits = 0x0001;
@@ -227,7 +269,7 @@ package beta.models
 				
 		public function getLightSteelRodFixtureDefinition(length:Number) {
 			var fixtureDef:b2FixtureDef = new b2FixtureDef();
-			fixtureDef.density = 0.05;
+			fixtureDef.density = 0.1;
 			fixtureDef.restitution = 0.2;
 			fixtureDef.friction = 0.1;
 			fixtureDef.filter.categoryBits = 0x0001;
@@ -250,7 +292,7 @@ package beta.models
 			fixtureDef.shape = polygonShape;
 			fixtureDef.restitution = 0.1;
 			fixtureDef.friction 0.2;
-			fixtureDef.density = 0.1;
+			fixtureDef.density = 0.2;
 			body.CreateFixture(fixtureDef);
 			
 			return body;
