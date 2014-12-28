@@ -67,6 +67,13 @@ package beta.physics
 			var y = Math.sin(angle) * distance;
 			return new b2Vec2(x,y);
 		}
+		
+		public static function distanceTwoVectors(vector1, vector2) {
+			var a = vector2.x - vector1.x;
+			var b = vector2.y - vector1.y;
+			var c = Math.sqrt(a * a + b * b);
+			return c;
+		}
 	}
 
 }
