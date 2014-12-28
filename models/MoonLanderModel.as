@@ -40,25 +40,11 @@ package beta.models
 		{
 			_world = world;
 			
-			var pod:b2Body = getPod();
+			//var pod:b2Body = getPod();
 			var fuelCompartment:b2Body = getFuelCompartment();
 
-			pod.SetPosition(new b2Vec2(0, -5));
 			
-			var podFuelJointDef:b2PrismaticJointDef = new b2PrismaticJointDef();
-			podFuelJointDef.Initialize(pod, fuelCompartment, new b2Vec2(0,0), new b2Vec2(0,0.2));
-			podFuelJointDef.enableLimit = true;
-			//podFuelJointDef.
-			podFuelJointDef.lowerTranslation = 3;
-			podFuelJointDef.upperTranslation = 3;
-			podFuelJointDef.maxMotorForce = 1;
-			podFuelJointDef.motorSpeed = 1;
-			podFuelJointDef.enableMotor = true;
-			podFuelJointDef.localAnchorA = new b2Vec2(0, 3);
-			podFuelJointDef.localAnchorB = new b2Vec2(0, -2);
-			var podFuelJoint = _world.CreateJoint(podFuelJointDef);
-			joints.push(podFuelJoint);
-			
+			attachPodToChassis(fuelCompartment);			
 			attachLegToChassis(fuelCompartment);
 			attachLegToChassis(fuelCompartment, true);
 			
@@ -87,7 +73,7 @@ package beta.models
 			
 		}
 		
-		public function getPod() {
+		public function attachPodToChassis(fuelCompartment) {
 			var podBody = createLightSteelCircularComponent(3);
 			podBody.SetPosition(new b2Vec2(0, 0));
 			
@@ -128,7 +114,7 @@ package beta.models
 			antennaJointDef.localAnchorA = new b2Vec2(0, -1);
 			var antennaJoint = _world.CreateJoint(antennaJointDef);
 			
-				joints.push(antennaJoint);
+			joints.push(antennaJoint);
 			
 			sBandJointDef.Initialize(podBody, sBand, new b2Vec2(0,0), new b2Vec2(0.7,0));
 			sBandJointDef.collideConnected = false;
@@ -141,109 +127,91 @@ package beta.models
 			sBandJointDef.localAnchorA = new b2Vec2(0, -1);
 			var sBandJoint = _world.CreateJoint(sBandJointDef);
 			
-				joints.push(sBandJoint);
-			//radarPodJoint.SetLimits(1, 1);
+			joints.push(sBandJoint);
 			
-			return podBody;
+			
+			podBody.SetPosition(new b2Vec2(0, -5));
+			
+			var podFuelJointDef:b2PrismaticJointDef = new b2PrismaticJointDef();
+			podFuelJointDef.Initialize(podBody, fuelCompartment, new b2Vec2(0,0), new b2Vec2(0,0.2));
+			podFuelJointDef.enableLimit = true;
+			podFuelJointDef.lowerTranslation = 3;
+			podFuelJointDef.upperTranslation = 3;
+			podFuelJointDef.maxMotorForce = 1;
+			podFuelJointDef.motorSpeed = 1;
+			podFuelJointDef.enableMotor = true;
+			podFuelJointDef.localAnchorA = new b2Vec2(0, 3);
+			podFuelJointDef.localAnchorB = new b2Vec2(0, -2);
+			var podFuelJoint = _world.CreateJoint(podFuelJointDef);
+			joints.push(podFuelJoint);
+			
 		}
 		
+		public function bindAtFixedRotation(bodyA, bodyB, localAnchorA, localAnchorB, rotationLower = 0,rotationUpper = 0) {
+			var revoluteJointDef:b2RevoluteJointDef = new b2RevoluteJointDef();
+			revoluteJointDef.Initialize(bodyA, bodyB, getZeroVector());
+			revoluteJointDef.localAnchorA = localAnchorA;
+			revoluteJointDef.localAnchorB = localAnchorB;
+			revoluteJointDef.enableLimit = true;
+			revoluteJointDef.upperAngle = rotationLower;
+			revoluteJointDef.lowerAngle = rotationUpper;
+			var revoluteJoint = _world.CreateJoint(revoluteJointDef);
+			
+			return revoluteJoint;
+		}
+		
+		public function getZeroVector() {
+			return new b2Vec2(0, 0);
+		}
 			
 		public function attachLegToChassis(fuelCompartment:b2Body, _mirror = false) {
-			var femurLength = 2;
-			var tibiaLength = 4;
-			var mirror = _mirror ? -1 : 1;
-			var innerWingLength = 2;
-			var outerWingLength = 2;
-			var leftFemur:b2Body = createLightSteelRodComponent(femurLength);		
-			leftFemur.SetPosition(new b2Vec2(-1 * mirror, -1));
-			var leftInnerWing:b2Body = createLightSteelRodComponent(innerWingLength);
-			var leftTibia:b2Body = createLightSteelRodComponent(tibiaLength);
-			var leftOuterWing:b2Body = createLightSteelRodComponent(outerWingLength);
+			var mirror:Number = _mirror ? -1 : 1;
+			var ZERO = 0;
+			var FORTY_FIVE_DEGREES = -Math.PI / 4 * mirror;
+			var SIXTY_SEVEN_DEGREES = -Math.PI / 3 * mirror;
+			var NINETY_DEGREES = -Math.PI / 2 * mirror;
 			
-			var shoulderJointDef:b2RevoluteJointDef = new b2RevoluteJointDef();
-			shoulderJointDef.Initialize(fuelCompartment, leftFemur, new b2Vec2(0, 0));
-			shoulderJointDef.localAnchorA = new b2Vec2( -4*mirror, -2);
-			shoulderJointDef.localAnchorB = new b2Vec2( femurLength * mirror, 0);
-			shoulderJointDef.enableLimit = true;
-			shoulderJointDef.upperAngle = -Math.PI / 4 * mirror;
-			shoulderJointDef.lowerAngle = -Math.PI / 4 * mirror;
-			var shoulderJoint = _world.CreateJoint(shoulderJointDef);
-			
-				joints.push(shoulderJoint);
-			
-			var fuelCompartmentLeftLowerWingJointDef:b2RevoluteJointDef = new b2RevoluteJointDef();
-			fuelCompartmentLeftLowerWingJointDef.Initialize(fuelCompartment, leftInnerWing, new b2Vec2(0, 0));
-			fuelCompartmentLeftLowerWingJointDef.localAnchorA = new b2Vec2( -4 * mirror, 2);
-			fuelCompartmentLeftLowerWingJointDef.enableLimit = true;
-			fuelCompartmentLeftLowerWingJointDef.upperAngle = -Math.PI / 4 * mirror;
-			fuelCompartmentLeftLowerWingJointDef.lowerAngle = -Math.PI / 4 * mirror;
-			fuelCompartmentLeftLowerWingJointDef.localAnchorB = new b2Vec2( innerWingLength*mirror, 0);
-			var fuelCompartmentLeftLowerWingJoint = _world.CreateJoint(fuelCompartmentLeftLowerWingJointDef);
-			
-			var leftElbowJointDef:b2RevoluteJointDef = new b2RevoluteJointDef();
-			leftElbowJointDef.Initialize(leftFemur, leftTibia, new b2Vec2(0, 0));
-			leftElbowJointDef.localAnchorA = new b2Vec2(-femurLength*mirror, 0);
-			leftElbowJointDef.localAnchorB = new b2Vec2(tibiaLength * mirror, 0);
-			leftElbowJointDef.enableLimit = true;
-			leftElbowJointDef.lowerAngle = -Math.PI / 4 * mirror;
-			leftElbowJointDef.upperAngle = -Math.PI / 4 * mirror;
-			var leftElbowJoint = _world.CreateJoint(leftElbowJointDef);
-			
-			var leftInnerWingOuterWingJointDef:b2RevoluteJointDef = new b2RevoluteJointDef();
-			leftInnerWingOuterWingJointDef.Initialize(leftInnerWing, leftOuterWing, new b2Vec2(0, 0));
-			leftInnerWingOuterWingJointDef.localAnchorA = new b2Vec2( -innerWingLength * mirror, 0);
-			leftInnerWingOuterWingJointDef.enableLimit = true;
-			leftInnerWingOuterWingJointDef.upperAngle = -Math.PI / 4 * mirror;
-			leftInnerWingOuterWingJointDef.lowerAngle = -Math.PI / 4 * mirror;
-			leftInnerWingOuterWingJointDef.localAnchorB = new b2Vec2(outerWingLength*mirror, 0);
-			var leftInnerWingOuterWingJoint = _world.CreateJoint(leftInnerWingOuterWingJointDef);
-			
-			var leftTibiaOuterWingJointDef:b2RevoluteJointDef = new b2RevoluteJointDef();
-			leftTibiaOuterWingJointDef.Initialize(leftTibia, leftOuterWing, new b2Vec2(0, 0));
-			leftTibiaOuterWingJointDef.localAnchorA = new b2Vec2(-tibiaLength*mirror, 0);
-			leftTibiaOuterWingJointDef.localAnchorB = new b2Vec2(-outerWingLength*mirror, 0);
-			var leftTibiaOuterWingJoint = _world.CreateJoint(leftTibiaOuterWingJointDef);
+			var chassisWidth:Number = 4;
+			var chassisHeight:Number = 2;
 			
 			
-			var leftLowerWingKneeJointDef:b2LineJointDef = new b2LineJointDef();
-			leftLowerWingKneeJointDef.Initialize(leftInnerWing, leftFemur, new b2Vec2(-innerWingLength*mirror, 0), new b2Vec2( 0,0));
-			leftLowerWingKneeJointDef.localAnchorA = new b2Vec2(-innerWingLength*mirror,0);
-			leftLowerWingKneeJointDef.localAnchorB = new b2Vec2(-femurLength*mirror,0);
-			var leftLowerWingKneeJoint = _world.CreateJoint(leftLowerWingKneeJointDef);
+			var femurLength:Number = 1;
+			var tibiaLength:Number = 3;
+			var wingLength = 1.5;
 			
+			
+			
+			
+			var femur:b2Body = createLightSteelRodComponent(femurLength);		
+			var wing:b2Body = createLightSteelRodComponent(wingLength);
+			var tibia:b2Body = createLightSteelRodComponent(tibiaLength);
+			var foot:b2Body = getLandingPad();
+						
+		
+			var shoulderJoint = bindAtFixedRotation(fuelCompartment, femur, new b2Vec2( -chassisWidth * mirror, -chassisHeight), new b2Vec2( femurLength * mirror, ZERO));
+			var bodyWingJoint = bindAtFixedRotation(fuelCompartment, wing, new b2Vec2( -chassisWidth * mirror, chassisHeight), new b2Vec2( wingLength * mirror, ZERO), FORTY_FIVE_DEGREES , FORTY_FIVE_DEGREES );
+			var elbowJoint = bindAtFixedRotation(femur, tibia, new b2Vec2( -femurLength * mirror, ZERO), new b2Vec2(tibiaLength * mirror, ZERO), NINETY_DEGREES, NINETY_DEGREES);
+			var ankleJoint = bindAtFixedRotation(tibia, wing, new b2Vec2( -tibiaLength * mirror, ZERO), new b2Vec2( -wingLength * mirror, ZERO), -FORTY_FIVE_DEGREES , -FORTY_FIVE_DEGREES );
+			var heelJoint = bindAtFixedRotation(tibia, foot, new b2Vec2( -tibiaLength * mirror, ZERO), getZeroVector(), NINETY_DEGREES,NINETY_DEGREES);
+		
+			
+		}
+		
+		public function getLandingPad():b2Body {
 			var footBodyDef:b2BodyDef = new b2BodyDef();
 			footBodyDef.type = b2Body.b2_dynamicBody;
 			var footBody:b2Body = _world.CreateBody(footBodyDef);
 			
 			var fixtureDef:b2FixtureDef = new b2FixtureDef();
 			var polygonShape:b2PolygonShape = new b2PolygonShape();
-			polygonShape.SetAsBox(2, 1);
+			polygonShape.SetAsBox(1.5, 0.5);
 			fixtureDef.shape = polygonShape;
 			fixtureDef.restitution = 0.3;
 			fixtureDef.friction 1;
 			fixtureDef.density = 0.3;
 			footBody.CreateFixture(fixtureDef);
-			footBody.SetPosition( new b2Vec2(-5*mirror, 5));
 			
-			var leftTibiaFootJointDef:b2RevoluteJointDef = new b2RevoluteJointDef();
-			leftTibiaFootJointDef.Initialize(leftTibia, footBody, new b2Vec2(0, 0));
-			leftTibiaFootJointDef.localAnchorA = new b2Vec2( -tibiaLength * mirror, 0);
-			leftTibiaFootJointDef.enableLimit = true;
-			leftTibiaFootJointDef.lowerAngle = Math.PI / 2;
-			leftTibiaFootJointDef.upperAngle = Math.PI / 2;
-			leftTibiaFootJointDef.localAnchorB = new b2Vec2(0, 0);
-			var leftTibiaFootJoint = _world.CreateJoint(leftTibiaFootJointDef);
-			
-			joints.push(leftTibiaFootJoint);
-			joints.push(leftLowerWingKneeJoint);
-			joints.push(leftTibiaOuterWingJoint);
-			joints.push(leftInnerWingOuterWingJoint);
-			joints.push(leftElbowJoint);
-			joints.push(fuelCompartmentLeftLowerWingJoint);
-			joints.push(shoulderJoint);			
-			
-		
-			
+			return footBody;
 		}
 		
 		
@@ -276,8 +244,6 @@ package beta.models
 			var bodyDef:b2BodyDef = new b2BodyDef();
 			bodyDef.type = b2Body.b2_dynamicBody;
 			bodyDef.linearDamping = 0;
-			
-			//bodyDef.position = new b2Vec2(10, 5);
 			var body:b2Body = _world.CreateBody(bodyDef);
 			
 			var fixtureDef:b2FixtureDef = new b2FixtureDef();
