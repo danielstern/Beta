@@ -29,7 +29,7 @@ package beta.displays {
 			
 			projector = new MovieClip();
 			addChild(projector);
-			//projector.mask = square;
+			projector.mask = square;
 			var debug:b2DebugDraw = new b2DebugDraw();
 			debug.SetSprite(projector);
 			debug.SetDrawScale(scale);
