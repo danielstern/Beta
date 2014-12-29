@@ -35,7 +35,10 @@ package beta.models
 		private var _world:b2World;
 		public var chassis:b2Body;
 		public var joints = [];
+		public var leftPad:b2Body;
+		public var rightPad:b2Body;
 		public var bodies = [];
+		public var footWidth = 2;
 		private var destroyed = false;
 		private var _position:b2Vec2;
 		
@@ -56,6 +59,13 @@ package beta.models
 				move(position);
 			}
 			
+		}
+		
+		public function getMinX() {
+			return leftPad.GetPosition().x - footWidth / 2;
+		}
+		public function getMaxX() {
+			return rightPad.GetPosition().x + footWidth / 2;
 		}
 		
 		public function move(position) {
@@ -191,7 +201,12 @@ package beta.models
 			var femur:b2Body = createLightSteelRodComponent(femurLength);		
 			var wing:b2Body = createLightSteelRodComponent(wingLength);
 			var tibia:b2Body = createLightSteelRodComponent(tibiaLength);
-			var foot:b2Body = getLandingPad();						
+			var foot:b2Body = getLandingPad();		
+			if (!_mirror) {
+				leftPad = foot;
+			} else {
+				rightPad = foot;
+			}
 			
 			tibia.SetAngle(NINETY_DEGREES);
 			tibia.SetPosition(new b2Vec2(( -chassisWidth - femurLength) * mirror, ZERO));
@@ -216,7 +231,7 @@ package beta.models
 			
 			var fixtureDef:b2FixtureDef = new b2FixtureDef();
 			var polygonShape:b2PolygonShape = new b2PolygonShape();
-			polygonShape.SetAsBox(1.5, 1);
+			polygonShape.SetAsBox(footWidth, 1);
 			fixtureDef.shape = polygonShape;
 			fixtureDef.restitution = 0.3;
 			fixtureDef.friction 1;
