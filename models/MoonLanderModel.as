@@ -93,79 +93,43 @@ package beta.models
 			
 		}
 		
+		public function createStandardSuspension(bodyA, bodyB, vector, anchorA = null, anchorB = null) {
+			var suspensionJointDef:b2PrismaticJointDef = new b2PrismaticJointDef();
+			
+			suspensionJointDef.Initialize(bodyA, bodyB, new b2Vec2(0,0), vector);
+			suspensionJointDef.enableLimit = true;
+			suspensionJointDef.lowerTranslation = 2;
+			suspensionJointDef.upperTranslation = 3;
+			//
+			if (anchorA) {
+				suspensionJointDef.localAnchorA = anchorA;
+			}
+			
+			if (anchorB) {
+				suspensionJointDef.localAnchorB = anchorB;
+			}
+			
+			
+			var suspensionJoint = _world.CreateJoint(suspensionJointDef);
+			joints.push(suspensionJoint);
+			return suspensionJoint;
+		}
+		
 		public function attachPodToChassis(fuelCompartment) {
 			var podBody = createLightSteelCircularComponent(3);
-			podBody.SetPosition(new b2Vec2(0, 0));
-			
-			var radar = createLightSteelCircularComponent(0.8);
-			radar.SetPosition(new b2Vec2(0, -4));
-			var radarPodJointDef:b2PrismaticJointDef = new b2PrismaticJointDef();
+			var podFuelJoint = createStandardSuspension(podBody, fuelCompartment , new b2Vec2(0, 1),new b2Vec2(0,3.5));
 			
 			var antenna = createLightSteelCircularComponent(0.6);
-			antenna.SetPosition(new b2Vec2(2, -2));
-			var antennaJointDef:b2PrismaticJointDef = new b2PrismaticJointDef();
+			var antennaJoint = createStandardSuspension(podBody,antenna,new b2Vec2(0,-1),new b2Vec2(0, -3));
 			
 						
 			var sBand = createLightSteelCircularComponent(0.9);
-			sBand.SetPosition(new b2Vec2(-3, -0.5));
-			var sBandJointDef:b2PrismaticJointDef = new b2PrismaticJointDef();
-			
-			radarPodJointDef.Initialize(podBody, radar, new b2Vec2(0,0), new b2Vec2(0,0.7));
-			radarPodJointDef.collideConnected = false;
-			radarPodJointDef.enableLimit = true;
-			radarPodJointDef.lowerTranslation = 1;
-			radarPodJointDef.upperTranslation = 1;
-			radarPodJointDef.maxMotorForce = 1;
-			radarPodJointDef.motorSpeed = 10;
-			radarPodJointDef.enableMotor = true;;
-			radarPodJointDef.localAnchorA = new b2Vec2(0, -1);
-			var radarPodJoint = _world.CreateJoint(radarPodJointDef);
-			
-			joints.push(radarPodJoint);
-			
-			antennaJointDef.Initialize(podBody, antenna, new b2Vec2(0,0), new b2Vec2(0.7,0.7));
-			antennaJointDef.collideConnected = false;
-			antennaJointDef.enableLimit = true;
-			antennaJointDef.lowerTranslation = 1;
-			antennaJointDef.upperTranslation = 1;
-			antennaJointDef.maxMotorForce = 1;
-			antennaJointDef.motorSpeed = 10;
-			antennaJointDef.enableMotor = true;;
-			antennaJointDef.localAnchorA = new b2Vec2(0, -1);
-			var antennaJoint = _world.CreateJoint(antennaJointDef);
-			
-			joints.push(antennaJoint);
-			
-			sBandJointDef.Initialize(podBody, sBand, new b2Vec2(0,0), new b2Vec2(0.7,0));
-			sBandJointDef.collideConnected = false;
-			sBandJointDef.enableLimit = true;
-			sBandJointDef.lowerTranslation = 1;
-			sBandJointDef.upperTranslation = 1;
-			sBandJointDef.maxMotorForce = 1;
-			sBandJointDef.motorSpeed = 10;
-			sBandJointDef.enableMotor = true;;
-			sBandJointDef.localAnchorA = new b2Vec2(0, -1);
-			var sBandJoint = _world.CreateJoint(sBandJointDef);
-			
-			joints.push(sBandJoint);
+			var sBandJoint = createStandardSuspension(podBody,sBand,new b2Vec2(-0.7,-0.7),new b2Vec2(-3.5, 0));
 			
 			
-			podBody.SetPosition(new b2Vec2(0, -5));
+			var radar = createLightSteelCircularComponent(0.8);
+			var radarPodJoint = createStandardSuspension(podBody, radar, new b2Vec2(1,0),new b2Vec2(3,0));
 			
-			var podFuelJointDef:b2PrismaticJointDef = new b2PrismaticJointDef();
-			podFuelJointDef.Initialize(podBody, fuelCompartment, new b2Vec2(0,0), new b2Vec2(0,1));
-			podFuelJointDef.enableLimit = true;
-			podFuelJointDef.lowerTranslation = 0;
-			podFuelJointDef.upperTranslation = 0.3;
-			podFuelJointDef.localAnchorA = new b2Vec2(0, 3);
-			podFuelJointDef.localAnchorB = new b2Vec2(0, -2);
-			var podFuelJoint = _world.CreateJoint(podFuelJointDef);
-			joints.push(podFuelJoint);
-			
-			//bodies.push(podBody);
-			//bodies.push(sBand);
-			//bodies.push(antenna);
-			//bodies.push(radar);
 			
 		}
 		
@@ -175,8 +139,6 @@ package beta.models
 			revoluteJointDef.localAnchorA = localAnchorA;
 			revoluteJointDef.localAnchorB = localAnchorB;
 			revoluteJointDef.enableLimit = true;
-			//revoluteJointDef.enableMotor = true;
-			//revoluteJointDef.motorSpeed = 5
 			revoluteJointDef.upperAngle = rotationLower;
 			revoluteJointDef.lowerAngle = rotationUpper;
 			var revoluteJoint = _world.CreateJoint(revoluteJointDef);

@@ -32,6 +32,7 @@ package beta.entity
 		}
 		
 		override protected function tick() {
+			if (health === 0) return;
 			super.tick();
 			
 			
@@ -42,6 +43,8 @@ package beta.entity
 			bottomThrusterPosition.Add(_body.GetPosition());
 			leftThrusterPosition.Add(_body.GetPosition());
 			rightThrusterPosition.Add(_body.GetPosition());
+			
+			
 			
 			var zero = 0;
 			
@@ -74,6 +77,10 @@ package beta.entity
 				//_body.ApplyTorque( autoStabilizerStrength);
 			//}
 			_body.SetAngle(defaultAngle);
+			
+			upThruster.step();
+			leftThruster.step();
+			rightThruster.step();
 			
 		}
 
