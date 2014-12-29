@@ -58,6 +58,10 @@ package beta.entity
 			return _currentForce;
 		}
 		
+		public function getIntensity():Number {
+			return _intensity;
+		}
+		
 	}
 
 }

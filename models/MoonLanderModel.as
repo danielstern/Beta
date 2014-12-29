@@ -2,6 +2,7 @@ package beta.models
 {
 	import Box2D.Dynamics.b2Body;
 	import Box2D.Dynamics.b2World;
+	import flash.utils.setTimeout;
 	
 	import Box2D.Collision.b2AABB;
 	import Box2D.Collision.b2Bound;
@@ -180,6 +181,12 @@ package beta.models
 				_world.DestroyJoint(_joint);
 			});
 			destroyed = true;
+			
+			setTimeout(function() {
+				bodies.forEach(function(a) {
+					_world.DestroyBody(a);
+				});
+			},5000);
 		}
 			
 		public function attachLegToChassis(fuelCompartment:b2Body, _mirror = false) {
