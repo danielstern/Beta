@@ -186,7 +186,7 @@ package beta.models
 				bodies.forEach(function(a) {
 					_world.DestroyBody(a);
 				});
-			},5000);
+			},3500);
 		}
 			
 		public function attachLegToChassis(fuelCompartment:b2Body, _mirror = false) {

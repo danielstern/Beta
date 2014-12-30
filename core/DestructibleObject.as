@@ -8,6 +8,7 @@ package beta.core {
 		protected var maxHealth = 25;
 		public static var TAKE_DAMAGE = "takeDamage";
 		public static var RESTORE_HEALTH = "restoreHealth";
+		protected static var destroyed = false;
 		public static var DESTROYED = "destroyed";
 		
 		public function DestructibleObject() {
@@ -32,6 +33,7 @@ package beta.core {
 		override protected function tick() {
 			if (health <= 0) {
 				health = 0;
+				destroyed = true;
 				kill();				
 			}
 			super.tick();

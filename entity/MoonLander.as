@@ -34,8 +34,9 @@ package beta.entity
 		}
 		
 		override protected function tick() {
-			if (health === 0) return;
+			
 			super.tick();
+			//if (health === 0) return;
 			
 			
 			
@@ -48,7 +49,7 @@ package beta.entity
 					
 			var zero = 0;
 			
-			if (_fuel > 0) {
+			if (_fuel > 0 && !destroyed) {
 				
 				
 				if (controlsUp) {

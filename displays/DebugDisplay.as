@@ -5,6 +5,7 @@ package beta.displays {
 	import Box2D.Dynamics.*;
 	import com.kircode.EasyKeyboard.*;
 	import flash.display.*;
+	import flash.events.MouseEvent;
 	import flash.utils.setInterval;
 	
 	public class DebugDisplay extends MovieClip
@@ -80,7 +81,7 @@ package beta.displays {
 		
 		public function WASDControl(stage, controllableObject) {
 			var keyboard = new EasyKeyboard(stage);		
-			
+	
 			keyboard.addEasyListener("W", controllableObject.startUp, controllableObject.stopUp);
 			keyboard.addEasyListener("A", controllableObject.startLeft, controllableObject.stopLeft);
 			keyboard.addEasyListener("S", controllableObject.startDown, controllableObject.stopDown);
