@@ -7,37 +7,327 @@ package beta.game
 	import beta.entity.MoonLander;
 	import beta.models.MoonLanderModel;
 	import beta.displays.DebugDisplay;
-	public class MoonLanderGame 
+	import flash.display.MovieClip;
+	import flash.events.EventDispatcher;
+	import flash.utils.clearInterval;
+	
+	import beta.displays.DebugDisplay;
+	import beta.entity.MoonLander;
+	import beta.game.MoonLanderGame;
+	import beta.models.MoonLanderModel;
+	import beta.physics.BoxHelpers;
+	import Box2D.Collision.Shapes.b2PolygonShape;
+	import Box2D.Common.Math.b2Vec2;
+	import Box2D.Dynamics.b2Body;
+	import Box2D.Dynamics.b2BodyDef;
+	import Box2D.Dynamics.b2FixtureDef;
+	import Box2D.Dynamics.b2World;
+	import Box2D.Dynamics.Contacts.b2ContactEdge;
+	import flash.display.MovieClip;
+	import flash.events.Event;
+	import com.kircode.EasyKeyboard.*;
+	import flash.events.MouseEvent;
+	import flash.utils.setInterval;
+	import flash.utils.setTimeout;
+	import Levels;
+	
+	public class MoonLanderGame extends MovieClip
 	{
 		
 		public var accumulatedScoreCurrentLevel;
 		
+		public var queuedToExitGameLevel = false;
 		
+		private var _world:b2World;
+		private var debugDisplay:DebugDisplay;
+		private var moonLanderModel:MoonLanderModel;
+		private var gameWidth = 550;
+		private var gameHeight = 400;
+		private var lander:MoonLander;
+		private var shipAlive = false;
+		private var successfulLanding = false;
+		private var moonPeakBodies = [];
+		private var bonusBodies = [];
+		private var platformBodies = [];
+		private var closePlatformMinDistance = 60;
+		private var REGULAR_ZOOM = 1.5;
+		private var CLOSE_ZOOM = 3;
+		private var ADJUSTED_LUNAR_GRAVITY = 0.1622 / 4;
+		private var maxSafeLandingXVelocity = 0.07;
+		private var maxSafeLandingYVelocity = 0.07;
+		private var levelRunning = false;
+		private var timer;
 		
-		public function MoonLanderGame(level:Object,display) 
-		{
+		private var _level;
+		private var _target;
+		private var _stage;
+		
+		public var devMeta = {
 			
 		}
 		
-				
+		
+		public function MoonLanderGame(level:Object,target:MovieClip) 
+		{
+			super();
+			_level = level;
+			_target = target;
+			_stage = stage;
+		}
+		
 		public function start() {
-						
-			createMoonSurface(level.topography);
-			createPlatforms(level.platforms);
-			createDoodads(level.doodads);
 			
-			moonLanderModel = new MoonLanderModel(_world, currentLevel.startingPosition);
-			lander = new MoonLander(moonLanderModel.chassis,level.startingFuel);
+			_world = new b2World(new b2Vec2(0, ADJUSTED_LUNAR_GRAVITY),false);
+			createDisplay();
+						
+			createMoonSurface(_level.topography);
+			createPlatforms(_level.platforms);
+			createDoodads(_level.doodads);
+			
+			moonLanderModel = new MoonLanderModel(_world, _level.startingPosition);
+			lander = new MoonLander(moonLanderModel.chassis,_level.startingFuel);
 			accumulatedScoreCurrentLevel = 0;
 			
-			debugDisplay.visible = true;
-			debugDisplay.WASDControl(stage, lander);		
+			//WASDControl(_stage, lander);		
 			
 			shipAlive = true;
 			successfulLanding = false;
 			levelRunning = true;
 			queuedToExitGameLevel = false;
+			
+			timer = setInterval(function() {
+				tick();
+			},33);
 		}
+	
+		
+		public function getLanderEntity() {
+			return lander;
+		}
+
+		public function tick() {
+			
+			if (!queuedToExitGameLevel) {	
+		
+					var shipPos:b2Vec2 = moonLanderModel.chassis.GetPosition();
+					var closePlatform = getClosestPlatformToShip();					
+					
+					if (closePlatform) {
+						debugDisplay.setZoom(CLOSE_ZOOM);
+						debugDisplay.setFocus(closePlatform.position);
+					} else {
+						debugDisplay.setZoom(REGULAR_ZOOM);
+						debugDisplay.setFocus(shipPos);
+					}
+						
+							
+					getEntitiesTouchingShip().forEach(function(data) {
+						if (data.type == 'moon') {
+							destroyLander()
+							//devMeta.text = "HOUSTON, WE HAVE A PROBLEM.";
+							
+						}
+						
+						if (data.type === 'doodad' && data.doodadType === 'bonus' ) {
+							
+							accumulatedScoreCurrentLevel += data.points;
+							_world.DestroyBody(data.body);						
+							
+						}
+						
+						if (data.type == 'platform') {
+							handleLandOnPlatform(data);					
+						}
+					
+					})					
+					 
+					
+				updateOnscreenMeta();
+				checkShipWithinBounds();
+			
+			}
+			
+			lander.step();	
+			_world.Step(1, 30, 30);
+			_world.ClearForces();
+				
+			
+		}
+		
+				
+		public function updateOnscreenMeta() {					
+			//var vx = moonLanderModel.chassis.GetLinearVelocity().x.toFixed(2);
+			//var vy = moonLanderModel.chassis.GetLinearVelocity().y.toFixed(2);
+			//var shipPos = moonLanderModel.chassis.GetPosition();
+			//
+			//devMeta.text = "x:" + shipPos.x.toFixed(2) + ",y:" + shipPos.y.toFixed(2);
+	//
+			//fuelDisplay.text = "FUEL: " + lander.getFuel().toFixed(0);
+			//
+			//vxDisplay.text = "VX:" + vx +'m/s';
+			//vyDisplay.text = "VY:" +  vy + 'm/s';
+			//
+			//if (getClosestPlatformToShip(40) && getClosestPlatformToShip(40).platformType === 'goal') {
+				//if (vx > maxSafeLandingXVelocity || vx < -maxSafeLandingXVelocity) {
+					//vxDisplay.textColor = 0xFF0000;
+				//} else {
+					//vxDisplay.textColor = 0x00FF00;
+				//}
+				//
+				//if (vy > maxSafeLandingYVelocity) {
+					//vyDisplay.textColor = 0xFF0000;
+				//} else {
+					//vyDisplay.textColor = 0x00FF00;
+				//}
+				//
+			//} else {
+				//vxDisplay.textColor = 0xFFFFFF;
+				//vyDisplay.textColor = 0xFFFFFF;
+			//}
+			//
+			//
+			//scoreDisplay.text = "SCORE: " + accumulatedScoreCurrentLevel.toFixed(0);
+			
+		}
+		
+		public function createDisplay() {
+			debugDisplay = new DebugDisplay(_world,1,gameWidth,gameHeight);
+			_target.addChild(debugDisplay);
+			debugDisplay.x = 24;
+			debugDisplay.y = 24;
+		}
+		
+		public function handleLandOnPlatform(platform) {
+			var landerMinX = moonLanderModel.getMinX();
+			var landerMaxX = moonLanderModel.getMaxX();
+			var platFormMinX = platform.position.x - platform.width;
+			var platFormMaxX = platform.position.x + platform.width;
+			var vx = moonLanderModel.chassis.GetLinearVelocity().x.toFixed(2);
+			var vy = moonLanderModel.chassis.GetLinearVelocity().y.toFixed(2);
+			
+			if (platform.platformType === 'start') {
+				devMeta.text = "READY FOR TAKEOFF.";
+			} else if (platform.platformType === 'goal') {
+				if (landerMinX < platFormMinX || landerMaxX > platFormMaxX) {
+					destroyLander();
+					devMeta.text = "TOO FAR OFF THE EDGE."		
+				} else if (vx > maxSafeLandingXVelocity || vy > maxSafeLandingYVelocity) {
+					destroyLander()
+					devMeta.text = "APPROACH VELOCITY TOO HIGH."
+				} else {
+					successfulLanding = true;
+					devMeta.text = "LANDING SUCCESSFUL. +" + platform.points;
+					accumulatedScoreCurrentLevel += platform.points;
+					gameWin();
+				}	
+			}		
+		}
+		
+		public function gameWin() {
+			trace("won game");
+			dispatchEvent(new Event('win'));
+			queueGameExit();
+		}
+		
+		
+		
+		public function gameLose() {
+			trace("lose game");
+			queueGameExit();
+			dispatchEvent(new Event('lose'));
+				
+		}
+		
+		public function kill(e = null) {
+			clearInterval(timer);
+			destroyLander();
+			clearAllBodies();
+			
+			//keyboard.kill();
+			trace("kill");
+		}
+		
+		public function queueGameExit() {
+			queuedToExitGameLevel = true;
+			setTimeout(kill, 2000);
+			
+		}
+		
+		
+		public function getClosestPlatformToShip(distance = null) {
+			var shipPos:b2Vec2 = moonLanderModel.chassis.GetPosition();
+			distance = distance || closePlatformMinDistance;
+			var closePlatform;
+			
+			_level.platforms.forEach(function(platform) {
+				var platformPos:b2Vec2 = platform.position;
+				var dist = BoxHelpers.distanceTwoVectors(shipPos, platformPos);
+				if (dist < distance) {
+					closePlatform = platform;
+				}
+			});
+			
+			
+			
+			return closePlatform;
+				
+			
+		}
+		
+		public function checkShipWithinBounds() {
+			var shipPastLeft = moonLanderModel.getMinX() - _level.minX;
+			var shipPastRight = moonLanderModel.getMaxX() - _level.maxX;
+			if (shipPastLeft < 10) {
+				devMeta.text = "WARNING: LOSING CONNECTION TO SHUTTLE.";
+			}
+			if (shipPastLeft < -100) {
+				destroyLander();
+				devMeta.text = "CONNECTION LOST.";
+			}
+			
+			if (shipPastRight > 10) {
+				devMeta.text = "WARNING: LOSING CONNECTION TO SHUTTLE.";
+			}
+			if (shipPastRight > 100) {
+				destroyLander();
+				devMeta.text = "CONNECTION LOST.";
+			}
+		}
+		
+				
+		public function getEntitiesTouchingShip() {
+			var entities = [];
+			
+			moonLanderModel.bodies.forEach(function(_body) {
+				var body:b2Body = _body;
+				var contacts:b2ContactEdge = body.GetContactList();
+				while (contacts) {
+					if (contacts.contact.IsTouching()) {					
+						var dataA = contacts.contact.GetFixtureA().GetBody().GetUserData();
+						var dataB = contacts.contact.GetFixtureB().GetBody().GetUserData();
+						if (dataA) {
+							if (dataA.type == 'moon'  || dataA.type == 'platform' || dataA.type == 'doodad') {
+								entities.push(dataA);
+							}
+						}
+						if (dataB) {
+							if (dataB.type == 'moon'  || dataB.type == 'platform' || dataB.type == 'doodad') {
+								entities.push(dataB);
+							}
+						}
+							
+					}
+					contacts = contacts.next;
+				};
+			});
+			
+			return entities;
+		}
+		
+		
+		
+				
+	
 		
 		public function createDoodads(doodads) {
 			doodads.forEach(function(doodad) {
@@ -80,18 +370,9 @@ package beta.game
 			lander.destroy();
 			moonLanderModel.explode();			
 			shipAlive = false;
+			gameLose();
 			
 			
-		}
-		
-		public function endLevel() {
-			if (levelRunning) {	
-				//trace("end level.");
-				levelRunning = false;
-				debugDisplay.visible = false;
-				destroyLander();
-				clearAllBodies();
-			}
 		}
 		
 		function clearAllBodies() {
@@ -108,10 +389,13 @@ package beta.game
 				_world.DestroyBody(b);
 			});
 			
+			bonusBodies = [];
+			platformBodies = [];
+			moonPeakBodies = [];
+			
 			
 		}
 		
-	
 		public function getPeak(width = 10, leftHeight = 0,midHeight = 2,rightHeight = 1) {
 			var peakBodyDef:b2BodyDef = new b2BodyDef();
 			var ZERO = 0;

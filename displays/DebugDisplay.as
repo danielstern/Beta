@@ -3,7 +3,7 @@ package beta.displays {
 	import beta.core.ControllableObject;
 	import Box2D.Common.Math.*;
 	import Box2D.Dynamics.*;
-	import com.kircode.EasyKeyboard.*;
+	
 	import flash.display.*;
 	import flash.events.MouseEvent;
 	import flash.utils.setInterval;
@@ -79,15 +79,6 @@ package beta.displays {
 			
 		}
 		
-		public function WASDControl(stage, controllableObject) {
-			var keyboard = new EasyKeyboard(stage);		
-	
-			keyboard.addEasyListener("W", controllableObject.startUp, controllableObject.stopUp);
-			keyboard.addEasyListener("A", controllableObject.startLeft, controllableObject.stopLeft);
-			keyboard.addEasyListener("S", controllableObject.startDown, controllableObject.stopDown);
-			keyboard.addEasyListener("D", controllableObject.startRight, controllableObject.stopRight);
-			keyboard.addListener(32, controllableObject.startAction1, controllableObject.stopAction1);
-			
-		}
+
 	}
 }
