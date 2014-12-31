@@ -29,7 +29,7 @@ package beta.game
 	import flash.events.MouseEvent;
 	import flash.utils.setInterval;
 	import flash.utils.setTimeout;
-	import Levels;
+	import beta.game.Levels;
 	
 	public class MoonLanderGame extends MovieClip
 	{
