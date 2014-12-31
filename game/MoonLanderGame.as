@@ -63,14 +63,16 @@ package beta.game
 		
 		//
 		public var devMeta;
+		private var _upgrade:LanderUpgrader;
 		//
 		
-		public function MoonLanderGame(level:Object,target:MovieClip) 
+		public function MoonLanderGame(level:Object,target:MovieClip,upgrader:LanderUpgrader) 
 		{
 			super();
 			_level = level;
 			_target = target;
-			_stage = stage;
+			//_stage = stage;
+			_upgrade = upgrader;
 			
 			devMeta = _target.devMeta;
 		}
@@ -85,7 +87,7 @@ package beta.game
 			createDoodads(_level.doodads);
 			
 			moonLanderModel = new MoonLanderModel(_world, _level.startingPosition);
-			lander = new MoonLander(moonLanderModel.chassis,_level.startingFuel);
+			lander = new MoonLander(moonLanderModel.chassis,(_level.startingFuel + _upgrade.extraFuelCount) * _upgrade.fuelModifier, _upgrade.thrusterAccelerationModifier,_upgrade.thrusterPowerModifier);
 			accumulatedScoreCurrentLevel = 0;
 			
 			//WASDControl(_stage, lander);		
@@ -222,7 +224,7 @@ package beta.game
 					destroyLander();
 					gameLose();
 					devMeta.text = "TOO FAR OFF THE EDGE."		
-				} else if (vx > maxSafeLandingXVelocity || vy > maxSafeLandingYVelocity) {
+				} else if (vx > maxSafeLandingXVelocity * _upgrade.safeLandingSpeedModifier || vy > maxSafeLandingYVelocity *  _upgrade.safeLandingSpeedModifier) {
 					destroyLander()
 					gameLose();
 					devMeta.text = "APPROACH VELOCITY TOO HIGH."

@@ -1,6 +1,7 @@
 package beta.entity 
 {
 	import beta.core.ControllableObject;
+	import beta.game.LanderUpgrader;
 	import beta.physics.BoxHelpers;
 	import Box2D.Collision.Shapes.b2CircleShape;
 	import Box2D.Dynamics.b2Body;
@@ -19,16 +20,20 @@ package beta.entity
 		protected var defaultAngle = 0;	
 		protected var autoStabilizerStrength = 2.5;
 		
+		protected var thrusterTimeToIncreaseIntensity:Number = 1000;
+		protected var upThrusterForcePerIntensity:Number = 0.8;
+		protected var sideThrusterForcePerIntensity:Number = 0.4;
+		protected var thrusterMaxIntensity:Number = 5;
 	
 		
-		public function MoonLander(body, fuel = 500) 
+		public function MoonLander(body, fuel, timeToIncreaseIntensityModifier:Number = 1, thrusterForceModifier:Number = 1) 
 		
 		{
 			super(body);
 			
-			upThruster = new Thruster(1, 10, 1000);
-			leftThruster = new Thruster(0.2, 5, 100);
-			rightThruster = new Thruster(0.2, 5, 100);
+			upThruster = new Thruster(upThrusterForcePerIntensity * thrusterForceModifier, 5, thrusterTimeToIncreaseIntensity * timeToIncreaseIntensityModifier);
+			leftThruster = new Thruster(sideThrusterForcePerIntensity * thrusterForceModifier, 5, thrusterTimeToIncreaseIntensity * timeToIncreaseIntensityModifier);
+			rightThruster = new Thruster(sideThrusterForcePerIntensity * thrusterForceModifier, 5, thrusterTimeToIncreaseIntensity * timeToIncreaseIntensityModifier);
 			_fuel = fuel;
 			
 
