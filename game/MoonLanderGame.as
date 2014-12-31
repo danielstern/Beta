@@ -59,7 +59,7 @@ package beta.game
 		private var timer;
 		
 		private var _level;
-		private var _target;
+		private var _target:MovieClip;
 		private var _stage;
 		
 		public var devMeta = {
@@ -191,7 +191,10 @@ package beta.game
 		}
 		
 		public function createDisplay() {
-			debugDisplay = new DebugDisplay(_world,1,gameWidth,gameHeight);
+			debugDisplay = new DebugDisplay(_world, 1, gameWidth, gameHeight);
+			//if (_target.getChildAt(0)) {
+				//_target.removeChild(_target.getChildAt(0));
+			//}
 			_target.addChild(debugDisplay);
 			debugDisplay.x = 24;
 			debugDisplay.y = 24;

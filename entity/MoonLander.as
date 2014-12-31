@@ -22,8 +22,11 @@ package beta.entity
 	
 		
 		public function MoonLander(body, fuel = 500) 
+		
 		{
 			super(body);
+			
+			//trace("Moonlander init...", fuel);
 
 			upThruster = new Thruster(1, 10, 1000);
 			leftThruster = new Thruster(0.2, 5, 100);
@@ -37,6 +40,7 @@ package beta.entity
 			
 			super.tick();
 			//if (health === 0) return;
+			trace("moonlander tick.",_fuel,destroyed, health);
 			
 			
 			
@@ -69,6 +73,7 @@ package beta.entity
 				}
 				
 				if (controlsRight) {
+					trace("engage thrust right.");
 					rightThruster.engage();
 					_body.ApplyForce(new b2Vec2(rightThruster.getForce(), zero), rightThrusterPosition);
 					_fuel -= rightThruster.getIntensity();
