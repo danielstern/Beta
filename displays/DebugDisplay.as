@@ -8,7 +8,7 @@ package beta.displays {
 	import flash.events.MouseEvent;
 	import flash.utils.setInterval;
 	
-	public class DebugDisplay extends MovieClip
+	public dynamic class DebugDisplay extends MovieClip
 	{	
 		private var projector:MovieClip;
 		private var _focus:b2Vec2;

@@ -65,11 +65,9 @@ package beta.game
 		private var platformScore = 0;
 		private var bonusScore = 0;
 		
-		
-		public var devMeta = {
-			
-		}
-		
+		//
+		public var devMeta;
+		//
 		
 		public function MoonLanderGame(level:Object,target:MovieClip) 
 		{
@@ -77,6 +75,8 @@ package beta.game
 			_level = level;
 			_target = target;
 			_stage = stage;
+			
+			devMeta = _target.devMeta;
 		}
 		
 		public function start() {
@@ -165,37 +165,44 @@ package beta.game
 		
 				
 		public function updateOnscreenMeta() {					
-			//var vx = moonLanderModel.chassis.GetLinearVelocity().x.toFixed(2);
-			//var vy = moonLanderModel.chassis.GetLinearVelocity().y.toFixed(2);
-			//var shipPos = moonLanderModel.chassis.GetPosition();
-			//
-			//devMeta.text = "x:" + shipPos.x.toFixed(2) + ",y:" + shipPos.y.toFixed(2);
-	//
-			//fuelDisplay.text = "FUEL: " + lander.getFuel().toFixed(0);
-			//
-			//vxDisplay.text = "VX:" + vx +'m/s';
-			//vyDisplay.text = "VY:" +  vy + 'm/s';
-			//
-			//if (getClosestPlatformToShip(40) && getClosestPlatformToShip(40).platformType === 'goal') {
-				//if (vx > maxSafeLandingXVelocity || vx < -maxSafeLandingXVelocity) {
-					//vxDisplay.textColor = 0xFF0000;
-				//} else {
-					//vxDisplay.textColor = 0x00FF00;
-				//}
-				//
-				//if (vy > maxSafeLandingYVelocity) {
-					//vyDisplay.textColor = 0xFF0000;
-				//} else {
-					//vyDisplay.textColor = 0x00FF00;
-				//}
-				//
-			//} else {
-				//vxDisplay.textColor = 0xFFFFFF;
-				//vyDisplay.textColor = 0xFFFFFF;
-			//}
-			//
-			//
-			//scoreDisplay.text = "SCORE: " + accumulatedScoreCurrentLevel.toFixed(0);
+
+			var vxDisplay = _target.vxDisplay;
+			var vyDisplay = _target.vyDisplay;
+			var fuelDisplay = _target.fuelDisplay;
+			var scoreDisplay = _target.scoreDisplay;
+			
+			
+			var vx = moonLanderModel.chassis.GetLinearVelocity().x.toFixed(2);
+			var vy = moonLanderModel.chassis.GetLinearVelocity().y.toFixed(2);
+			var shipPos = moonLanderModel.chassis.GetPosition();
+			
+			devMeta.text = "x:" + shipPos.x.toFixed(2) + ",y:" + shipPos.y.toFixed(2);
+	
+			fuelDisplay.text = "FUEL: " + lander.getFuel().toFixed(0);
+			
+			vxDisplay.text = "VX:" + vx +'m/s';
+			vyDisplay.text = "VY:" +  vy + 'm/s';
+			
+			if (getClosestPlatformToShip(40) && getClosestPlatformToShip(40).platformType === 'goal') {
+				if (vx > maxSafeLandingXVelocity || vx < -maxSafeLandingXVelocity) {
+					vxDisplay.textColor = 0xFF0000;
+				} else {
+					vxDisplay.textColor = 0x00FF00;
+				}
+				
+				if (vy > maxSafeLandingYVelocity) {
+					vyDisplay.textColor = 0xFF0000;
+				} else {
+					vyDisplay.textColor = 0x00FF00;
+				}
+				
+			} else {
+				vxDisplay.textColor = 0xFFFFFF;
+				vyDisplay.textColor = 0xFFFFFF;
+			}
+			
+			
+			scoreDisplay.text = "SCORE: " + accumulatedScoreCurrentLevel.toFixed(0);
 			
 		}
 		
