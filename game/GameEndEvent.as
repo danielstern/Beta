@@ -15,6 +15,7 @@ package beta.game
 		public var bonusPoints:Number;
 		public var platformPoints:Number;
 		public var level;
+		public var game:MoonLanderGame;
 		public function GameEndEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false) 
 		{
 			super(type, bubbles, cancelable);

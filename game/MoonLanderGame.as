@@ -28,16 +28,13 @@ package beta.game
 	import com.kircode.EasyKeyboard.*;
 	import flash.events.MouseEvent;
 	import flash.utils.setInterval;
-	import flash.utils.setTimeout;
 	import beta.game.Levels;
 	
 	public class MoonLanderGame extends MovieClip
 	{
 		
-		public var accumulatedScoreCurrentLevel;
-		
-		public var queuedToExitGameLevel = false;
-		
+		private var accumulatedScoreCurrentLevel;		
+		private var queuedToExitGameLevel = false;		
 		private var _world:b2World;
 		private var debugDisplay:DebugDisplay;
 		private var moonLanderModel:MoonLanderModel;
@@ -55,7 +52,6 @@ package beta.game
 		private var ADJUSTED_LUNAR_GRAVITY = 0.1622 / 4;
 		private var maxSafeLandingXVelocity = 0.7;
 		private var maxSafeLandingYVelocity = 0.7;
-		private var levelRunning = false;
 		private var timer;
 		
 		private var _level;
@@ -96,7 +92,6 @@ package beta.game
 			
 			shipAlive = true;
 			successfulLanding = false;
-			levelRunning = true;
 			queuedToExitGameLevel = false;
 			
 			timer = setInterval(function() {
@@ -242,9 +237,7 @@ package beta.game
 		}
 		
 		public function gameWin() {
-			if (!queuedToExitGameLevel) {
-				trace("won game");
-				
+			if (!queuedToExitGameLevel) {			
 				dispatchGameEndEvent(GameEndEvent.WIN);
 				queueGameExit();
 			}
@@ -254,7 +247,6 @@ package beta.game
 		
 		public function gameLose() {
 			if (!queuedToExitGameLevel) {			
-				trace("lose game");
 				queueGameExit();
 				dispatchGameEndEvent(GameEndEvent.LOSE);
 			}		
@@ -267,21 +259,17 @@ package beta.game
 			gameEndEvent.bonusPoints = bonusScore;
 			gameEndEvent.fuelSpent = _level.startingFuel - lander.getFuel();
 			gameEndEvent.level = _level;
+			gameEndEvent.game = this;
 			dispatchEvent(gameEndEvent);
 		}
 		
 		public function kill(e = null) {
 			clearInterval(timer);
-			//destroyLander();
 			clearAllBodies();
-			
-			//keyboard.kill();
-			trace("kill");
 		}
 		
 		public function queueGameExit() {
 			queuedToExitGameLevel = true;
-			setTimeout(kill, 2000);
 			
 		}
 		
@@ -298,12 +286,9 @@ package beta.game
 					closePlatform = platform;
 				}
 			});
-			
-			
-			
+					
 			return closePlatform;
-				
-			
+					
 		}
 		
 		public function checkShipWithinBounds() {
@@ -357,16 +342,10 @@ package beta.game
 			
 			return entities;
 		}
-		
-		
-		
-				
-	
-		
+
 		public function createDoodads(doodads) {
 			doodads.forEach(function(doodad) {
 				if (doodad.doodadType === 'bonus') {
-					//trace("create bonus.");
 					var body = createBonusBody();
 					doodad.body = body;
 					body.SetPosition(doodad.position);
@@ -397,36 +376,6 @@ package beta.game
 			return bonusBody;
 		}
 	
-		
-		
-		public function destroyLander() {
-			if (!shipAlive) return;
-			trace("LANDER:destroy lander.");
-			lander.destroy();
-			moonLanderModel.explode();			
-			shipAlive = false;			
-		}
-		
-		function clearAllBodies() {
-			moonPeakBodies.forEach(function(b) {
-				_world.DestroyBody(b);
-			});
-			
-			platformBodies.forEach(function(b) {
-				_world.DestroyBody(b);
-			});
-			
-			
-			bonusBodies.forEach(function(b) {
-				_world.DestroyBody(b);
-			});
-			
-			bonusBodies = [];
-			platformBodies = [];
-			moonPeakBodies = [];
-			
-			
-		}
 		
 		public function getPeak(width = 10, leftHeight = 0,midHeight = 2,rightHeight = 1) {
 			var peakBodyDef:b2BodyDef = new b2BodyDef();
@@ -513,6 +462,33 @@ package beta.game
 			
 		}
 		
+		public function destroyLander() {
+			if (shipAlive) {			
+				lander.destroy();
+				moonLanderModel.explode();			
+				shipAlive = false;			
+			}
+		}
+		
+		function clearAllBodies() {
+			moonPeakBodies.forEach(function(b) {
+				_world.DestroyBody(b);
+			});
+			
+			platformBodies.forEach(function(b) {
+				_world.DestroyBody(b);
+			});
+			
+			
+			bonusBodies.forEach(function(b) {
+				_world.DestroyBody(b);
+			});
+			
+			bonusBodies = [];
+			platformBodies = [];
+			moonPeakBodies = [];
+						
+		}		
 	}
 
 }

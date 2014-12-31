@@ -22,16 +22,16 @@ package beta.game
 		
 		public function Level(options) 
 		{
-			name  =options.name
-			minX  =options.minX
-			maxX =options.maxX
-			maxScore=options.maxScore
-			startingFuel=options.startingFuel
-			startingPosition=options.startingPosition
-			baseStartingFuel=options.baseStartingFuel
-			topography=options.topography
-			doodads=options.doodads
-			platforms=options.platforms				
+			name  = options.name;
+			minX  = options.minX;
+			maxX = options.maxX;
+			maxScore = options.maxScore;
+			startingFuel = options.startingFuel;
+			startingPosition = options.startingPosition;
+			baseStartingFuel = options.baseStartingFuel;
+			topography = options.topography;
+			doodads = options.doodads;
+			platforms = options.platforms;				
 		}
 		
 	}
