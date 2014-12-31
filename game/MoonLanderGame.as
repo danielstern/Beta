@@ -53,14 +53,18 @@ package beta.game
 		private var REGULAR_ZOOM = 1.5;
 		private var CLOSE_ZOOM = 3;
 		private var ADJUSTED_LUNAR_GRAVITY = 0.1622 / 4;
-		private var maxSafeLandingXVelocity = 0.07;
-		private var maxSafeLandingYVelocity = 0.07;
+		private var maxSafeLandingXVelocity = 0.7;
+		private var maxSafeLandingYVelocity = 0.7;
 		private var levelRunning = false;
 		private var timer;
 		
 		private var _level;
 		private var _target:MovieClip;
 		private var _stage;
+		
+		private var platformScore = 0;
+		private var bonusScore = 0;
+		
 		
 		public var devMeta = {
 			
@@ -109,45 +113,50 @@ package beta.game
 			
 			if (!queuedToExitGameLevel) {	
 		
-					var shipPos:b2Vec2 = moonLanderModel.chassis.GetPosition();
-					var closePlatform = getClosestPlatformToShip();					
+				var shipPos:b2Vec2 = moonLanderModel.chassis.GetPosition();
+				var closePlatform = getClosestPlatformToShip();					
+				
+				if (closePlatform) {
+					debugDisplay.setZoom(CLOSE_ZOOM);
+					debugDisplay.setFocus(closePlatform.position);
+				} else {
+					debugDisplay.setZoom(REGULAR_ZOOM);
+					debugDisplay.setFocus(shipPos);
+				}
 					
-					if (closePlatform) {
-						debugDisplay.setZoom(CLOSE_ZOOM);
-						debugDisplay.setFocus(closePlatform.position);
-					} else {
-						debugDisplay.setZoom(REGULAR_ZOOM);
-						debugDisplay.setFocus(shipPos);
+						
+				getEntitiesTouchingShip().forEach(function(data) {
+					if (data.type == 'moon') {
+						destroyLander()
+						gameLose();
 					}
-						
-							
-					getEntitiesTouchingShip().forEach(function(data) {
-						if (data.type == 'moon') {
-							destroyLander()
-							//devMeta.text = "HOUSTON, WE HAVE A PROBLEM.";
-							
-						}
-						
-						if (data.type === 'doodad' && data.doodadType === 'bonus' ) {
-							
-							accumulatedScoreCurrentLevel += data.points;
-							_world.DestroyBody(data.body);						
-							
-						}
-						
-						if (data.type == 'platform') {
-							handleLandOnPlatform(data);					
-						}
 					
-					})					
-					 
+					if (data.type === 'doodad' && data.doodadType === 'bonus' ) {
+						
+						accumulatedScoreCurrentLevel += data.points;
+						bonusScore+= data.points;
+						_world.DestroyBody(data.body);						
+						
+					}
+					
+					if (data.type == 'platform') {
+						handleLandOnPlatform(data);					
+					}
+				
+				})					
+				
+				if (shipAlive) {
+					lander.step();
+				}
+				 
 					
 				updateOnscreenMeta();
 				checkShipWithinBounds();
+						
 			
 			}
+			 
 			
-			lander.step();	
 			_world.Step(1, 30, 30);
 			_world.ClearForces();
 				
@@ -192,12 +201,8 @@ package beta.game
 		
 		public function createDisplay() {
 			debugDisplay = new DebugDisplay(_world, 1, gameWidth, gameHeight);
-			//if (_target.getChildAt(0)) {
-				//_target.removeChild(_target.getChildAt(0));
-			//}
 			_target.addChild(debugDisplay);
-			debugDisplay.x = 24;
-			debugDisplay.y = 24;
+
 		}
 		
 		public function handleLandOnPlatform(platform) {
@@ -213,37 +218,54 @@ package beta.game
 			} else if (platform.platformType === 'goal') {
 				if (landerMinX < platFormMinX || landerMaxX > platFormMaxX) {
 					destroyLander();
+					gameLose();
 					devMeta.text = "TOO FAR OFF THE EDGE."		
 				} else if (vx > maxSafeLandingXVelocity || vy > maxSafeLandingYVelocity) {
 					destroyLander()
+					gameLose();
 					devMeta.text = "APPROACH VELOCITY TOO HIGH."
 				} else {
 					successfulLanding = true;
 					devMeta.text = "LANDING SUCCESSFUL. +" + platform.points;
 					accumulatedScoreCurrentLevel += platform.points;
+					platformScore = platform.points;
 					gameWin();
 				}	
 			}		
 		}
 		
 		public function gameWin() {
-			trace("won game");
-			dispatchEvent(new Event('win'));
-			queueGameExit();
+			if (!queuedToExitGameLevel) {
+				trace("won game");
+				
+				dispatchGameEndEvent(GameEndEvent.WIN);
+				queueGameExit();
+			}
 		}
 		
 		
 		
 		public function gameLose() {
-			trace("lose game");
-			queueGameExit();
-			dispatchEvent(new Event('lose'));
-				
+			if (!queuedToExitGameLevel) {			
+				trace("lose game");
+				queueGameExit();
+				dispatchGameEndEvent(GameEndEvent.LOSE);
+			}		
+		}
+		
+		public function dispatchGameEndEvent(type) {
+			var gameEndEvent:GameEndEvent = new GameEndEvent(type);
+			gameEndEvent.fuelRemaining = lander.getFuel();
+			gameEndEvent.platformPoints = platformScore;
+			gameEndEvent.bonusPoints = bonusScore;
+			gameEndEvent.fuelSpent = _level.startingFuel - lander.getFuel();
+			gameEndEvent.level = _level;
+			dispatchEvent(gameEndEvent);
 		}
 		
 		public function kill(e = null) {
 			clearInterval(timer);
-			destroyLander();
+			//destroyLander();
 			clearAllBodies();
 			
 			//keyboard.kill();
@@ -285,6 +307,7 @@ package beta.game
 			}
 			if (shipPastLeft < -100) {
 				destroyLander();
+				gameLose();
 				devMeta.text = "CONNECTION LOST.";
 			}
 			
@@ -293,6 +316,7 @@ package beta.game
 			}
 			if (shipPastRight > 100) {
 				destroyLander();
+				gameLose();
 				devMeta.text = "CONNECTION LOST.";
 			}
 		}
@@ -370,12 +394,10 @@ package beta.game
 		
 		public function destroyLander() {
 			if (!shipAlive) return;
+			trace("LANDER:destroy lander.");
 			lander.destroy();
 			moonLanderModel.explode();			
-			shipAlive = false;
-			gameLose();
-			
-			
+			shipAlive = false;			
 		}
 		
 		function clearAllBodies() {

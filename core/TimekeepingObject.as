@@ -30,6 +30,10 @@ package beta.core {
 		protected function kill() {
 			clearInterval(timer);
 		}
+		
+		public function destroy() {
+			kill();
+		}
 	}
 }
 

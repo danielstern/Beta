@@ -2,7 +2,7 @@ package beta.core {
 	import flash.display.*;
 	import flash.events.Event;
 	
-	public class ControllableObject extends DestructibleObject
+	public class ControllableObject extends TimekeepingObject
 	{
 		protected var controlsRight:Boolean = false;
 		protected var controlsLeft:Boolean = false;

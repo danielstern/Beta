@@ -26,8 +26,6 @@ package beta.entity
 		{
 			super(body);
 			
-			//trace("Moonlander init...", fuel);
-
 			upThruster = new Thruster(1, 10, 1000);
 			leftThruster = new Thruster(0.2, 5, 100);
 			rightThruster = new Thruster(0.2, 5, 100);
@@ -39,8 +37,7 @@ package beta.entity
 		override protected function tick() {
 			
 			super.tick();
-			//if (health === 0) return;
-			trace("moonlander tick.",_fuel,destroyed, health);
+			//trace("moonlander tick.",_fuel);
 			
 			
 			
@@ -53,7 +50,7 @@ package beta.entity
 					
 			var zero = 0;
 			
-			if (_fuel > 0 && !destroyed) {
+			if (_fuel > 0) {
 				
 				
 				if (controlsUp) {
@@ -73,24 +70,22 @@ package beta.entity
 				}
 				
 				if (controlsRight) {
-					trace("engage thrust right.");
+					//trace("engage thrust right.");
 					rightThruster.engage();
 					_body.ApplyForce(new b2Vec2(rightThruster.getForce(), zero), rightThrusterPosition);
 					_fuel -= rightThruster.getIntensity();
 				} else {
 					rightThruster.disengage();
 				}			
+				
+				var currentAngle = _body.GetAngle();
+				_body.SetAngle(defaultAngle);
 			} else {
+				trace("Out of fuel.");
 				_fuel = 0;
 			}
 			
-			var currentAngle = _body.GetAngle();
-			//if (currentAngle > defaultAngle) {
-				//_body.ApplyTorque( -autoStabilizerStrength);
-			//} else {
-				//_body.ApplyTorque( autoStabilizerStrength);
-			//}
-			_body.SetAngle(defaultAngle);
+			
 			
 			upThruster.step();
 			leftThruster.step();
