@@ -34,14 +34,28 @@ package beta.models
 	public class MoonLanderModel 
 	{
 		private var _world:b2World;
-		public var chassis:b2Body;
 		public var joints = [];
-		public var leftPad:b2Body;
-		public var rightPad:b2Body;
+		
 		public var bodies = [];
 		public var footWidth = 2;
 		private var destroyed = false;
 		private var _position:b2Vec2;
+		
+		public var pod:b2Body;
+		public var chassis:b2Body;
+		public var sBand:b2Body;
+		public var radar:b2Body;
+		public var antenna:b2Body;
+		
+		public var leftPad:b2Body;
+		public var leftUpperLeft:b2Body;
+		public var leftLowerLeg:b2Body;
+		public var leftWing:b2Body;
+		
+		public var rightPad:b2Body;
+		public var rightUpperLeft:b2Body;
+		public var rightLowerLeg:b2Body;
+		public var rightWing:b2Body;
 		
 		public function MoonLanderModel(world,position) 
 		{
@@ -128,17 +142,20 @@ package beta.models
 		
 		public function attachPodToChassis(fuelCompartment) {
 			var podBody = createLightSteelCircularComponent(3);
-			var podFuelJoint = createStandardSuspension(podBody, fuelCompartment , new b2Vec2(0, 1),new b2Vec2(0,3.5));
+			var podFuelJoint = createStandardSuspension(podBody, fuelCompartment , new b2Vec2(0, 1), new b2Vec2(0, 3.5));
 			
-			var antenna = createLightSteelCircularComponent(0.6);
-			var antennaJoint = createStandardSuspension(podBody,antenna,new b2Vec2(0,-1),new b2Vec2(0, -3));
+			pod = podBody;
+			
+			antenna = createLightSteelCircularComponent(0.6);
+			var antennaJoint = createStandardSuspension(podBody, antenna, new b2Vec2(0, -1), new b2Vec2(0, -3));
+			
 			
 						
-			var sBand = createLightSteelCircularComponent(0.9);
+			sBand = createLightSteelCircularComponent(0.9);
 			var sBandJoint = createStandardSuspension(podBody,sBand,new b2Vec2(-0.7,-0.7),new b2Vec2(-3.5, 0));
 			
 			
-			var radar = createLightSteelCircularComponent(0.8);
+			radar = createLightSteelCircularComponent(0.8);
 			var radarPodJoint = createStandardSuspension(podBody, radar, new b2Vec2(1,0),new b2Vec2(3,0));
 			
 			
@@ -211,9 +228,17 @@ package beta.models
 			var foot:b2Body = getLandingPad();		
 			if (!_mirror) {
 				leftPad = foot;
+				leftWing = wing;
+				leftLowerLeg = femur;
+				leftUpperLeft = tibia;
 			} else {
 				rightPad = foot;
+				rightWing = wing;
+				rightLowerLeg = femur;
+				rightUpperLeft = tibia;
 			}
+			
+			
 			
 			tibia.SetAngle(NINETY_DEGREES);
 			tibia.SetPosition(new b2Vec2(( -chassisWidth - femurLength) * mirror, ZERO));

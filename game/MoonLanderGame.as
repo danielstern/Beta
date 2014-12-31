@@ -116,9 +116,13 @@ package beta.game
 				if (closePlatform) {
 					debugDisplay.setZoom(CLOSE_ZOOM);
 					debugDisplay.setFocus(closePlatform.position);
+					_target.space.x = -closePlatform.position.x / 7;
+					_target.space.y = -closePlatform.position.y / 7;
 				} else {
 					debugDisplay.setZoom(REGULAR_ZOOM);
 					debugDisplay.setFocus(shipPos);
+					_target.space.x = -shipPos.x / 7;
+					_target.space.y = -shipPos.y /7;
 				}
 					
 						
@@ -140,7 +144,9 @@ package beta.game
 						handleLandOnPlatform(data);					
 					}
 				
-				})					
+				});
+				
+				
 				
 				if (shipAlive) {
 					lander.step();
@@ -219,6 +225,9 @@ package beta.game
 			
 			if (platform.platformType === 'start') {
 				devMeta.text = "READY FOR TAKEOFF.";
+				if (lander.getFuel() < 1) {
+					destroyLander();
+				}
 			} else if (platform.platformType === 'goal') {
 				if (landerMinX < platFormMinX || landerMaxX > platFormMaxX) {
 					destroyLander();

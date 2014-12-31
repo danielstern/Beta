@@ -24,6 +24,7 @@ package beta.entity
 		protected var upThrusterForcePerIntensity:Number = 0.8;
 		protected var sideThrusterForcePerIntensity:Number = 0.4;
 		protected var thrusterMaxIntensity:Number = 5;
+		
 	
 		
 		public function MoonLander(body, fuel, timeToIncreaseIntensityModifier:Number = 1, thrusterForceModifier:Number = 1) 
